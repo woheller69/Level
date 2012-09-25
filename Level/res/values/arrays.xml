@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="display_types_name">
+        <item>@string/angle</item>
+        <item>@string/inclination</item>
+        <item>@string/roof_pitch</item>
+    </string-array>
+    
+    <string-array name="display_types">
+	    <item>ANGLE</item>
+	    <item>INCLINATION</item>
+	    <item>ROOF_PITCH</item>
+	</string-array>
+
+	<string-array name="orientations_name">
+        <item>@string/orientation</item>
+        <item>@string/accelerometer</item>
+    </string-array>
+    
+    <string-array name="orientations">
+	    <item>ORIENTATION</item>
+	    <item>ACCELEROMETER</item>
+	</string-array>
+
+	<string-array name="viscosities_name">
+        <item>@string/viscosity_low</item>
+        <item>@string/viscosity_medium</item>
+        <item>@string/viscosity_high</item>
+    </string-array>
+    
+    <string-array name="viscosities">
+	    <item>LOW</item>
+	    <item>MEDIUM</item>
+	    <item>HIGH</item>
+	</string-array>
+
+	<string-array name="configs_name">
+        <item>@string/config_switch_horizontally</item>
+        <item>@string/config_switch_vertically</item>
+        <item>@string/config_rotate_axis</item>
+    </string-array>
+
+</resources>

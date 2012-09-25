@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+    	android:id="@+id/calibrate"
+    	android:icon="@android:drawable/ic_menu_mylocation"
+        android:title="@string/calibrate"
+        android:showAsAction="withText" />
+
+    <item
+    	android:id="@+id/preferences"
+    	android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/preferences"
+        android:showAsAction="withText" />
+        
+</menu>

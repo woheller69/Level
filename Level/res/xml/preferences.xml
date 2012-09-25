@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<PreferenceCategory android:title="@string/preferences">
+		
+		<CheckBoxPreference
+			android:key="preference_show_angle"
+			android:defaultValue="true"
+			android:title="@string/preference_show_angle"
+			android:summary="@string/preference_show_angle_summary"/>
+	
+	    <ListPreference 
+		    android:key="preference_display_type"
+		    android:dependency="preference_show_angle"
+		    android:defaultValue="ANGLE"
+		    android:entryValues="@array/display_types"
+		    android:entries="@array/display_types_name"
+		    android:title="@string/preference_display_type" />
+		
+		<CheckBoxPreference
+			android:key="preference_lock"
+			android:defaultValue="false"
+			android:title="@string/preference_lock"
+			android:summary="@string/preference_lock_summary"/>
+		
+		<CheckBoxPreference
+			android:key="preference_economy"
+			android:defaultValue="false"
+			android:title="@string/preference_economy"
+			android:summary="@string/preference_economy_summary"/>
+	
+	    <ListPreference 
+		    android:key="preference_viscosity"
+		    android:defaultValue="MEDIUM"
+		    android:entryValues="@array/viscosities"
+		    android:entries="@array/viscosities_name"
+		    android:title="@string/preference_viscosity" />
+		
+	    <ListPreference 
+		    android:key="preference_sensor"
+		    android:defaultValue="ACCELEROMETER"
+		    android:entryValues="@array/orientations"
+		    android:entries="@array/orientations_name"
+		    android:title="@string/preference_sensor" />
+		
+		<CheckBoxPreference
+			android:key="preference_sound"
+			android:defaultValue="false"
+			android:title="@string/preference_sound"
+			android:summary="@string/preference_sound_summary"/>
+	    
+	</PreferenceCategory>
+	
+</PreferenceScreen>
