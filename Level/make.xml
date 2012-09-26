@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="Livraison Level" default="all">
+
+	<property file="make.properties" />
+
+	<target name="all" 
+		description="Package les version gratuites et don" 
+		depends="clean, prepare-livraison, do-original, do-modified, clean"/>
+	
+	<target name="prepare-livraison" depends="clean">
+		<delete dir="bin"/>
+		<mkdir dir="${temp.dir}" />
+		<copy todir="${temp.dir}">
+			<fileset dir=".">
+				<exclude name="**/${temp.dir}/**" />
+			</fileset>
+		</copy>
+		
+		<replace file="${temp.dir}/build.xml" token="${original.name}" value="${modified.name}"/>
+
+		<!-- debut des modifications specifiques -->
+		
+		<replace file="${temp.dir}/AndroidManifest.xml" token="net.androgames.level" value="net.androgames.level.donate"/>
+		
+		<replace dir="${temp.dir}" value="net.androgames.level.donate.R">
+			<include name="**/*.java"/>
+			<replacetoken><![CDATA[net.androgames.level.R]]></replacetoken>
+		</replace>
+		
+		<replace dir="${temp.dir}" value="net.androgames.level.donate.Level">
+			<include name="**/*.java"/>
+			<replacetoken><![CDATA[net.androgames.level.Level]]></replacetoken>
+		</replace>
+		
+		<move todir="${temp.dir}/src/net/androgames/level/donate">
+			<fileset dir="${temp.dir}/src/net/androgames/level">
+				<include name="*.java"/>
+			</fileset>
+		</move>
+		
+		<replace dir="${temp.dir}" value="package net.androgames.level.donate;">
+			<include name="**/*.java"/>
+			<replacetoken><![CDATA[package net.androgames.level;]]></replacetoken>
+		</replace>
+		
+		<replace file="${temp.dir}/src/net/androgames/level/donate/LevelPreferences.java">
+			  <replacetoken><![CDATA[if (true) {]]></replacetoken>
+			  <replacevalue><![CDATA[if (false) {]]></replacevalue>
+		</replace>
+		
+		<!-- fin des modifications specifiques -->
+		
+	</target>
+	
+	<target name="clean">
+		<delete dir="${temp.dir}"/>
+	</target>
+
+	<target name="do-original">
+		<echo message="Création de la version originale" />
+		<ant dir="." antfile="build.xml" target="release"/>
+	</target>
+	
+	<target name="do-modified">
+		<echo message="Création de la version modifiee" />
+		<delete dir="${temp.dir}/gen" />
+		<ant dir="${temp.dir}" antfile="build.xml" target="release"/>
+		<move file="${temp.dir}/bin/${modified.name}-release.apk" todir="bin"/>
+	</target>
+
+</project>

@@ -35,9 +35,9 @@
     <string name="lock_info">Berühren um die Ausrichtung zu sperren</string>
     <string name="inclination">Steigung</string>
     <string name="roof_pitch">Dachneigung</string>
-    <string name="roof_pitch_summary">Anstieg in inch pro foot\n3 ~ 14°</string>
+    <string name="roof_pitch_summary">Anstieg in inch pro foot\n3 &#126; 14°</string>
     <string name="angle_summary">Winkel in Grad</string>
-    <string name="inclination_summary">Steigung in Prozent\n100% ~ 45°</string>
+    <string name="inclination_summary">Steigung in Prozent\n100&#37;&#37; &#126; 45°</string>
     <string name="preference_sensor">Sensor Typ</string>
     <string name="orientation">Lage</string>
     <string name="accelerometer">Beschleunigung</string>
