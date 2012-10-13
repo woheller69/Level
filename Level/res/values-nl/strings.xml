@@ -37,7 +37,7 @@
     <string name="roof_pitch">Dak-helling</string>
     <string name="roof_pitch_summary">Stijging in inches per voet\n3 &#126; 14°</string>
     <string name="angle_summary">Hoek in graden</string>
-    <string name="inclination_summary">Helling in procenten\n100&#37;&#37; &#126; 45°</string>
+    <string name="inclination_summary">Helling in procenten\n100&#37; &#126; 45°</string>
     <string name="preference_sensor">Type sensor</string>
     <string name="orientation">Orientatie</string>
     <string name="accelerometer">G-sensor</string>

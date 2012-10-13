@@ -37,7 +37,7 @@
     <string name="roof_pitch">Techo pendiente</string>
     <string name="roof_pitch_summary">Unitades verticales para 12 horizontales\n3 &#126; 14°</string>
     <string name="angle_summary">Ángulo en grados</string>
-    <string name="inclination_summary">Inclinación en porcentajes\n100&#37;&#37; &#126; 45°</string>
+    <string name="inclination_summary">Inclinación en porcentajes\n100&#37; &#126; 45°</string>
     <string name="preference_sensor">Tipo de sensor</string>
     <string name="orientation">Orientación</string>
     <string name="accelerometer">Acelerómetro</string>
