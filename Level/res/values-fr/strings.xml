@@ -16,9 +16,6 @@
     <string name="calibrate_failed">L\'étalonnage a échoué !</string>
     <string name="calibrate_restored">Etalonnage d\'usine restauré !</string>
     <string name="preferences">Préférences</string>
-    <string name="preference_apps_category">Mon travail</string>
-    <string name="preference_apps">Mes applications</string>
-    <string name="preference_apps_summary">Jettez un oeil à mes autres applis</string>
     <string name="preference_show_angle">Affichage numérique</string>
     <string name="preference_show_angle_summary">Affiche la valeur de l\'inclinaison</string>
     <string name="preference_display_type">Type d\'affichage</string>
@@ -26,8 +23,6 @@
     <string name="preference_sound_summary">Joue un son à l\'équilibre</string>
     <string name="preference_lock">Verrouillage</string>
     <string name="preference_lock_summary">Verrouille l\'orientation du niveau</string>
-    <string name="preference_donate">Faire un don</string>
-    <string name="preference_donate_summary">Si vous souhaitez soutenir le développement de cette application</string>
     <string name="preference_viscosity">Viscosité</string>
     <string name="preference_economy">Mode économique</string>
     <string name="preference_economy_summary">Animations moins fluides\nmais préserve la batterie</string>

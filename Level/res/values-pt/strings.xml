@@ -16,9 +16,6 @@
     <string name="calibrate_failed">A calibragem falhou !</string>
     <string name="calibrate_restored">Calibragem de origem aplicada!</string>
     <string name="preferences">Opções</string>
-    <string name="preference_apps_category">Relacionado</string>
-    <string name="preference_apps">Aplicações do Autor</string>
-    <string name="preference_apps_summary">Ver as minhas outras aplicações para Android</string>
     <string name="preference_show_angle">Mostrar o valor do ângulo</string>
     <string name="preference_show_angle_summary">Mostrar o(s) valor(es) no ecrâ</string>
     <string name="preference_display_type">Tipo de informação</string>
@@ -26,8 +23,6 @@
     <string name="preference_sound_summary">Reproduzir som quando estabiliza a medição</string>
     <string name="preference_lock">Bloqueio</string>
     <string name="preference_lock_summary">Bloquear o tipo de nível a usar</string>
-    <string name="preference_donate">Ajudar</string>
-    <string name="preference_donate_summary">Gosta e quer contribuir?</string>
     <string name="preference_viscosity">Viscosidade</string>
     <string name="preference_economy">Modo Económico</string>
     <string name="preference_economy_summary">Menos qualidade nas animações\npreservando mais a vida da bateria.</string>

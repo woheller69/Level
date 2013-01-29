@@ -16,9 +16,6 @@
     <string name="calibrate_failed">Error de calibración !</string>
     <string name="calibrate_restored">Calibración original restaurada !</string>
     <string name="preferences">Preferencias</string>
-    <string name="preference_apps_category">Mi trabajo</string>
-    <string name="preference_apps">Mis aplicaciones</string>
-    <string name="preference_apps_summary">Mis otras Android aplicaciones</string>
     <string name="preference_show_angle">Mostrar el ángulo</string>
     <string name="preference_show_angle_summary">Pantalla de inclinación</string>
     <string name="preference_display_type">Tipo de pantalla</string>
@@ -26,8 +23,6 @@
     <string name="preference_sound_summary">Alarma sonora</string>
     <string name="preference_lock">Orientación</string>
     <string name="preference_lock_summary">Conservar la orientación del nivel</string>
-    <string name="preference_donate">Donar</string>
-    <string name="preference_donate_summary">Si desea apoyar el desarrollo de esta aplicación</string>
     <string name="preference_viscosity">Viscosidad</string>
     <string name="preference_economy">Modo económico</string>
     <string name="preference_economy_summary">Animaciones menos fluidas\npero conserva la pila</string>

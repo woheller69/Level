@@ -16,9 +16,6 @@
     <string name="calibrate_failed">La calibrazione fallito !</string>
     <string name="calibrate_restored">Calibrazione originale restaurata !</string>
     <string name="preferences">Preferenze</string>
-    <string name="preference_apps_category">Mio lavoro</string>
-    <string name="preference_apps">Mie applicazioni</string>
-    <string name="preference_apps_summary">Mio altre Android applicazioni</string>
     <string name="preference_show_angle">Mostra digitale</string>
     <string name="preference_show_angle_summary">Visualizzazione del valore di angolo</string>
     <string name="preference_display_type">Tipo di display</string>
@@ -26,8 +23,6 @@
     <string name="preference_sound_summary">Riproduci suono quando il livello</string>
     <string name="preference_lock">Orientamento</string>
     <string name="preference_lock_summary">Preserva il orientamento di livello</string>
-    <string name="preference_donate">Donare</string>
-    <string name="preference_donate_summary">Se si vuole sostenere lo sviluppo di questa applicazione</string>
     <string name="preference_viscosity">Viscosità</string>
     <string name="preference_economy">Eco Mode</string>
     <string name="preference_economy_summary">Animazioni meno fluide\nma conserva la batteria</string>

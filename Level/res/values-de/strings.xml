@@ -16,9 +16,6 @@
     <string name="calibrate_failed">Kalibrierung fehlgeschlagen!</string>
     <string name="calibrate_restored">Originale Kalibrierung wiederhergestellt!</string>
     <string name="preferences">Einstellungen</string>
-    <string name="preference_apps_category">Meine Arbeit</string>
-    <string name="preference_apps">Meine Anwendungen</string>
-    <string name="preference_apps_summary">Schau dir meine weiteren Android Apps an</string>
     <string name="preference_show_angle">Zeige numerischen Winkel</string>
     <string name="preference_show_angle_summary">Zeige den Wert als Zahl auf dem Bildschirm</string>
     <string name="preference_display_type">Anzeigewert</string>
@@ -26,8 +23,6 @@
     <string name="preference_sound_summary">Spiele einen Sound, wenn in der Waage</string>
     <string name="preference_lock">Sperren</string>
     <string name="preference_lock_summary">Erlaube das Sperren der Ausrichtung</string>
-    <string name="preference_donate">Spenden</string>
-    <string name="preference_donate_summary">Wenn du diese Anwendung magst</string>
     <string name="preference_viscosity">Viskosität</string>
     <string name="preference_economy">Strom sparen</string>
     <string name="preference_economy_summary">Weniger ruhige Animationen,\naber der Akku wird geschont</string>

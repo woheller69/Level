@@ -16,9 +16,6 @@
     <string name="calibrate_failed">Calibratie mislukt !</string>
     <string name="calibrate_restored">Oorspronkelijke calibratie hersteld !</string>
     <string name="preferences">Opties</string>
-    <string name="preference_apps_category">Mijn werk</string>
-    <string name="preference_apps">Mijn applicaties</string>
-    <string name="preference_apps_summary">Bekijk mijn andere Android applicaties</string>
     <string name="preference_show_angle">Toon Hoek</string>
     <string name="preference_show_angle_summary">Geef de waarde(s) van de hoek weer</string>
     <string name="preference_display_type">Weergave type</string>
@@ -26,8 +23,6 @@
     <string name="preference_sound_summary">Speel geluid af als het toestel horizontaal ligt</string>
     <string name="preference_lock">Vergrendeling</string>
     <string name="preference_lock_summary">Sta oriëntatie-niveau vergrendeling toe</string>
-    <string name="preference_donate">Doneren</string>
-    <string name="preference_donate_summary">Als u deze applicatie nuttig vindt</string>
     <string name="preference_viscosity">Viscositeit</string>
     <string name="preference_economy">Besparings-mode</string>
     <string name="preference_economy_summary">Minder vlotte animaties\nmaar langere batterij-duur</string>
