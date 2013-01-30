@@ -1,5 +1,8 @@
 package net.androgames.level.orientation.provider;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.androgames.level.orientation.OrientationProvider;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -71,8 +74,8 @@ public class ProviderOrientation extends OrientationProvider {
 	}
 
 	@Override
-	protected int getSensorType() {
-		return Sensor.TYPE_ORIENTATION;
+	protected List<Integer> getRequiredSensors() {
+		return Arrays.asList(Integer.valueOf(Sensor.TYPE_ORIENTATION));
 	}
 
 }

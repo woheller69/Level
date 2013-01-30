@@ -90,7 +90,7 @@ public abstract class OrientationProvider implements SensorEventListener {
         } catch (Exception e) {}
     }
 
-    protected abstract int getSensorType();
+    protected abstract List<Integer> getRequiredSensors();
 
     /**
      * Returns true if at least one Accelerometer sensor is available
@@ -99,8 +99,13 @@ public abstract class OrientationProvider implements SensorEventListener {
         if (supported == null) {
             if (Level.getContext() != null) {
                 sensorManager = (SensorManager) Level.getContext().getSystemService(Context.SENSOR_SERVICE);
-                List<Sensor> sensors = sensorManager.getSensorList(getSensorType());
-                return sensors.size() > 0;
+                boolean supported = true;
+                for (int sensorType : getRequiredSensors()) {
+                    List<Sensor> sensors = sensorManager.getSensorList(sensorType);
+                    supported = (sensors.size() > 0) && supported;
+                }
+                this.supported = Boolean.valueOf(supported);
+                return supported;
             }
         }
         return false;
@@ -126,11 +131,14 @@ public abstract class OrientationProvider implements SensorEventListener {
     	}
     	// register listener and start listening
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        List<Sensor> sensors = sensorManager.getSensorList(getSensorType());
-        if (sensors.size() > 0) {
-            sensor = sensors.get(0);
-            running = sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-            listener = orientationListener;
+        running = true;
+        for (int sensorType : getRequiredSensors()) {
+            List<Sensor> sensors = sensorManager.getSensorList(sensorType);
+            if (sensors.size() > 0) {
+                sensor = sensors.get(0);
+                running = sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL) && running;
+                listener = orientationListener;
+            }
         }
     }
 

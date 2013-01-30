@@ -1,5 +1,8 @@
 package net.androgames.level.orientation.provider;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.androgames.level.orientation.OrientationProvider;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -28,8 +31,13 @@ import android.view.Surface;
 public class ProviderAccelerometer extends OrientationProvider {
 	
 	private static OrientationProvider provider;
-	
-	private static final float[] GEOMAGNETIC_FIELD = new float[] {1, 1, 1};
+
+    private float[] ACC;
+    private float[] MAG;
+    private float[] R = new float[16];
+    private float[] outR = new float[16];
+    private float[] I = new float[16];
+    private float[] LOC = new float[3];
 	
 	private ProviderAccelerometer() {
 		super();
@@ -49,42 +57,64 @@ public class ProviderAccelerometer extends OrientationProvider {
 	 * @param event
 	 */
 	protected void handleSensorChanged(SensorEvent event) {
-	    float[] R = new float[16];
-	    float[] I = new float[16];
-
-	    SensorManager.getRotationMatrix(R, I, event.values, GEOMAGNETIC_FIELD);
-
-	    float[] actual_orientation = new float[3];
-	    float[] outR = new float[16];
 	    
-	    switch (displayOrientation) {
-	    case Surface.ROTATION_270:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X, outR);
-	    	break;
-	    case Surface.ROTATION_180:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y, outR);
-	    	break;
-	    case Surface.ROTATION_90:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X, outR);
-	    	break;
-	    case Surface.ROTATION_0:
-    	default:
-		    SensorManager.remapCoordinateSystem(R, 
-		    		SensorManager.AXIS_X, SensorManager.AXIS_Y, outR);
-	    	break;
-	    }
-	    
-	    SensorManager.getOrientation(outR, actual_orientation);
-	    pitch = (float) (actual_orientation[1] * 180 / Math.PI);
-        roll = - (float) (actual_orientation[2] * 180 / Math.PI);
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+            ACC = event.values.clone();
+
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+            MAG = event.values.clone();
+
+        if (ACC != null && MAG != null) {
+            boolean success = SensorManager.getRotationMatrix(R, I, ACC, MAG);
+            if (success) {
+                
+                switch (displayOrientation) {
+                case Surface.ROTATION_270:
+                    SensorManager.remapCoordinateSystem(
+                            R, 
+                            SensorManager.AXIS_MINUS_Y, 
+                            SensorManager.AXIS_X, 
+                            outR);
+                    break;
+                case Surface.ROTATION_180:
+                    SensorManager.remapCoordinateSystem(
+                            R, 
+                            SensorManager.AXIS_MINUS_X, 
+                            SensorManager.AXIS_MINUS_Y, 
+                            outR);
+                    break;
+                case Surface.ROTATION_90:
+                    SensorManager.remapCoordinateSystem(
+                            R, 
+                            SensorManager.AXIS_Y, 
+                            SensorManager.AXIS_MINUS_X, 
+                            outR);
+                    break;
+                case Surface.ROTATION_0:
+                default:
+                    SensorManager.remapCoordinateSystem(
+                            R, 
+                            SensorManager.AXIS_X, 
+                            SensorManager.AXIS_Y, 
+                            outR);
+                    break;
+                }
+                
+                SensorManager.getOrientation(outR, LOC);
+                
+                pitch = (float) (LOC[1] * 180 / Math.PI);
+                roll = - (float) (LOC[2] * 180 / Math.PI);
+                
+                ACC = null;
+                MAG = null;
+
+            }
+        }
 	}
 
 	@Override
-	protected int getSensorType() {
-		return Sensor.TYPE_ACCELEROMETER;
+    protected List<Integer> getRequiredSensors() {
+        return Arrays.asList(Integer.valueOf(Sensor.TYPE_ACCELEROMETER), Integer.valueOf(Sensor.TYPE_MAGNETIC_FIELD));
 	}
 	
 }
