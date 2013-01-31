@@ -68,7 +68,7 @@ public abstract class OrientationProvider implements SensorEventListener {
 	protected int displayOrientation;
  
     protected OrientationProvider() {
-		this.displayOrientation = Level.getContext().getWindowManager().getDefaultDisplay().getOrientation();
+		this.displayOrientation = Level.getContext().getWindowManager().getDefaultDisplay().getRotation();
 	}
 
 	/**
@@ -149,7 +149,7 @@ public abstract class OrientationProvider implements SensorEventListener {
 		oldPitch = pitch;
 		oldRoll = roll;
 		
-		handleSensorChanged(event);
+        handleSensorChanged(event);
 
 		// calculating minimal sensor step
 		if (oldRoll != roll || oldPitch != pitch) {
