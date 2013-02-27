@@ -43,8 +43,8 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 	public static final String KEY_DISPLAY_TYPE 		= "preference_display_type";
 	public static final String KEY_SOUND 				= "preference_sound";
 	public static final String KEY_LOCK				 	= "preference_lock";
-	public static final String KEY_LOCK_LOCKED		 	= "preference_lock_locked";			// mémoriser le verouillage
-	public static final String KEY_LOCK_ORIENTATION 	= "preference_lock_orientation";	// mémoriser l'orientation verouillée
+	public static final String KEY_LOCK_LOCKED		 	= "preference_lock_locked";			// mÃ©moriser le verouillage
+	public static final String KEY_LOCK_ORIENTATION 	= "preference_lock_orientation";	// mÃ©moriser l'orientation verouillÃ©e
 	public static final String KEY_SENSOR				= "preference_sensor";
 	public static final String KEY_VISCOSITY			= "preference_viscosity";
 	public static final String KEY_ECONOMY				= "preference_economy";
