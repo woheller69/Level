@@ -63,6 +63,7 @@
                     </targetedDensities>
                     <fallbackDensity>mdpi</fallbackDensity>
                     <skipNoDpi>true</skipNoDpi>
+                    <highResIcon>level</highResIcon>
                 </configuration>
                 <executions>
                     <execution>
