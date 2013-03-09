@@ -1,0 +1,12 @@
+*.class
+
+# Eclipse #
+target/
+bin/
+gen/
+.project
+.classpath
+.settings/
+
+# androidgendrawable-maven-plugin #
+*.png
