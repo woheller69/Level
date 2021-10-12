@@ -33,13 +33,6 @@
     <string name="roof_pitch_summary">Inches of rise per foot of run\n3 &#126; 14°</string>
     <string name="angle_summary">Angle in degrees</string>
     <string name="inclination_summary">Inclination in percents\n100&#37; &#126; 45°</string>
-    <string name="preference_sensor">Sensor type</string>
-    <string name="orientation">Orientation</string>
-    <string name="accelerometer">Accelerometer</string>
-    <string name="orientation_sensor">Orientation sensor</string>
-    <string name="accelerometer_sensor">Accelerometer sensor</string>
-    <string name="orientation_summary">Orientation sensor\nSensitivity depends on the phone</string>
-    <string name="accelerometer_summary">Accelerometer sensor\nAccurate but sensitive to moves</string>
     <string name="viscosity_low">Low</string>
     <string name="viscosity_medium">Medium</string>
     <string name="viscosity_high">High</string>

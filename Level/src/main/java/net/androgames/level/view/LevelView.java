@@ -2,7 +2,6 @@ package net.androgames.level.view;
 
 import net.androgames.level.LevelPreferences;
 import net.androgames.level.config.DisplayType;
-import net.androgames.level.config.Provider;
 import net.androgames.level.config.Viscosity;
 import net.androgames.level.orientation.Orientation;
 import net.androgames.level.painter.LevelPainter;
@@ -21,7 +20,7 @@ import android.view.View.OnTouchListener;
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
  *  
- *  Copyright (C) 2012 Antoine Vianey
+ *  Copyright (C) 2014 Antoine Vianey
  *  
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -68,9 +67,7 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
 				DisplayType.valueOf(prefs.getString(LevelPreferences.KEY_DISPLAY_TYPE, "ANGLE")),
 				Viscosity.valueOf(prefs.getString(LevelPreferences.KEY_VISCOSITY, "MEDIUM")),
 				prefs.getBoolean(LevelPreferences.KEY_LOCK, false),
-				prefs.getBoolean(LevelPreferences.KEY_ECONOMY, false),
-				Provider.valueOf(prefs.getString(LevelPreferences.KEY_SENSOR, 
-						LevelPreferences.PROVIDER_ACCELEROMETER)));
+				prefs.getBoolean(LevelPreferences.KEY_ECONOMY, false));
 	    }
     }
 
@@ -84,9 +81,9 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
         System.gc();
     }
 
-    public void onOrientationChanged(Orientation orientation, float pitch, float roll) {
+    public void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance) {
 		if (painter != null) {
-			painter.onOrientationChanged(orientation, pitch, roll);
+			painter.onOrientationChanged(orientation, pitch, roll, balance);
 		}
 	}
 

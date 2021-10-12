@@ -38,15 +38,6 @@
     <string name="angle_summary">角度</string>
     <string name="inclination_summary">"倾斜度：
 100&#37; &#126; 45°"</string>
-    <string name="preference_sensor">测量器类型</string>
-    <string name="orientation">方位</string>
-    <string name="accelerometer">加速器</string>
-    <string name="orientation_sensor">方位测量器</string>
-    <string name="accelerometer_sensor">加速器测量器</string>
-    <string name="orientation_summary">"方位测量器
-测量结果取决于手机"</string>
-    <string name="accelerometer_summary">"加速测量器
-准确"</string>
     <string name="viscosity_low">低</string>
     <string name="viscosity_medium">中</string>
     <string name="viscosity_high">高</string>

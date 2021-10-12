@@ -13,16 +13,6 @@
 	    <item>ROOF_PITCH</item>
 	</string-array>
 
-	<string-array name="orientations_name">
-        <item>@string/orientation</item>
-        <item>@string/accelerometer</item>
-    </string-array>
-    
-    <string-array name="orientations">
-	    <item>ORIENTATION</item>
-	    <item>ACCELEROMETER</item>
-	</string-array>
-
 	<string-array name="viscosities_name">
         <item>@string/viscosity_low</item>
         <item>@string/viscosity_medium</item>

@@ -34,12 +34,6 @@
     <string name="angle_summary">Winkel in Grad</string>
     <string name="inclination_summary">Steigung in Prozent\n100&#37; &#126; 45°</string>
     <string name="preference_sensor">Sensor Typ</string>
-    <string name="orientation">Lage</string>
-    <string name="accelerometer">Beschleunigung</string>
-    <string name="orientation_sensor">Lagesensor</string>
-    <string name="accelerometer_sensor">Beschleunigungssensor</string>
-    <string name="orientation_summary">Lagesensor\nGenauigkeit hängt vom Gerät ab</string>
-    <string name="accelerometer_summary">Beschleunigungssensor\nGenau, aber anfällig für Bewegungen</string>
     <string name="viscosity_low">Gering</string>
     <string name="viscosity_medium">Mittel</string>
     <string name="viscosity_high">Hoch</string>

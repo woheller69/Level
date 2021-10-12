@@ -33,13 +33,6 @@
     <string name="roof_pitch_summary">Igotako hazbeteak aurreratutako oineko\n3 &#126; 14°</string>
     <string name="angle_summary">Angelua gradutan</string>
     <string name="inclination_summary">Inklinazioa ehunekotan\n100&#37; &#126; 45°</string>
-    <string name="preference_sensor">Sentsore mota</string>
-    <string name="orientation">Orientazioa</string>
-    <string name="accelerometer">Azelerometroa</string>
-    <string name="orientation_sensor">Orientazio-sentsorea</string>
-    <string name="accelerometer_sensor">Azelerometro-sentsorea</string>
-    <string name="orientation_summary">Orientazio-sentsorea\nSentikortasuna telefonoaren araberakoa da</string>
-    <string name="accelerometer_summary">Azelerometro-sentsorea\nZehatza baina mugimenduekiko sentikorra</string>
     <string name="viscosity_low">Baxua</string>
     <string name="viscosity_medium">Ertaina</string>
     <string name="viscosity_high">Altua</string>

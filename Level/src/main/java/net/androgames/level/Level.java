@@ -1,6 +1,5 @@
 package net.androgames.level;
 
-import net.androgames.level.config.Provider;
 import net.androgames.level.orientation.Orientation;
 import net.androgames.level.orientation.OrientationListener;
 import net.androgames.level.orientation.OrientationProvider;
@@ -15,20 +14,19 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
  *  
- *  Copyright (C) 2012 Antoine Vianey
+ *  Copyright (C) 2014 Antoine Vianey
  *  
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -53,7 +51,6 @@ public class Level extends Activity implements OrientationListener {
 	private OrientationProvider provider;
 	
     private LevelView view;
-    private WakeLock wakeLock;
     
 	/** Gestion du son */
 	private SoundPool soundPool;
@@ -66,6 +63,7 @@ public class Level extends Activity implements OrientationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CONTEXT = this;
         view = (LevelView) findViewById(R.id.level);
         // sound
@@ -126,9 +124,7 @@ public class Level extends Activity implements OrientationListener {
     	super.onResume();
     	Log.d("Level", "Level resumed");
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    	provider = Provider.valueOf(
-    			prefs.getString(LevelPreferences.KEY_SENSOR, 
-    					LevelPreferences.PROVIDER_ACCELEROMETER)).getProvider();
+    	provider = OrientationProvider.getInstance();
     	// chargement des effets sonores
         soundEnabled = prefs.getBoolean(LevelPreferences.KEY_SOUND, false);
         // orientation manager
@@ -137,10 +133,6 @@ public class Level extends Activity implements OrientationListener {
     	} else {
     		Toast.makeText(this, getText(R.string.not_supported), TOAST_DURATION).show();
     	}
-        // wake lock
-        wakeLock = ((PowerManager) getSystemService(Context.POWER_SERVICE)).newWakeLock(
-        		PowerManager.SCREEN_BRIGHT_WAKE_LOCK, this.getClass().getName());
-        wakeLock.acquire();
     }
 
     @Override
@@ -149,7 +141,6 @@ public class Level extends Activity implements OrientationListener {
         if (provider.isListening()) {
         	provider.stopListening();
     	}
-		wakeLock.release();
     }
     
     @Override
@@ -161,9 +152,9 @@ public class Level extends Activity implements OrientationListener {
     }
 
 	@Override
-	public void onOrientationChanged(Orientation orientation, float pitch, float roll) {
-		if (soundEnabled 
-				&& orientation.isLevel(pitch, roll, provider.getSensibility())
+	public void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance) {
+	    if (soundEnabled 
+				&& orientation.isLevel(pitch, roll, balance, provider.getSensibility())
 				&& System.currentTimeMillis() - lastBip > bipRate) {
 			AudioManager mgr = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 			float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_RING);
@@ -172,7 +163,7 @@ public class Level extends Activity implements OrientationListener {
 			lastBip = System.currentTimeMillis();
 			soundPool.play(bipSoundID, volume, volume, 1, 0, 1);
 		}
-		view.onOrientationChanged(orientation, pitch, roll);
+		view.onOrientationChanged(orientation, pitch, roll, balance);
 	}
 
 	@Override

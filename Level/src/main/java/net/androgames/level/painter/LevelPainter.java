@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import net.androgames.level.Level;
 import net.androgames.level.R;
 import net.androgames.level.config.DisplayType;
-import net.androgames.level.config.Provider;
 import net.androgames.level.config.Viscosity;
 import net.androgames.level.orientation.Orientation;
 import android.content.Context;
@@ -21,7 +20,7 @@ import android.view.SurfaceHolder;
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
  *  
- *  Copyright (C) 2012 Antoine Vianey
+ *  Copyright (C) 2014 Antoine Vianey
  *  
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,8 +36,6 @@ import android.view.SurfaceHolder;
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
 public class LevelPainter implements Runnable {
-	
-	private static final double PI180 = Math.PI / 180;
 
     /** Etats du thread */
     private boolean initialized;
@@ -48,6 +45,8 @@ public class LevelPainter implements Runnable {
     private SurfaceHolder surfaceHolder;
 	
 	/** Dimensions */
+    private int height;
+    private int width;
     private int canvasWidth;
     private int canvasHeight;
 	private int minLevelX;
@@ -127,7 +126,6 @@ public class LevelPainter implements Runnable {
 	/** Info */
 	private String infoText;
 	private String lockText;
-	private String sensorText;
 	
 	/** Ajustement de la vitesse */
 	private Viscosity viscosity;
@@ -165,7 +163,7 @@ public class LevelPainter implements Runnable {
     		Handler handler, int width, int height,
     		boolean showAngle, DisplayType angleType, 
     		Viscosity viscosity, boolean lockEnabled, 
-    		boolean ecoMode, Provider provider) {
+    		boolean ecoMode) {
 
     	// get handles to some important objects
         this.surfaceHolder = surfaceHolder;
@@ -199,7 +197,6 @@ public class LevelPainter implements Runnable {
         // strings
         this.infoText = context.getString(R.string.calibrate_info);
         this.lockText = context.getString(R.string.lock_info);
-        this.sensorText = context.getString(provider.getName());
         
         // typeface
         Typeface lcd = Typeface.createFromAsset(context.getAssets(), FONT_LCD);
@@ -390,7 +387,6 @@ public class LevelPainter implements Runnable {
     	switch (orientation) {
 	    	case LANDING :
 	    		canvas.drawText(infoText, middleX, infoY, infoPaint);
-	    		canvas.drawText(sensorText, middleX, sensorY , infoPaint);
 	    		if (lockEnabled) {
 		    		display.setBounds(lockRect);
 		    		display.draw(canvas);
@@ -462,7 +458,6 @@ public class LevelPainter implements Runnable {
 	    	default :
 	    		canvas.rotate(orientation.getRotation(), middleX, middleY);
 	    		canvas.drawText(infoText, middleX, infoY, infoPaint);
-	    		canvas.drawText(sensorText, middleX, sensorY , infoPaint);
 	    		if (lockEnabled) {
 		    		display.setBounds(lockRect);
 		    		display.draw(canvas);
@@ -531,8 +526,6 @@ public class LevelPainter implements Runnable {
 		if (!(lockEnabled && locked) || !initialized) {
 	        synchronized (this.surfaceHolder) {
 	    		orientation = newOrientation;
-	    		
-	    		int height, width;
 	    		
 	    		switch (newOrientation) {
 		    		case LEFT :		// left
@@ -625,7 +618,7 @@ public class LevelPainter implements Runnable {
 		}
 	}
 
-	public void onOrientationChanged(Orientation newOrientation, float newPitch, float newRoll) {
+	public void onOrientationChanged(Orientation newOrientation, float newPitch, float newRoll, float newBalance) {
 		if (!orientation.equals(newOrientation)) {
 			setOrientation(newOrientation);
 		}
@@ -633,13 +626,16 @@ public class LevelPainter implements Runnable {
 			switch (orientation) {
 				case TOP :
 				case BOTTOM :
-					angle1 = Math.abs(newRoll);
+					angle1 = Math.abs(newBalance);
+		            angleX = Math.sin(Math.toRadians(newBalance)) / MAX_SINUS;
 					break;
 				case LANDING :
 					angle2 = Math.abs(newRoll);
+		            angleX = Math.sin(Math.toRadians(newRoll)) / MAX_SINUS;
 				case RIGHT :
 				case LEFT :
 					angle1 = Math.abs(newPitch);
+		            angleY = Math.sin(Math.toRadians(newPitch)) / MAX_SINUS;
 					if (angle1 > 90) {
 						angle1 = 180 - angle1;
 					}
@@ -651,8 +647,8 @@ public class LevelPainter implements Runnable {
 					angle2 = 100 * angle2 / 45;
 					break;
 				case ROOF_PITCH :
-					angle1 = 12 * (float) Math.tan(angle1 * PI180);
-					angle2 = 12 * (float) Math.tan(angle2 * PI180);
+					angle1 = 12 * (float) Math.tan(Math.toRadians(angle1));
+					angle2 = 12 * (float) Math.tan(Math.toRadians(angle2));
 					break;
 			}
 			// correction des angles affiches
@@ -662,8 +658,6 @@ public class LevelPainter implements Runnable {
 			if (angle2 > angleType.getMax()) {
 				angle2 = angleType.getMax();
 			}
-	        angleY = Math.sin(newPitch * PI180) / MAX_SINUS;
-	        angleX = Math.sin(newRoll * PI180) / MAX_SINUS;
 	        // correction des angles aberrants
 	        // pour ne pas que la bulle sorte de l'ecran
         	if (angleX > 1) {

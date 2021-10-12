@@ -1,11 +1,7 @@
 package net.androgames.level;
 
 import net.androgames.level.config.DisplayType;
-import net.androgames.level.config.Provider;
 import net.androgames.level.config.Viscosity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +15,7 @@ import android.preference.PreferenceManager;
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
  *  
- *  Copyright (C) 2012 Antoine Vianey
+ *  Copyright (C) 2014 Antoine Vianey
  *  
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,9 +31,6 @@ import android.preference.PreferenceManager;
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
 public class LevelPreferences extends PreferenceActivity implements OnPreferenceChangeListener {
-
-	public static final String PROVIDER_ORIENTATION 	= Provider.ORIENTATION.toString();
-	public static final String PROVIDER_ACCELEROMETER 	= Provider.ACCELEROMETER.toString();
 	
 	public static final String KEY_SHOW_ANGLE 			= "preference_show_angle";
 	public static final String KEY_DISPLAY_TYPE 		= "preference_display_type";
@@ -45,11 +38,8 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 	public static final String KEY_LOCK				 	= "preference_lock";
 	public static final String KEY_LOCK_LOCKED		 	= "preference_lock_locked";			// mémoriser le verouillage
 	public static final String KEY_LOCK_ORIENTATION 	= "preference_lock_orientation";	// mémoriser l'orientation verouillée
-	public static final String KEY_SENSOR				= "preference_sensor";
 	public static final String KEY_VISCOSITY			= "preference_viscosity";
 	public static final String KEY_ECONOMY				= "preference_economy";
-	
-	private static final int DIALOG_CALIBRATE_AGAIN = 0;
 	
 	private SharedPreferences prefs;
 
@@ -64,13 +54,10 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
     	super.onResume();
     	// enregistrement des listerners
     	findPreference(KEY_DISPLAY_TYPE).setOnPreferenceChangeListener(this);
-    	findPreference(KEY_SENSOR).setOnPreferenceChangeListener(this);
     	findPreference(KEY_VISCOSITY).setOnPreferenceChangeListener(this);
     	findPreference(KEY_ECONOMY).setOnPreferenceChangeListener(this);
     	// mise a jour de l'affichage
     	onPreferenceChange(findPreference(KEY_DISPLAY_TYPE), prefs.getString(LevelPreferences.KEY_DISPLAY_TYPE, "ANGLE")); 
-    	findPreference(KEY_SENSOR).setSummary(Provider.valueOf(
-    			prefs.getString(LevelPreferences.KEY_SENSOR, PROVIDER_ACCELEROMETER)).getSummary());
     	findPreference(KEY_VISCOSITY).setSummary(Viscosity.valueOf(
     			prefs.getString(LevelPreferences.KEY_VISCOSITY, "MEDIUM")).getSummary());
     	findPreference(KEY_VISCOSITY).setEnabled(
@@ -87,9 +74,6 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 		        displaySummary = String.valueOf(displaySummary).replaceAll("%", "%%");
 		    }
 			preference.setSummary(displaySummary);
-		} else if (KEY_SENSOR.equals(key)) {
-			preference.setSummary(Provider.valueOf((String) newValue).getSummary());
-	    	showDialog(DIALOG_CALIBRATE_AGAIN);
 		} else if (KEY_VISCOSITY.equals(key)) {
 			preference.setSummary(Viscosity.valueOf((String) newValue).getSummary());
 		} else if (KEY_ECONOMY.equals(key)) {
@@ -97,27 +81,5 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 		}
 		return true;
 	}
-	
-	protected Dialog onCreateDialog(int id) {
-        Dialog dialog;
-    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        switch(id) {
-	        case DIALOG_CALIBRATE_AGAIN:
-	        	builder.setTitle(R.string.calibrate_again_title)
-	        			.setIcon(android.R.drawable.ic_dialog_alert)
-	        			.setCancelable(true)
-	        	       	.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
-	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	        	   	dialog.dismiss();
-	        	           	}
-	        	       	})
-	        	       	.setMessage(R.string.calibrate_again_message);
-	        	dialog = builder.create();
-	            break;
-	        default:
-	            dialog = null;
-        }
-        return dialog;
-    }
     
 }

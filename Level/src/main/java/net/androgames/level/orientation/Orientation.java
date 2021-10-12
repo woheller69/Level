@@ -4,7 +4,7 @@ package net.androgames.level.orientation;
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
  *  
- *  Copyright (C) 2012 Antoine Vianey
+ *  Copyright (C) 2014 Antoine Vianey
  *  
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ public enum Orientation {
 	TOP(1, 0),
 	RIGHT(1, 90),
 	BOTTOM(-1, 180),
-	LEFT(-1, 270);
+	LEFT(-1, -90);
 	
 	private int reverse;
 	private int rotation;
@@ -43,12 +43,12 @@ public enum Orientation {
 		this.rotation = rotation;
 	}
 	
-	public boolean isLevel(float pitch, float roll, float sensibility) {
+	public boolean isLevel(float pitch, float roll, float balance, float sensibility) {
 		switch (this) {
 			case BOTTOM :
 			case TOP :
-				return roll <= sensibility 
-						&& roll >= - sensibility;
+				return balance <= sensibility 
+						&& balance >= - sensibility;
 			case LANDING :
 				return roll <= sensibility 
 						&& roll >= - sensibility 

@@ -33,13 +33,6 @@
     <string name="roof_pitch_summary">Stijging in inches per voet\n3 &#126; 14°</string>
     <string name="angle_summary">Hoek in graden</string>
     <string name="inclination_summary">Helling in procenten\n100&#37; &#126; 45°</string>
-    <string name="preference_sensor">Type sensor</string>
-    <string name="orientation">Orientatie</string>
-    <string name="accelerometer">G-sensor</string>
-    <string name="orientation_sensor">kompas sensor</string>
-    <string name="accelerometer_sensor">G-sensor</string>
-    <string name="orientation_summary">Kompas sensor\nGevoeligheid hangt af van de telefoon</string>
-    <string name="accelerometer_summary">G-sensor\naccuraat, maar gevoelig voor bewegingen</string>
     <string name="viscosity_low">Laag</string>
     <string name="viscosity_medium">Middelmatig</string>
     <string name="viscosity_high">Hoog</string>

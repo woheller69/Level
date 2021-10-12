@@ -33,13 +33,6 @@
     <string name="roof_pitch_summary">Unità verticali per 12 orizzontali\n3 &#126; 14°</string>
     <string name="angle_summary">Angolo in gradi</string>
     <string name="inclination_summary">Inclinazione in percentuale\n100&#37; &#126; 45°</string>
-    <string name="preference_sensor">Tipo di sensore</string>
-    <string name="orientation">Orientamento</string>
-    <string name="accelerometer">Accelerometro</string>
-    <string name="orientation_sensor">Sensore di orientamento</string>
-    <string name="accelerometer_sensor">Accelerometro sensore</string>
-    <string name="orientation_summary">Sensore di orientamento\nSensibilità dipende dal telefono</string>
-    <string name="accelerometer_summary">Accelerometro sensore\nAccurato, ma sensibili ai movimenti</string>
     <string name="viscosity_low">Bassa</string>
     <string name="viscosity_medium">Media</string>
     <string name="viscosity_high">Alta</string>

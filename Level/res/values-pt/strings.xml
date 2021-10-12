@@ -33,13 +33,6 @@
     <string name="roof_pitch_summary">Polegadas de origem por pé de corridan\n3 &#126; 14°</string>
     <string name="angle_summary">Ângulo em graus</string>
     <string name="inclination_summary">Inclinação em percentagem\n100&#37; &#126; 45°</string>
-    <string name="preference_sensor">Tipo de sensor</string>
-    <string name="orientation">Orientação</string>
-    <string name="accelerometer">Acelerómetro</string>
-    <string name="orientation_sensor">Sensor de orientação</string>
-    <string name="accelerometer_sensor">Sensor de aceleração</string>
-    <string name="orientation_summary">Sensor de orientação\nA sensibilidade depende do aparelho</string>
-    <string name="accelerometer_summary">Sensor de aceleração\nPreciso mas sensível aos movimentos</string>
     <string name="viscosity_low">Baixa</string>
     <string name="viscosity_medium">Média</string>
     <string name="viscosity_high">Alta</string>
