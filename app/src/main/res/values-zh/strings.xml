@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">水准仪</string>
+    <string name="reset">重置</string>
+    <string name="not_supported">不支持定向</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="ok">确定</string>
+    <string name="calibrate">校准</string>
+    <string name="calibrate_info">点击菜单按钮校准...</string>
+    <string name="calibrate_title">校准手机</string>
+    <string name="calibrate_message">将手机调整至水平位置，点击校准按钮。
+	
+或重置校准手机的所有边。</string>
+    <string name="calibrate_again_title">请再次校准</string>
+    <string name="calibrate_again_message">测量器要求再次校准手机。</string>
+    <string name="calibrate_saved">定制校准已保存！</string>
+    <string name="calibrate_failed">校准失败！</string>
+    <string name="calibrate_restored">初始校准已恢复！</string>
+    <string name="preferences">设置</string>
+    <string name="preference_show_angle">多角度显示</string>
+    <string name="preference_show_angle_summary">在界面上显示角度值</string>
+    <string name="preference_display_type">显示类型</string>
+    <string name="preference_sound">音效</string>
+    <string name="preference_sound_summary">测量时播放声音</string>
+    <string name="preference_lock">锁定</string>
+    <string name="preference_lock_summary">允许方位锁定</string>
+    <string name="preference_viscosity">粘度</string>
+    <string name="preference_economy">Eco 模式</string>
+    <string name="preference_economy_summary">"流畅度欠佳
+耗费电量较少"</string>
+    <string name="angle">角度</string>
+    <string name="lock_info">点击锁定方位</string>
+    <string name="inclination">倾斜度</string>
+    <string name="roof_pitch">屋面坡度</string>
+    <string name="roof_pitch_summary">"每英尺增加英寸值
+3 &#126; 14°"</string>
+    <string name="angle_summary">角度</string>
+    <string name="inclination_summary">"倾斜度：
+100&#37; &#126; 45°"</string>
+    <string name="viscosity_low">低</string>
+    <string name="viscosity_medium">中</string>
+    <string name="viscosity_high">高</string>
+    <string name="viscosity_low_summary">"低粘度
+气泡快速移动"</string>
+    <string name="viscosity_medium_summary">"中粘度
+气泡常速移动"</string>
+    <string name="viscosity_high_summary">"高粘度
+气泡慢速移动"</string>
+    <string name="config_switch_vertically">转向竖直方向</string>
+    <string name="config_switch_horizontally">转向水平方向</string>
+    <string name="config_rotate_axis">转动轴线</string>
+    <string name="orientation">方位</string>
+    <string name="accelerometer">加速器</string>
+    <string name="orientation_sensor">方位测量器</string>
+    <string name="accelerometer_sensor">加速器测量器</string>
+    <string name="orientation_summary">"方位测量器
+测量结果取决于手机"</string>
+    <string name="accelerometer_summary">"加速测量器
+准确"</string>
+</resources>
