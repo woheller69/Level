@@ -333,7 +333,7 @@ public class OrientationProvider implements SensorEventListener {
 		if (refValues >= MIN_VALUES) {
 			return minStep;
 		} else {
-			return 0;
+			return 0.2f;
 		}
 	}
 	
