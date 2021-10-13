@@ -23,8 +23,8 @@
 				android:gradientRadius="100"
 				android:startColor="@color/level_liquid_reflect"
 				android:endColor="@color/level_liquid_dark"
-				android:centerX="33%"
-				android:centerY="33%" />
+				android:centerX="50%"
+				android:centerY="50%" />
 		</shape>
 	</item>
 </layer-list>

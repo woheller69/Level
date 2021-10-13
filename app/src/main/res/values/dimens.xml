@@ -14,7 +14,7 @@
 	<!-- Bubble -->
 	<dimen name="bubble_padding">2dip</dimen>
 	<dimen name="bubble_padding_top">0dip</dimen>
-	<dimen name="bubble_padding_bottom">4dip</dimen>
+	<dimen name="bubble_padding_bottom">10dip</dimen>
 	<dimen name="bubble_padding_right">2dip</dimen>
 	<dimen name="bubble_padding_left">2dip</dimen>
 	<!-- LCD -->
