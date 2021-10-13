@@ -39,8 +39,7 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 	public static final String KEY_LOCK_LOCKED		 	= "preference_lock_locked";			// mémoriser le verouillage
 	public static final String KEY_LOCK_ORIENTATION 	= "preference_lock_orientation";	// mémoriser l'orientation verouillée
 	public static final String KEY_VISCOSITY			= "preference_viscosity";
-	public static final String KEY_ECONOMY				= "preference_economy";
-	
+
 	private SharedPreferences prefs;
 
     @Override
@@ -55,13 +54,10 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
     	// enregistrement des listerners
     	findPreference(KEY_DISPLAY_TYPE).setOnPreferenceChangeListener(this);
     	findPreference(KEY_VISCOSITY).setOnPreferenceChangeListener(this);
-    	findPreference(KEY_ECONOMY).setOnPreferenceChangeListener(this);
     	// mise a jour de l'affichage
     	onPreferenceChange(findPreference(KEY_DISPLAY_TYPE), prefs.getString(LevelPreferences.KEY_DISPLAY_TYPE, "ANGLE")); 
     	findPreference(KEY_VISCOSITY).setSummary(Viscosity.valueOf(
     			prefs.getString(LevelPreferences.KEY_VISCOSITY, "MEDIUM")).getSummary());
-    	findPreference(KEY_VISCOSITY).setEnabled(
-				!((CheckBoxPreference) findPreference(KEY_ECONOMY)).isChecked());
     }
 
 	@Override
@@ -76,8 +72,6 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 			preference.setSummary(displaySummary);
 		} else if (KEY_VISCOSITY.equals(key)) {
 			preference.setSummary(Viscosity.valueOf((String) newValue).getSummary());
-		} else if (KEY_ECONOMY.equals(key)) {
-			findPreference(KEY_VISCOSITY).setEnabled(!((Boolean) newValue));
 		}
 		return true;
 	}

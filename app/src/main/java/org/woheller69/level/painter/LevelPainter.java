@@ -155,21 +155,18 @@ public class LevelPainter implements Runnable {
 	private boolean locked;
 	
 	/** Animation */
-	private boolean ecoMode;
 	private final Handler handler;
 	private long frameRate;
 
     public LevelPainter(SurfaceHolder surfaceHolder, Context context, 
     		Handler handler, int width, int height,
     		boolean showAngle, DisplayType angleType, 
-    		Viscosity viscosity, boolean lockEnabled, 
-    		boolean ecoMode) {
+    		Viscosity viscosity, boolean lockEnabled) {
 
     	// get handles to some important objects
         this.surfaceHolder = surfaceHolder;
         
         // economy mode
-        this.ecoMode = ecoMode;
         this.handler = handler;
         this.frameRate = 1000 / context.getResources().getInteger(R.integer.frame_rate);
         
@@ -300,7 +297,7 @@ public class LevelPainter implements Runnable {
         }  
     	// lancement du traitement differe en mode eco
     	handler.removeCallbacks(this);
-    	if (!wait && !ecoMode) {
+    	if (!wait) {
     		handler.postDelayed(this, frameRate - System.currentTimeMillis() + lastTime);
     	}
     }
@@ -330,53 +327,44 @@ public class LevelPainter implements Runnable {
 
     private void updatePhysics() {
     	currentTime = System.currentTimeMillis();
-    	if (ecoMode) {
-    		switch (orientation) {
-	    		case LANDING :
-	    			y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
-	    		default :
-	        		x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-    		}
-    	} else {
-	    	if (lastTime > 0) {
-		    	timeDiff = (currentTime - lastTime) / 1000.0;
-		    	posX = orientation.getReverse() * (2 * x - minLevelX - maxLevelX) / levelMinusBubbleWidth;
-		    	switch (orientation) {
-			    	case TOP : 
-			    	case BOTTOM : 
-			    		speedX = orientation.getReverse() * (angleX - posX) * viscosityValue;
-			    		break;
-			    	case LEFT : 
-			    	case RIGHT : 
-			    		speedX = orientation.getReverse() * (angleY - posX) * viscosityValue;
-			    		break;
-			    	case LANDING : 
-				    	posY = (2 * y - minLevelY - maxLevelY) / levelMinusBubbleHeight;
-			    		speedX = (angleX - posX) * viscosityValue;
-			    		speedY = (angleY - posY) * viscosityValue;
-				    	y += speedY * timeDiff;
-			    		break;
-		    	}
-		    	x += speedX * timeDiff;
-		    	// en cas de latence elevee
-		    	// si la bubble a trop deviee
-		    	// elle est replacee correctement
-		    	switch (orientation) {
-			    	case LANDING : 
-			    		if (Math.sqrt((middleX - x) * (middleX - x) 
-			    				+ (middleY - y) * (middleY - y)) > levelMaxDimension / 2 - halfBubbleWidth) {
-				    		x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-				    		y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
-			    		}
-			    		break;
-			    	default :
-				    	if (x < minLevelX + halfBubbleWidth || x > maxLevelX - halfBubbleWidth) {
-				    		x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-				    	}
-		    	}
-	    	}
-    	}
-    	lastTime = currentTime;
+		if (lastTime > 0) {
+			timeDiff = (currentTime - lastTime) / 1000.0;
+			posX = orientation.getReverse() * (2 * x - minLevelX - maxLevelX) / levelMinusBubbleWidth;
+			switch (orientation) {
+				case TOP :
+				case BOTTOM :
+					speedX = orientation.getReverse() * (angleX - posX) * viscosityValue;
+					break;
+				case LEFT :
+				case RIGHT :
+					speedX = orientation.getReverse() * (angleY - posX) * viscosityValue;
+					break;
+				case LANDING :
+					posY = (2 * y - minLevelY - maxLevelY) / levelMinusBubbleHeight;
+					speedX = (angleX - posX) * viscosityValue;
+					speedY = (angleY - posY) * viscosityValue;
+					y += speedY * timeDiff;
+					break;
+			}
+			x += speedX * timeDiff;
+			// en cas de latence elevee
+			// si la bubble a trop deviee
+			// elle est replacee correctement
+			switch (orientation) {
+				case LANDING :
+					if (Math.sqrt((middleX - x) * (middleX - x)
+							+ (middleY - y) * (middleY - y)) > levelMaxDimension / 2 - halfBubbleWidth) {
+						x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+						y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
+					}
+					break;
+				default :
+					if (x < minLevelX + halfBubbleWidth || x > maxLevelX - halfBubbleWidth) {
+						x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+					}
+			}
+		}
+		lastTime = currentTime;
     }
     
     private void doDraw(Canvas canvas) {
@@ -676,9 +664,6 @@ public class LevelPainter implements Runnable {
 				angleY = angleY / l;
 	        }
 	        // lancement de l'animation si mode eco
-	        if (ecoMode) {
-	        	handler.post(this);
-	        }
 		}
 	}
 
