@@ -1,5 +1,7 @@
 package org.woheller69.level.orientation;
 
+import android.util.Log;
+
 /*
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
@@ -44,10 +46,11 @@ public enum Orientation {
 	}
 	
 	public boolean isLevel(float pitch, float roll, float balance, float sensibility) {
+		if (sensibility<0.2f) sensibility=0.2f;  //minimum sensibility for playing sound (play sound even if sensor sensibility is better)
 		switch (this) {
 			case BOTTOM :
 			case TOP :
-				return balance <= sensibility 
+				return balance <= sensibility
 						&& balance >= - sensibility;
 			case LANDING :
 				return roll <= sensibility 
@@ -56,7 +59,7 @@ public enum Orientation {
 								|| Math.abs(pitch) >= 180 - sensibility);
 			case LEFT :
 			case RIGHT :
-				return Math.abs(pitch) <= sensibility 
+				return Math.abs(pitch) <= sensibility
 						|| Math.abs(pitch) >= 180 - sensibility;
 		}
 		return false;
