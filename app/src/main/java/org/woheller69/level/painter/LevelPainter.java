@@ -423,7 +423,7 @@ public class LevelPainter implements Runnable {
 		    				displayRect.centerY() + lcdHeight / 2, 
 		    				lcdBackgroundPaint);
 		    		canvas.drawText(
-		    				displayFormat.format(angle2), 
+		    				displayFormat.format(angle2),
 		    				middleX - (displayRect.width() + displayGap) / 2, 
 		    				displayRect.centerY() + lcdHeight / 2, 
 		    				lcdForegroundPaint);

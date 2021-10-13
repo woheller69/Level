@@ -18,7 +18,7 @@
 	<dimen name="bubble_padding_right">2dip</dimen>
 	<dimen name="bubble_padding_left">2dip</dimen>
 	<!-- LCD -->
-	<dimen name="lcd_text">20dip</dimen>
+	<dimen name="lcd_text">32dip</dimen>
 	<!-- LOCK -->
 	<dimen name="lock_text">32dip</dimen>
 	<!-- INFO -->

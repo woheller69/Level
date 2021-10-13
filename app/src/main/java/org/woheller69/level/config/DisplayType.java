@@ -23,8 +23,8 @@ import org.woheller69.level.R;
  */
 public enum DisplayType {
 
-	ANGLE(R.string.angle, R.string.angle_summary, "00.0", "88.8", 99.9f),
-	INCLINATION(R.string.inclination, R.string.inclination_summary, "000.0", "888.8", 999.9f);
+	ANGLE(R.string.angle, R.string.angle_summary, "00.0\u2009°", "88.8\u2009°", 99.9f),
+	INCLINATION(R.string.inclination, R.string.inclination_summary, "000.0\u2009'%'", "888.8\u2009%", 999.9f);
 	
 	private int label;
 	private int summary;
