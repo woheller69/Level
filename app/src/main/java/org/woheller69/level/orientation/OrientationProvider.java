@@ -1,9 +1,9 @@
-package net.androgames.level.orientation;
+package org.woheller69.level.orientation;
 
 import java.util.Arrays;
 import java.util.List;
 
-import net.androgames.level.Level;
+import org.woheller69.level.Level;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;

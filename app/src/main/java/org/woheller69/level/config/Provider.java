@@ -1,12 +1,15 @@
-package net.androgames.level.config;
+package org.woheller69.level.config;
 
-import net.androgames.level.R;
+import org.woheller69.level.R;
+import org.woheller69.level.orientation.OrientationProvider;
+import org.woheller69.level.orientation.provider.ProviderAccelerometer;
+import org.woheller69.level.orientation.provider.ProviderOrientation;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
  *  
- *  Copyright (C) 2014 Antoine Vianey
+ *  Copyright (C) 2012 Antoine Vianey
  *  
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,44 +24,39 @@ import net.androgames.level.R;
  *  You should have received a copy of the GNU General Public License
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
-public enum DisplayType {
+public enum Provider {
 
-	ANGLE(R.string.angle, R.string.angle_summary, "00.0", "88.8", 99.9f),
-	INCLINATION(R.string.inclination, R.string.inclination_summary, "000.0", "888.8", 999.9f),
-	ROOF_PITCH(R.string.roof_pitch, R.string.roof_pitch_summary, "00.000", "88.888", 99.999f);
-	
+	ORIENTATION(R.string.orientation, R.string.orientation_summary, R.string.orientation_sensor),
+	ACCELEROMETER(R.string.accelerometer, R.string.accelerometer_summary, R.string.accelerometer_sensor);
+
 	private int label;
 	private int summary;
-	private float max;
-	private String displayFormat;
-	private String displayBackgroundText;
+	private int name;
 	
-	private DisplayType(int label, int summary, String displayFormat, String displayBackgroundText, float max) {
+	private Provider(int label, int summary, int name) {
 		this.label = label;
-		this.max = max;
+		this.name = name;
 		this.summary = summary;
-		this.displayFormat = displayFormat;
-		this.displayBackgroundText = displayBackgroundText;
-	}
-	
-	public float getMax() {
-		return max;
 	}
 	
 	public int getSummary() {
 		return summary;
 	}
 
+	public int getName() {
+		return name;
+	}
+	
 	public int getLabel() {
 		return label;
 	}
 
-	public String getDisplayFormat() {
-		return displayFormat;
-	}
-	
-	public String getDisplayBackgroundText() {
-		return displayBackgroundText;
+	public OrientationProvider getProvider() {
+		switch (this) {
+			case ACCELEROMETER : return ProviderAccelerometer.getInstance();
+			case ORIENTATION : return ProviderOrientation.getInstance();
+		}
+		return null;
 	}
 	
 }

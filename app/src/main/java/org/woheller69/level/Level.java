@@ -1,9 +1,9 @@
-package net.androgames.level;
+package org.woheller69.level;
 
-import net.androgames.level.orientation.Orientation;
-import net.androgames.level.orientation.OrientationListener;
-import net.androgames.level.orientation.OrientationProvider;
-import net.androgames.level.view.LevelView;
+import org.woheller69.level.orientation.Orientation;
+import org.woheller69.level.orientation.OrientationListener;
+import org.woheller69.level.orientation.OrientationProvider;
+import org.woheller69.level.view.LevelView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest 
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.androgames.level">
+    package="org.woheller69.level">
     
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
@@ -12,7 +12,7 @@
     	android:label="@string/name">
 
         <activity 
-        	android:name=".Level"
+        	android:name="org.woheller69.level.Level"
         	android:screenOrientation="portrait"
         	android:hardwareAccelerated="true"
     		android:theme="@style/Level.NoTitle">
@@ -23,7 +23,7 @@
         </activity>
     	
         <activity 
-        	android:name=".LevelPreferences"
+        	android:name="org.woheller69.level.LevelPreferences"
             android:screenOrientation="portrait"
     		android:theme="@style/Level"/>
         

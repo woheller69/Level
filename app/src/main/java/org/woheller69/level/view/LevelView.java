@@ -1,10 +1,10 @@
-package net.androgames.level.view;
+package org.woheller69.level.view;
 
-import net.androgames.level.LevelPreferences;
-import net.androgames.level.config.DisplayType;
-import net.androgames.level.config.Viscosity;
-import net.androgames.level.orientation.Orientation;
-import net.androgames.level.painter.LevelPainter;
+import org.woheller69.level.LevelPreferences;
+import org.woheller69.level.config.DisplayType;
+import org.woheller69.level.config.Viscosity;
+import org.woheller69.level.orientation.Orientation;
+import org.woheller69.level.painter.LevelPainter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;

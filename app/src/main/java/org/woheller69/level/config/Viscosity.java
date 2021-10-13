@@ -1,4 +1,6 @@
-package net.androgames.level.orientation;
+package org.woheller69.level.config;
+
+import org.woheller69.level.R;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
@@ -19,12 +21,26 @@ package net.androgames.level.orientation;
  *  You should have received a copy of the GNU General Public License
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
-public interface OrientationListener {
+public enum Viscosity {
 
-	public void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
+	HIGH(R.string.viscosity_high_summary, 0.5d),
+	MEDIUM(R.string.viscosity_medium_summary, 1d),
+	LOW(R.string.viscosity_low_summary, 1.5d);
+
+	private int summary;
+	private double coeff;
 	
-	public void onCalibrationSaved(boolean success);
+	private Viscosity(int summary, double coeff) {
+		this.summary = summary;
+		this.coeff = coeff;
+	}
 	
-	public void onCalibrationReset(boolean success);
-	
+	public double getCoeff() {
+		return coeff;
+	}
+
+	public int getSummary() {
+		return summary;
+	}
+
 }

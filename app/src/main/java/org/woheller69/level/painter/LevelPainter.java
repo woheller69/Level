@@ -1,12 +1,12 @@
-package net.androgames.level.painter;
+package org.woheller69.level.painter;
 
 import java.text.DecimalFormat;
 
-import net.androgames.level.Level;
-import net.androgames.level.R;
-import net.androgames.level.config.DisplayType;
-import net.androgames.level.config.Viscosity;
-import net.androgames.level.orientation.Orientation;
+import org.woheller69.level.Level;
+import org.woheller69.level.R;
+import org.woheller69.level.config.DisplayType;
+import org.woheller69.level.config.Viscosity;
+import org.woheller69.level.orientation.Orientation;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;

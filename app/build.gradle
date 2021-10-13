@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "net.androgames.level"
+        applicationId "org.woheller69.level"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 36

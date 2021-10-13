@@ -1,9 +1,9 @@
-package net.androgames.level.orientation.provider;
+package org.woheller69.level.orientation.provider;
 
 import java.util.Arrays;
 import java.util.List;
 
-import net.androgames.level.orientation.OrientationProvider;
+import org.woheller69.level.orientation.OrientationProvider;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.view.Surface;

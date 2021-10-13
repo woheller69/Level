@@ -1,7 +1,7 @@
-package net.androgames.level;
+package org.woheller69.level;
 
-import net.androgames.level.config.DisplayType;
-import net.androgames.level.config.Viscosity;
+import org.woheller69.level.config.DisplayType;
+import org.woheller69.level.config.Viscosity;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
