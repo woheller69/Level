@@ -32,9 +32,6 @@
     <string name="angle">角度</string>
     <string name="lock_info">点击锁定方位</string>
     <string name="inclination">倾斜度</string>
-    <string name="roof_pitch">屋面坡度</string>
-    <string name="roof_pitch_summary">"每英尺增加英寸值
-3 &#126; 14°"</string>
     <string name="angle_summary">角度</string>
     <string name="inclination_summary">"倾斜度：
 100&#37; &#126; 45°"</string>

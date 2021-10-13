@@ -4,13 +4,11 @@
 	<string-array name="display_types_name">
         <item>@string/angle</item>
         <item>@string/inclination</item>
-        <item>@string/roof_pitch</item>
     </string-array>
     
     <string-array name="display_types">
 	    <item>ANGLE</item>
 	    <item>INCLINATION</item>
-	    <item>ROOF_PITCH</item>
 	</string-array>
 
 	<string-array name="viscosities_name">

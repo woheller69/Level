@@ -29,8 +29,6 @@
     <string name="angle">Hoek</string>
     <string name="lock_info">tik hier om de hoek te vergrendelan</string>
     <string name="inclination">Helling</string>
-    <string name="roof_pitch">Dak-helling</string>
-    <string name="roof_pitch_summary">Stijging in inches per voet\n3 &#126; 14°</string>
     <string name="angle_summary">Hoek in graden</string>
     <string name="inclination_summary">Helling in procenten\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Laag</string>

@@ -24,8 +24,7 @@ import org.woheller69.level.R;
 public enum DisplayType {
 
 	ANGLE(R.string.angle, R.string.angle_summary, "00.0", "88.8", 99.9f),
-	INCLINATION(R.string.inclination, R.string.inclination_summary, "000.0", "888.8", 999.9f),
-	ROOF_PITCH(R.string.roof_pitch, R.string.roof_pitch_summary, "00.000", "88.888", 99.999f);
+	INCLINATION(R.string.inclination, R.string.inclination_summary, "000.0", "888.8", 999.9f);
 	
 	private int label;
 	private int summary;

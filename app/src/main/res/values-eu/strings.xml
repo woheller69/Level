@@ -29,8 +29,6 @@
     <string name="angle">Angelua</string>
     <string name="lock_info">ukitu nibelaren orientazioa blokeatzeko</string>
     <string name="inclination">Inklinazioa</string>
-    <string name="roof_pitch">Teilatuaren inklinazioa</string>
-    <string name="roof_pitch_summary">Igotako hazbeteak aurreratutako oineko\n3 &#126; 14°</string>
     <string name="angle_summary">Angelua gradutan</string>
     <string name="inclination_summary">Inklinazioa ehunekotan\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Baxua</string>

@@ -29,8 +29,6 @@
     <string name="angle">Angle</string>
     <string name="lock_info">appuyer pour verrouiller l\'orientation</string>
     <string name="inclination">Pente</string>
-    <string name="roof_pitch">Pente de toît</string>
-    <string name="roof_pitch_summary">Unités verticales pour 12 horizontales\n3 &#126; 14°</string>
     <string name="angle_summary">Angle en degrés</string>
     <string name="inclination_summary">Pente en pourcents\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Faible</string>

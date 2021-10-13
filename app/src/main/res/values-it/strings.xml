@@ -29,8 +29,6 @@
     <string name="angle">Angolo</string>
     <string name="lock_info">premere per bloccare il orientamento</string>
     <string name="inclination">Inclinazione</string>
-    <string name="roof_pitch">Inclinazione del tetto</string>
-    <string name="roof_pitch_summary">Unità verticali per 12 orizzontali\n3 &#126; 14°</string>
     <string name="angle_summary">Angolo in gradi</string>
     <string name="inclination_summary">Inclinazione in percentuale\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Bassa</string>

@@ -29,8 +29,6 @@
     <string name="angle">Angulo</string>
     <string name="lock_info">hundir para conservar la orientación</string>
     <string name="inclination">Inclinación</string>
-    <string name="roof_pitch">Techo pendiente</string>
-    <string name="roof_pitch_summary">Unitades verticales para 12 horizontales\n3 &#126; 14°</string>
     <string name="angle_summary">Ángulo en grados</string>
     <string name="inclination_summary">Inclinación en porcentajes\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Baja</string>

@@ -646,10 +646,6 @@ public class LevelPainter implements Runnable {
 					angle1 = 100 * angle1 / 45;
 					angle2 = 100 * angle2 / 45;
 					break;
-				case ROOF_PITCH :
-					angle1 = 12 * (float) Math.tan(Math.toRadians(angle1));
-					angle2 = 12 * (float) Math.tan(Math.toRadians(angle2));
-					break;
 			}
 			// correction des angles affiches
 			if (angle1 > angleType.getMax()) {

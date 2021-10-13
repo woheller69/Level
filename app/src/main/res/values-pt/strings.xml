@@ -29,8 +29,6 @@
     <string name="angle">Ângulo</string>
     <string name="lock_info">Clicar para bloquear neste sensor</string>
     <string name="inclination">Inclinação</string>
-    <string name="roof_pitch">Inclinação do telhado</string>
-    <string name="roof_pitch_summary">Polegadas de origem por pé de corridan\n3 &#126; 14°</string>
     <string name="angle_summary">Ângulo em graus</string>
     <string name="inclination_summary">Inclinação em percentagem\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Baixa</string>

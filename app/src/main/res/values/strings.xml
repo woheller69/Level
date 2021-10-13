@@ -29,8 +29,6 @@
     <string name="angle">Angle</string>
     <string name="lock_info">tap to lock level orientation</string>
     <string name="inclination">Inclination</string>
-    <string name="roof_pitch">Roof pitch</string>
-    <string name="roof_pitch_summary">Inches of rise per foot of run\n3 &#126; 14°</string>
     <string name="angle_summary">Angle in degrees</string>
     <string name="inclination_summary">Inclination in percents\n100&#37; &#126; 45°</string>
     <string name="viscosity_low">Low</string>
