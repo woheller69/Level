@@ -1,0 +1,4 @@
+Based on the source tar ball from F-Droid.
+Updated to targetSDK 30.
+Removed some unnecessary options.
+Minor layout changes. 
