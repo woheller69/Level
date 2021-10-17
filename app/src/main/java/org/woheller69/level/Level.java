@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -80,13 +81,15 @@ public class Level extends Activity implements OrientationListener {
     
     /* Handles item selections */
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-	        case R.id.calibrate:
-	            showDialog(DIALOG_CALIBRATE_ID);
-	            return true;
-	        case R.id.preferences:
-	            startActivity(new Intent(this, LevelPreferences.class));
-	            return true;
+        if (item.getItemId() == R.id.calibrate) {
+			showDialog(DIALOG_CALIBRATE_ID);
+			return true;
+		}else if (item.getItemId() == R.id.preferences) {
+			startActivity(new Intent(this, LevelPreferences.class));
+			return true;
+		}else if (item.getItemId() == R.id.Github) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
+				return true;
         }
         return false;
     }
@@ -186,5 +189,5 @@ public class Level extends Activity implements OrientationListener {
     public static OrientationProvider getProvider() {
     	return getContext().provider;
     }
-    
+
 }
