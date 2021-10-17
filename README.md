@@ -12,6 +12,7 @@ No permissions required
      alt="Get it on F-Droid"
      height="80">](https://f-droid.org/packages/org.woheller69.level/)
      
+This is an updated version of https://f-droid.org/de/packages/net.androgames.level/ which has not been updated since 2014.
 
 ## License
 
