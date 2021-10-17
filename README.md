@@ -1,6 +1,20 @@
+# Bubble level
+
+With Bubble you can measure angles and inclination.
+
+Hold one of the four sides of the phone against an object or place it on a flat surface to check the orientation.
+
+No permissions required 
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/org.woheller69.level/)
+     
+
+## License
+
 ```
 An Android Bubble Level application.
-<https://play.google.com/store/apps/details?id=net.androgames.level>
 
 Copyright (C) 2014 Antoine Vianey
 
