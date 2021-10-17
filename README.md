@@ -1,5 +1,7 @@
 # Bubble level
 
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/EggTimer.png" width="150" rotate="270"/> 
+
 With Bubble you can measure angles and inclination.
 
 Hold one of the four sides of the phone against an object or place it on a flat surface to check the orientation.
