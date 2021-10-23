@@ -30,7 +30,7 @@ public enum Viscosity {
 	private int summary;
 	private double coeff;
 	
-	private Viscosity(int summary, double coeff) {
+	Viscosity(int summary, double coeff) {
 		this.summary = summary;
 		this.coeff = coeff;
 	}

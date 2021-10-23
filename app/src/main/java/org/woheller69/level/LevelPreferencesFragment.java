@@ -3,7 +3,6 @@ package org.woheller69.level;
 import org.woheller69.level.config.DisplayType;
 import org.woheller69.level.config.Viscosity;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -35,8 +34,6 @@ public class LevelPreferencesFragment extends PreferenceFragmentCompat implement
 	public static final String KEY_DISPLAY_TYPE 		= "preference_display_type";
 	public static final String KEY_SOUND 				= "preference_sound";
 	public static final String KEY_LOCK				 	= "preference_lock";
-	public static final String KEY_LOCK_LOCKED		 	= "preference_lock_locked";			// mémoriser le verouillage
-	public static final String KEY_LOCK_ORIENTATION 	= "preference_lock_orientation";	// mémoriser l'orientation verouillée
 	public static final String KEY_VISCOSITY			= "preference_viscosity";
 
 	private SharedPreferences prefs;
@@ -44,14 +41,14 @@ public class LevelPreferencesFragment extends PreferenceFragmentCompat implement
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		setPreferencesFromResource(R.xml.preferences, rootKey);
-		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		prefs = PreferenceManager.getDefaultSharedPreferences(requireActivity());
 	}
 
 	public void onResume() {
     	super.onResume();
     	// enregistrement des listerners
-    	findPreference(KEY_DISPLAY_TYPE).setOnPreferenceChangeListener((androidx.preference.Preference.OnPreferenceChangeListener) this);
-    	findPreference(KEY_VISCOSITY).setOnPreferenceChangeListener((androidx.preference.Preference.OnPreferenceChangeListener) this);
+    	findPreference(KEY_DISPLAY_TYPE).setOnPreferenceChangeListener((OnPreferenceChangeListener) this);
+    	findPreference(KEY_VISCOSITY).setOnPreferenceChangeListener((OnPreferenceChangeListener) this);
     	// mise a jour de l'affichage
     	onPreferenceChange(findPreference(KEY_DISPLAY_TYPE), prefs.getString(LevelPreferencesFragment.KEY_DISPLAY_TYPE, "ANGLE"));
     	findPreference(KEY_VISCOSITY).setSummary(Viscosity.valueOf(
@@ -63,10 +60,8 @@ public class LevelPreferencesFragment extends PreferenceFragmentCompat implement
 		String key = preference.getKey();
 		if (KEY_DISPLAY_TYPE.equals(key)) {
 			CharSequence displaySummary = getText(DisplayType.valueOf((String) newValue).getSummary());
-			if (Build.VERSION.SDK_INT >= 11 /* 3.0 : HoneyComb */) {
-				// Fucking retro-compatibility !!!
-				displaySummary = String.valueOf(displaySummary).replaceAll("%", "%%");
-			}
+			// Fucking retro-compatibility !!!
+			displaySummary = String.valueOf(displaySummary).replaceAll("%", "%%");
 			preference.setSummary(displaySummary);
 		} else if (KEY_VISCOSITY.equals(key)) {
 			preference.setSummary(Viscosity.valueOf((String) newValue).getSummary());

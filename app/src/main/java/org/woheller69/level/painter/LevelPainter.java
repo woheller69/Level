@@ -44,7 +44,7 @@ public class LevelPainter implements Runnable {
 	private boolean wait;
 
     /** Possesseur de la surface */
-    private SurfaceHolder surfaceHolder;
+    private final SurfaceHolder surfaceHolder;
 	
 	/** Dimensions */
     private int height;
@@ -352,18 +352,16 @@ public class LevelPainter implements Runnable {
 			// en cas de latence elevee
 			// si la bubble a trop deviee
 			// elle est replacee correctement
-			switch (orientation) {
-				case LANDING :
-					if (Math.sqrt((middleX - x) * (middleX - x)
-							+ (middleY - y) * (middleY - y)) > levelMaxDimension / 2 - halfBubbleWidth) {
-						x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-						y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
-					}
-					break;
-				default :
-					if (x < minLevelX + halfBubbleWidth || x > maxLevelX - halfBubbleWidth) {
-						x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-					}
+			if (orientation == Orientation.LANDING) {
+				if (Math.sqrt((middleX - x) * (middleX - x)
+						+ (middleY - y) * (middleY - y)) > levelMaxDimension / 2.0f - halfBubbleWidth) {
+					x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+					y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
+				}
+			} else {
+				if (x < minLevelX + halfBubbleWidth || x > maxLevelX - halfBubbleWidth) {
+					x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+				}
 			}
 		}
 		lastTime = currentTime;
@@ -373,141 +371,138 @@ public class LevelPainter implements Runnable {
     	canvas.save();
 
     	canvas.drawColor(backgroundColor);
-		
-    	switch (orientation) {
-	    	case LANDING :
-	    		canvas.drawText(infoText, middleX, infoY, infoPaint);
-	    		if (lockEnabled) {
-		    		display.setBounds(lockRect);
-		    		display.draw(canvas);
-		    		canvas.drawText(
-		    				LOCKED_BACKGROUND, 
-		    				middleX, 
-		    				lockRect.centerY() + lockHeight / 2, 
-		    				lockBackgroundPaint);
-		    		canvas.drawText(lockText, middleX, lockRect.bottom + displayGap, infoPaint);
-		    		if (locked) {
-			    		canvas.drawText(
-			    				LOCKED, 
-			    				middleX, 
-			    				lockRect.centerY() + lockHeight / 2, 
-			    				lockForegroundPaint);
-		    		}
-	    		}
-	    		if (showAngle) {
-		    		display.setBounds(
-		    				displayRect.left - (displayRect.width() + displayGap) / 2,
-		    				displayRect.top,
-		    				displayRect.right - (displayRect.width() + displayGap) / 2,
-		    				displayRect.bottom);
-		    		display.draw(canvas);
-		    		display.setBounds(
-		    				displayRect.left + (displayRect.width() + displayGap) / 2,
-		    				displayRect.top,
-		    				displayRect.right + (displayRect.width() + displayGap) / 2,
-		    				displayRect.bottom);
-		    		display.draw(canvas);
-		    		canvas.drawText(
-		    				displayBackgroundText, 
-		    				middleX - (displayRect.width() + displayGap) / 2, 
-		    				displayRect.centerY() + lcdHeight / 2, 
-		    				lcdBackgroundPaint);
-		    		canvas.drawText(
-		    				displayFormat.format(angle2),
-		    				middleX - (displayRect.width() + displayGap) / 2, 
-		    				displayRect.centerY() + lcdHeight / 2, 
-		    				lcdForegroundPaint);
-		    		canvas.drawText(
-		    				displayBackgroundText, 
-		    				middleX + (displayRect.width() + displayGap) / 2, 
-		    				displayRect.centerY() + lcdHeight / 2, 
-		    				lcdBackgroundPaint);
-		    		canvas.drawText(
-		    				displayFormat.format(angle1), 
-		    				middleX + (displayRect.width() + displayGap) / 2, 
-		    				displayRect.centerY() + lcdHeight / 2, 
-		    				lcdForegroundPaint);
-	    		}
-	        	bubble2D.setBounds(
-	        			(int) (x - halfBubbleWidth), 
-	        			(int) (y - halfBubbleHeight), 
-	        			(int) (x + halfBubbleWidth), 
-	        			(int) (y + halfBubbleHeight));
-	        	level2D.draw(canvas);
-	            bubble2D.draw(canvas);
-	            marker2D.draw(canvas);
-	        	canvas.drawLine(minLevelX, middleY, 
-	        			middleX - halfMarkerGap, middleY, infoPaint);
-	        	canvas.drawLine(middleX + halfMarkerGap, middleY, 
-	        			maxLevelX, middleY, infoPaint);
-	        	canvas.drawLine(middleX, minLevelY, 
-	        			middleX, middleY - halfMarkerGap, infoPaint);
-	        	canvas.drawLine(middleX, middleY + halfMarkerGap, 
-	        			middleX, maxLevelY, infoPaint);
-	    		break;
-	    	default :
-	    		canvas.rotate(orientation.getRotation(), middleX, middleY);
-	    		canvas.drawText(infoText, middleX, infoY, infoPaint);
-	    		if (lockEnabled) {
-		    		display.setBounds(lockRect);
-		    		display.draw(canvas);
-		    		canvas.drawText(
-		    				LOCKED_BACKGROUND, 
-		    				middleX, 
-		    				lockRect.centerY() + lockHeight / 2, 
-		    				lockBackgroundPaint);
-		    		canvas.drawText(lockText, middleX, lockRect.bottom + displayGap, infoPaint);
-		    		if (locked) {
-			    		canvas.drawText(
-			    				LOCKED, 
-			    				middleX, 
-			    				lockRect.centerY() + lockHeight / 2, 
-			    				lockForegroundPaint);
-		    		}
-	    		}
-	    		if (showAngle) {
-	        		display.setBounds(displayRect);
-		    		display.draw(canvas);
-		    		canvas.drawText(
-		    				displayBackgroundText, 
-		    				middleX, 
-		    				displayRect.centerY() + lcdHeight / 2, 
-		    				lcdBackgroundPaint);
-		    		canvas.drawText(
-		    				displayFormat.format(angle1), 
-		    				middleX, 
-		    				displayRect.centerY() + lcdHeight / 2, 
-		    				lcdForegroundPaint);
-	    		}
-	            // level
-	        	level1D.draw(canvas);
-	        	// bubble
-	        	canvas.clipRect(
-	        			minLevelX + levelBorderWidth, 
-	        			minLevelY + levelBorderHeight, 
-	        			maxLevelX - levelBorderWidth, 
-	        			maxLevelY - levelBorderHeight);
-	        	bubble1D.setBounds(
-	        			(int) (x - halfBubbleWidth), 
-	        			minBubble, 
-	        			(int) (x + halfBubbleWidth), 
-	        			maxBubble);
-	            bubble1D.draw(canvas);
-	            // marker
-	            marker1D.setBounds(
-	            		middleX - halfMarkerGap - markerThickness, 
-	            		minLevelY, 
-	            		middleX - halfMarkerGap, 
-	            		maxLevelY);
-	            marker1D.draw(canvas);
-	            marker1D.setBounds(
-	            		middleX + halfMarkerGap, 
-	            		minLevelY, 
-	            		middleX + halfMarkerGap + markerThickness, 
-	            		maxLevelY);
-	            marker1D.draw(canvas);
-	    		break;
-    	}
+
+		if (orientation == Orientation.LANDING) {
+			canvas.drawText(infoText, middleX, infoY, infoPaint);
+			if (lockEnabled) {
+				display.setBounds(lockRect);
+				display.draw(canvas);
+				canvas.drawText(
+						LOCKED_BACKGROUND,
+						middleX,
+						lockRect.centerY() + lockHeight / 2.0f,
+						lockBackgroundPaint);
+				canvas.drawText(lockText, middleX, lockRect.bottom + displayGap, infoPaint);
+				if (locked) {
+					canvas.drawText(
+							LOCKED,
+							middleX,
+							lockRect.centerY() + lockHeight / 2.0f,
+							lockForegroundPaint);
+				}
+			}
+			if (showAngle) {
+				display.setBounds(
+						displayRect.left - (displayRect.width() + displayGap) / 2,
+						displayRect.top,
+						displayRect.right - (displayRect.width() + displayGap) / 2,
+						displayRect.bottom);
+				display.draw(canvas);
+				display.setBounds(
+						displayRect.left + (displayRect.width() + displayGap) / 2,
+						displayRect.top,
+						displayRect.right + (displayRect.width() + displayGap) / 2,
+						displayRect.bottom);
+				display.draw(canvas);
+				canvas.drawText(
+						displayBackgroundText,
+						middleX - (displayRect.width() + displayGap) / 2.0f,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						lcdBackgroundPaint);
+				canvas.drawText(
+						displayFormat.format(angle2),
+						middleX - (displayRect.width() + displayGap) / 2.0f,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						lcdForegroundPaint);
+				canvas.drawText(
+						displayBackgroundText,
+						middleX + (displayRect.width() + displayGap) / 2.0f,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						lcdBackgroundPaint);
+				canvas.drawText(
+						displayFormat.format(angle1),
+						middleX + (displayRect.width() + displayGap) / 2.0f,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						lcdForegroundPaint);
+			}
+			bubble2D.setBounds(
+					(int) (x - halfBubbleWidth),
+					(int) (y - halfBubbleHeight),
+					(int) (x + halfBubbleWidth),
+					(int) (y + halfBubbleHeight));
+			level2D.draw(canvas);
+			bubble2D.draw(canvas);
+			marker2D.draw(canvas);
+			canvas.drawLine(minLevelX, middleY,
+					middleX - halfMarkerGap, middleY, infoPaint);
+			canvas.drawLine(middleX + halfMarkerGap, middleY,
+					maxLevelX, middleY, infoPaint);
+			canvas.drawLine(middleX, minLevelY,
+					middleX, middleY - halfMarkerGap, infoPaint);
+			canvas.drawLine(middleX, middleY + halfMarkerGap,
+					middleX, maxLevelY, infoPaint);
+		} else {
+			canvas.rotate(orientation.getRotation(), middleX, middleY);
+			canvas.drawText(infoText, middleX, infoY, infoPaint);
+			if (lockEnabled) {
+				display.setBounds(lockRect);
+				display.draw(canvas);
+				canvas.drawText(
+						LOCKED_BACKGROUND,
+						middleX,
+						lockRect.centerY() + lockHeight / 2.0f,
+						lockBackgroundPaint);
+				canvas.drawText(lockText, middleX, lockRect.bottom + displayGap, infoPaint);
+				if (locked) {
+					canvas.drawText(
+							LOCKED,
+							middleX,
+							lockRect.centerY() + lockHeight / 2.0f,
+							lockForegroundPaint);
+				}
+			}
+			if (showAngle) {
+				display.setBounds(displayRect);
+				display.draw(canvas);
+				canvas.drawText(
+						displayBackgroundText,
+						middleX,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						lcdBackgroundPaint);
+				canvas.drawText(
+						displayFormat.format(angle1),
+						middleX,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						lcdForegroundPaint);
+			}
+			// level
+			level1D.draw(canvas);
+			// bubble
+			canvas.clipRect(
+					minLevelX + levelBorderWidth,
+					minLevelY + levelBorderHeight,
+					maxLevelX - levelBorderWidth,
+					maxLevelY - levelBorderHeight);
+			bubble1D.setBounds(
+					(int) (x - halfBubbleWidth),
+					minBubble,
+					(int) (x + halfBubbleWidth),
+					maxBubble);
+			bubble1D.draw(canvas);
+			// marker
+			marker1D.setBounds(
+					middleX - halfMarkerGap - markerThickness,
+					minLevelY,
+					middleX - halfMarkerGap,
+					maxLevelY);
+			marker1D.draw(canvas);
+			marker1D.setBounds(
+					middleX + halfMarkerGap,
+					minLevelY,
+					middleX + halfMarkerGap + markerThickness,
+					maxLevelY);
+			marker1D.draw(canvas);
+		}
     	
         canvas.restore();
     }
@@ -631,11 +626,9 @@ public class LevelPainter implements Runnable {
 					}
 					break;
 			}
-			switch (angleType) {
-				case INCLINATION :
-					angle1 = 100 * angle1 / 45;
-					angle2 = 100 * angle2 / 45;
-					break;
+			if (angleType == DisplayType.INCLINATION) {
+				angle1 = 100 * angle1 / 45;
+				angle2 = 100 * angle2 / 45;
 			}
 			// correction des angles affiches
 			if (angle1 > angleType.getMax()) {

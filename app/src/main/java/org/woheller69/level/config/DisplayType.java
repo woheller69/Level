@@ -32,7 +32,7 @@ public enum DisplayType {
 	private String displayFormat;
 	private String displayBackgroundText;
 	
-	private DisplayType(int label, int summary, String displayFormat, String displayBackgroundText, float max) {
+	DisplayType(int label, int summary, String displayFormat, String displayBackgroundText, float max) {
 		this.label = label;
 		this.max = max;
 		this.summary = summary;

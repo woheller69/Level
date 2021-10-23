@@ -1,6 +1,5 @@
 package org.woheller69.level.orientation;
 
-import android.util.Log;
 
 /*
  *  This file is part of Level (an Android Bubble Level).

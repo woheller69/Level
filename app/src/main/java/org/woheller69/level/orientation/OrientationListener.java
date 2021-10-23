@@ -21,10 +21,10 @@ package org.woheller69.level.orientation;
  */
 public interface OrientationListener {
 
-	public void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
+	void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
 	
-	public void onCalibrationSaved(boolean success);
+	void onCalibrationSaved(boolean success);
 	
-	public void onCalibrationReset(boolean success);
+	void onCalibrationReset(boolean success);
 	
 }

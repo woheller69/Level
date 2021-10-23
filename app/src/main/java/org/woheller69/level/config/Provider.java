@@ -2,8 +2,6 @@ package org.woheller69.level.config;
 
 import org.woheller69.level.R;
 import org.woheller69.level.orientation.OrientationProvider;
-import org.woheller69.level.orientation.provider.ProviderAccelerometer;
-import org.woheller69.level.orientation.provider.ProviderOrientation;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
@@ -33,7 +31,7 @@ public enum Provider {
 	private int summary;
 	private int name;
 	
-	private Provider(int label, int summary, int name) {
+	Provider(int label, int summary, int name) {
 		this.label = label;
 		this.name = name;
 		this.summary = summary;
@@ -52,11 +50,8 @@ public enum Provider {
 	}
 
 	public OrientationProvider getProvider() {
-		switch (this) {
-			case ACCELEROMETER : return ProviderAccelerometer.getInstance();
-			case ORIENTATION : return ProviderOrientation.getInstance();
-		}
-		return null;
+		return OrientationProvider.getInstance();
+
 	}
 	
 }

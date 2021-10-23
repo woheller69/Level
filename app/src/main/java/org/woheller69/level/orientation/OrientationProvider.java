@@ -1,11 +1,11 @@
 package org.woheller69.level.orientation;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.woheller69.level.Level;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -84,7 +84,12 @@ public class OrientationProvider implements SensorEventListener {
     private static OrientationProvider provider;
     
     public OrientationProvider() {
-		this.displayOrientation = Level.getContext().getDisplay().getRotation();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            this.displayOrientation = Level.getContext().getDisplay().getRotation();
+        } else {
+            this.displayOrientation = Level.getContext().getWindowManager().getDefaultDisplay().getRotation();
+        }
 	}
 
     public static OrientationProvider getInstance() {
@@ -114,8 +119,8 @@ public class OrientationProvider implements SensorEventListener {
     }
 
     private List<Integer> getRequiredSensors() {
-        return Arrays.asList(
-                Integer.valueOf(Sensor.TYPE_ACCELEROMETER)
+        return Collections.singletonList(
+                Sensor.TYPE_ACCELEROMETER
         );
     }
 
@@ -131,7 +136,7 @@ public class OrientationProvider implements SensorEventListener {
                     List<Sensor> sensors = sensorManager.getSensorList(sensorType);
                     supported = (sensors.size() > 0) && supported;
                 }
-                this.supported = Boolean.valueOf(supported);
+                this.supported = supported;
                 return supported;
             }
         }

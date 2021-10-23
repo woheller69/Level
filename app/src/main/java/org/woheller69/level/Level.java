@@ -7,7 +7,6 @@ import org.woheller69.level.view.LevelView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -98,17 +97,9 @@ public class Level extends AppCompatActivity implements OrientationListener {
 			builder.setTitle(R.string.calibrate_title)
 					.setIcon(null)
 					.setCancelable(true)
-					.setPositiveButton(R.string.calibrate, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							provider.saveCalibration();
-						}
-					})
+					.setPositiveButton(R.string.calibrate, (dialog, id) -> provider.saveCalibration())
 					.setNegativeButton(R.string.cancel, null)
-					.setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							provider.resetCalibration();
-						}
-					})
+					.setNeutralButton(R.string.reset, (dialog, id) -> provider.resetCalibration())
 					.setMessage(R.string.calibrate_message);
 			builder.create();
 			builder.show();
