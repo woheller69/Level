@@ -23,7 +23,7 @@
         </activity>
     	
         <activity 
-        	android:name="org.woheller69.level.LevelPreferences"
+        	android:name=".SettingsActivity"
             android:screenOrientation="portrait"
     		android:theme="@style/Level"/>
         

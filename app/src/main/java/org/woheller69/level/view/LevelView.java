@@ -1,6 +1,6 @@
 package org.woheller69.level.view;
 
-import org.woheller69.level.LevelPreferences;
+import org.woheller69.level.LevelPreferencesFragment;
 import org.woheller69.level.config.DisplayType;
 import org.woheller69.level.config.Viscosity;
 import org.woheller69.level.orientation.Orientation;
@@ -63,10 +63,10 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
     	if (painter == null) {
     		painter = new LevelPainter(holder, getContext(), new Handler(), getWidth(), getHeight(), 
-				prefs.getBoolean(LevelPreferences.KEY_SHOW_ANGLE, true), 
-				DisplayType.valueOf(prefs.getString(LevelPreferences.KEY_DISPLAY_TYPE, "ANGLE")),
-				Viscosity.valueOf(prefs.getString(LevelPreferences.KEY_VISCOSITY, "MEDIUM")),
-				prefs.getBoolean(LevelPreferences.KEY_LOCK, false));
+				prefs.getBoolean(LevelPreferencesFragment.KEY_SHOW_ANGLE, true),
+				DisplayType.valueOf(prefs.getString(LevelPreferencesFragment.KEY_DISPLAY_TYPE, "ANGLE")),
+				Viscosity.valueOf(prefs.getString(LevelPreferencesFragment.KEY_VISCOSITY, "MEDIUM")),
+				prefs.getBoolean(LevelPreferencesFragment.KEY_LOCK, false));
 	    }
     }
 

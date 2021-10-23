@@ -85,7 +85,7 @@ public class Level extends Activity implements OrientationListener {
 			showDialog(DIALOG_CALIBRATE_ID);
 			return true;
 		}else if (item.getItemId() == R.id.preferences) {
-			startActivity(new Intent(this, LevelPreferences.class));
+			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 		}else if (item.getItemId() == R.id.Github) {
 				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
@@ -128,7 +128,7 @@ public class Level extends Activity implements OrientationListener {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     	provider = OrientationProvider.getInstance();
     	// chargement des effets sonores
-        soundEnabled = prefs.getBoolean(LevelPreferences.KEY_SOUND, false);
+        soundEnabled = prefs.getBoolean(LevelPreferencesFragment.KEY_SOUND, false);
         // orientation manager
         if (provider.isSupported()) {
     		provider.startListening(this);

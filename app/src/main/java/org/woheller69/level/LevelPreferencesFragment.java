@@ -5,11 +5,10 @@ import org.woheller69.level.config.Viscosity;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.PreferenceManager;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
@@ -30,7 +29,7 @@ import android.preference.PreferenceManager;
  *  You should have received a copy of the GNU General Public License
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
-public class LevelPreferences extends PreferenceActivity implements OnPreferenceChangeListener {
+public class LevelPreferencesFragment extends PreferenceFragment implements OnPreferenceChangeListener {
 	
 	public static final String KEY_SHOW_ANGLE 			= "preference_show_angle";
 	public static final String KEY_DISPLAY_TYPE 		= "preference_display_type";
@@ -42,38 +41,36 @@ public class LevelPreferences extends PreferenceActivity implements OnPreference
 
 	private SharedPreferences prefs;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-    }
+	@Override
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+		setPreferencesFromResource(R.xml.preferences, rootKey);
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+	}
 
-    public void onResume() {
+	public void onResume() {
     	super.onResume();
     	// enregistrement des listerners
-    	findPreference(KEY_DISPLAY_TYPE).setOnPreferenceChangeListener(this);
-    	findPreference(KEY_VISCOSITY).setOnPreferenceChangeListener(this);
+    	findPreference(KEY_DISPLAY_TYPE).setOnPreferenceChangeListener((androidx.preference.Preference.OnPreferenceChangeListener) this);
+    	findPreference(KEY_VISCOSITY).setOnPreferenceChangeListener((androidx.preference.Preference.OnPreferenceChangeListener) this);
     	// mise a jour de l'affichage
-    	onPreferenceChange(findPreference(KEY_DISPLAY_TYPE), prefs.getString(LevelPreferences.KEY_DISPLAY_TYPE, "ANGLE")); 
+    	onPreferenceChange(findPreference(KEY_DISPLAY_TYPE), prefs.getString(LevelPreferencesFragment.KEY_DISPLAY_TYPE, "ANGLE"));
     	findPreference(KEY_VISCOSITY).setSummary(Viscosity.valueOf(
-    			prefs.getString(LevelPreferences.KEY_VISCOSITY, "MEDIUM")).getSummary());
+    			prefs.getString(LevelPreferencesFragment.KEY_VISCOSITY, "MEDIUM")).getSummary());
     }
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
 		if (KEY_DISPLAY_TYPE.equals(key)) {
-		    CharSequence displaySummary = getText(DisplayType.valueOf((String) newValue).getSummary());
-		    if (Build.VERSION.SDK_INT >= 11 /* 3.0 : HoneyComb */) {
-		        // Fucking retro-compatibility !!!
-		        displaySummary = String.valueOf(displaySummary).replaceAll("%", "%%");
-		    }
+			CharSequence displaySummary = getText(DisplayType.valueOf((String) newValue).getSummary());
+			if (Build.VERSION.SDK_INT >= 11 /* 3.0 : HoneyComb */) {
+				// Fucking retro-compatibility !!!
+				displaySummary = String.valueOf(displaySummary).replaceAll("%", "%%");
+			}
 			preference.setSummary(displaySummary);
 		} else if (KEY_VISCOSITY.equals(key)) {
 			preference.setSummary(Viscosity.valueOf((String) newValue).getSummary());
 		}
 		return true;
 	}
-    
 }
