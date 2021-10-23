@@ -73,9 +73,4 @@ public class ProviderOrientation extends OrientationProvider {
 	    }
 	}
 
-
-	protected List<Integer> getRequiredSensors() {
-		return Arrays.asList(Integer.valueOf(Sensor.TYPE_ORIENTATION));
-	}
-
 }

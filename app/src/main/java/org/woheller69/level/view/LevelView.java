@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import androidx.preference.PreferenceManager;
+
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -62,7 +64,7 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
     public void surfaceCreated(SurfaceHolder holder) {
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
     	if (painter == null) {
-    		painter = new LevelPainter(holder, getContext(), new Handler(), getWidth(), getHeight(), 
+    		painter = new LevelPainter(holder, getContext(), new Handler(Looper.getMainLooper()), getWidth(), getHeight(),
 				prefs.getBoolean(LevelPreferencesFragment.KEY_SHOW_ANGLE, true),
 				DisplayType.valueOf(prefs.getString(LevelPreferencesFragment.KEY_DISPLAY_TYPE, "ANGLE")),
 				Viscosity.valueOf(prefs.getString(LevelPreferencesFragment.KEY_VISCOSITY, "MEDIUM")),

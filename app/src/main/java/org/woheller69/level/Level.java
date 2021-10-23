@@ -6,14 +6,15 @@ import org.woheller69.level.orientation.OrientationProvider;
 import org.woheller69.level.view.LevelView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.preference.PreferenceManager;
 import android.util.Log;
@@ -67,7 +68,16 @@ public class Level extends AppCompatActivity implements OrientationListener {
         CONTEXT = this;
         view = (LevelView) findViewById(R.id.level);
         // sound
-    	soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			soundPool = new SoundPool.Builder()
+					.setMaxStreams(1)
+					.setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE).build())
+					.build();
+		} else {
+			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
+		}
+
     	bipSoundID = soundPool.load(this, R.raw.bip, 1);
     	bipRate = getResources().getInteger(R.integer.bip_rate);
     }
@@ -82,7 +92,24 @@ public class Level extends AppCompatActivity implements OrientationListener {
     /* Handles item selections */
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.calibrate) {
-			showDialog(DIALOG_CALIBRATE_ID);
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.calibrate_title)
+					.setIcon(null)
+					.setCancelable(true)
+					.setPositiveButton(R.string.calibrate, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							provider.saveCalibration();
+						}
+					})
+					.setNegativeButton(R.string.cancel, null)
+					.setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							provider.resetCalibration();
+						}
+					})
+					.setMessage(R.string.calibrate_message);
+			builder.create();
+			builder.show();
 			return true;
 		}else if (item.getItemId() == R.id.preferences) {
 			startActivity(new Intent(this, SettingsActivity.class));
@@ -93,35 +120,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
         }
         return false;
     }
-    
-    protected Dialog onCreateDialog(int id) {
-        Dialog dialog;
-        switch(id) {
-	        case DIALOG_CALIBRATE_ID:
-	        	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	        	builder.setTitle(R.string.calibrate_title)
-	        			.setIcon(null)
-	        			.setCancelable(true)
-	        			.setPositiveButton(R.string.calibrate, new DialogInterface.OnClickListener() {
-	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	        	   	provider.saveCalibration();
-	        	           	}
-	        			})
-	        	       	.setNegativeButton(R.string.cancel, null)
-	        	       	.setNeutralButton(R.string.reset, new DialogInterface.OnClickListener() {
-	        	           	public void onClick(DialogInterface dialog, int id) {
-	        	           		provider.resetCalibration();
-	        	           	}
-	        	       	})
-	        	       	.setMessage(R.string.calibrate_message);
-	        	dialog = builder.create();
-	            break;
-	        default:
-	            dialog = null;
-        }
-        return dialog;
-    }
-    
+
     protected void onResume() {
     	super.onResume();
     	Log.d("Level", "Level resumed");
