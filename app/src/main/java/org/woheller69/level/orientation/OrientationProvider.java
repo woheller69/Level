@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.woheller69.level.Level;
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -142,7 +142,7 @@ public class OrientationProvider implements SensorEventListener {
      *             callback for accelerometer events
      */
     public void startListening(OrientationListener orientationListener) {
-    	final Activity context = Level.getContext();
+    	final AppCompatActivity context = Level.getContext();
     	// load calibration
     	calibrating = false;
 		Arrays.fill(calibratedPitch, 0);

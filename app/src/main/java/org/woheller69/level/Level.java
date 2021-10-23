@@ -4,8 +4,8 @@ import org.woheller69.level.orientation.Orientation;
 import org.woheller69.level.orientation.OrientationListener;
 import org.woheller69.level.orientation.OrientationProvider;
 import org.woheller69.level.view.LevelView;
-import android.app.Activity;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,7 +42,7 @@ import android.widget.Toast;
  *  You should have received a copy of the GNU General Public License
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
-public class Level extends Activity implements OrientationListener {
+public class Level extends AppCompatActivity implements OrientationListener {
 	
 	private static Level CONTEXT;
 	

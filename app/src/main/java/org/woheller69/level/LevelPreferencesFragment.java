@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceManager;
 
@@ -29,7 +29,7 @@ import androidx.preference.PreferenceManager;
  *  You should have received a copy of the GNU General Public License
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
-public class LevelPreferencesFragment extends PreferenceFragment implements OnPreferenceChangeListener {
+public class LevelPreferencesFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener {
 	
 	public static final String KEY_SHOW_ANGLE 			= "preference_show_angle";
 	public static final String KEY_DISPLAY_TYPE 		= "preference_display_type";
