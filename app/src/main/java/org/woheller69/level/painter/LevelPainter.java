@@ -223,14 +223,14 @@ public class LevelPainter implements Runnable {
         this.lcdBackgroundPaint.setTextAlign(Paint.Align.CENTER);
         
         this.lockForegroundPaint = new Paint();
-        this.lockForegroundPaint.setColor(ContextCompat.getColor(context, R.color.lcd_front));
+        this.lockForegroundPaint.setColor(ContextCompat.getColor(context, R.color.lock_front));
         this.lockForegroundPaint.setAntiAlias(true);
         this.lockForegroundPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lock_text));
         this.lockForegroundPaint.setTypeface(lcd);
         this.lockForegroundPaint.setTextAlign(Paint.Align.CENTER);
         
         this.lockBackgroundPaint = new Paint();
-        this.lockBackgroundPaint.setColor(ContextCompat.getColor(context, R.color.lcd_back));
+        this.lockBackgroundPaint.setColor(ContextCompat.getColor(context, R.color.lock_back));
         this.lockBackgroundPaint.setAntiAlias(true);
         this.lockBackgroundPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lock_text));
         this.lockBackgroundPaint.setTypeface(lcd);
