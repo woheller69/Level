@@ -47,8 +47,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
 	
 	private static Level CONTEXT;
 	
-	private static final int DIALOG_CALIBRATE_ID = 1;
-
 	private OrientationProvider provider;
 	
     private LevelView view;
@@ -64,6 +62,10 @@ public class Level extends AppCompatActivity implements OrientationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        if (getSupportActionBar()!=null){
+			getSupportActionBar().setDisplayShowHomeEnabled(true);
+			getSupportActionBar().setIcon(R.mipmap.ic_launcher_round_appbar);
+		}
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CONTEXT = this;
         view = (LevelView) findViewById(R.id.level);
