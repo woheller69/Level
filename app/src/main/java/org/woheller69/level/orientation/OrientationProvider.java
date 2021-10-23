@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.woheller69.level.Level;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -82,7 +84,7 @@ public class OrientationProvider implements SensorEventListener {
     private static OrientationProvider provider;
     
     public OrientationProvider() {
-		this.displayOrientation = Level.getContext().getWindowManager().getDefaultDisplay().getRotation();
+		this.displayOrientation = Level.getContext().getDisplay().getRotation();
 	}
 
     public static OrientationProvider getInstance() {

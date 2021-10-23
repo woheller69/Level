@@ -16,6 +16,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.SurfaceHolder;
 
+import androidx.core.content.ContextCompat;
+
 /*
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
@@ -171,13 +173,13 @@ public class LevelPainter implements Runnable {
         this.frameRate = 1000 / context.getResources().getInteger(R.integer.frame_rate);
         
         // drawable
-        this.level1D = context.getResources().getDrawable(R.drawable.level_1d);
-        this.level2D = context.getResources().getDrawable(R.drawable.level_2d);
-        this.bubble1D = context.getResources().getDrawable(R.drawable.bubble_1d);
-        this.bubble2D = context.getResources().getDrawable(R.drawable.bubble_2d);
-        this.marker1D = context.getResources().getDrawable(R.drawable.marker_1d);
-        this.marker2D = context.getResources().getDrawable(R.drawable.marker_2d);
-        this.display = context.getResources().getDrawable(R.drawable.display);
+        this.level1D = ContextCompat.getDrawable(context, R.drawable.level_1d);
+        this.level2D = ContextCompat.getDrawable(context, R.drawable.level_2d);
+        this.bubble1D = ContextCompat.getDrawable(context, R.drawable.bubble_1d);
+        this.bubble2D = ContextCompat.getDrawable(context, R.drawable.bubble_2d);
+        this.marker1D = ContextCompat.getDrawable(context, R.drawable.marker_1d);
+        this.marker2D = ContextCompat.getDrawable(context, R.drawable.marker_2d);
+        this.display = ContextCompat.getDrawable(context, R.drawable.display);
         
         // vitesse de la bulle
         this.viscosity = viscosity;
@@ -189,7 +191,7 @@ public class LevelPainter implements Runnable {
     	this.angleType = angleType;
         
         // colors
-        this.backgroundColor = context.getResources().getColor(R.color.silver);
+        this.backgroundColor = ContextCompat.getColor(context, R.color.silver);
                 
         // strings
         this.infoText = context.getString(R.string.calibrate_info);
@@ -200,35 +202,35 @@ public class LevelPainter implements Runnable {
         
         // paint
         this.infoPaint = new Paint();
-        this.infoPaint.setColor(context.getResources().getColor(R.color.black));
+        this.infoPaint.setColor(ContextCompat.getColor(context, R.color.black));
         this.infoPaint.setAntiAlias(true);
         this.infoPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.info_text));
         this.infoPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL));
         this.infoPaint.setTextAlign(Paint.Align.CENTER);
         
         this.lcdForegroundPaint = new Paint();
-        this.lcdForegroundPaint.setColor(context.getResources().getColor(R.color.lcd_front));
+        this.lcdForegroundPaint.setColor(ContextCompat.getColor(context, R.color.lcd_front));
         this.lcdForegroundPaint.setAntiAlias(true);
         this.lcdForegroundPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lcd_text));
         this.lcdForegroundPaint.setTypeface(lcd);
         this.lcdForegroundPaint.setTextAlign(Paint.Align.CENTER);
         
         this.lcdBackgroundPaint = new Paint();
-        this.lcdBackgroundPaint.setColor(context.getResources().getColor(R.color.lcd_back));
+        this.lcdBackgroundPaint.setColor(ContextCompat.getColor(context, R.color.lcd_back));
         this.lcdBackgroundPaint.setAntiAlias(true);
         this.lcdBackgroundPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lcd_text));
         this.lcdBackgroundPaint.setTypeface(lcd);
         this.lcdBackgroundPaint.setTextAlign(Paint.Align.CENTER);
         
         this.lockForegroundPaint = new Paint();
-        this.lockForegroundPaint.setColor(context.getResources().getColor(R.color.lock_front));
+        this.lockForegroundPaint.setColor(ContextCompat.getColor(context, R.color.lcd_front));
         this.lockForegroundPaint.setAntiAlias(true);
         this.lockForegroundPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lock_text));
         this.lockForegroundPaint.setTypeface(lcd);
         this.lockForegroundPaint.setTextAlign(Paint.Align.CENTER);
         
         this.lockBackgroundPaint = new Paint();
-        this.lockBackgroundPaint.setColor(context.getResources().getColor(R.color.lock_back));
+        this.lockBackgroundPaint.setColor(ContextCompat.getColor(context, R.color.lcd_back));
         this.lockBackgroundPaint.setAntiAlias(true);
         this.lockBackgroundPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lock_text));
         this.lockBackgroundPaint.setTypeface(lcd);
