@@ -373,7 +373,7 @@ public class LevelPainter implements Runnable {
     	canvas.drawColor(backgroundColor);
 
 		if (orientation == Orientation.LANDING) {
-			canvas.drawText(infoText, middleX, infoY, infoPaint);
+			//canvas.drawText(infoText, middleX, infoY, infoPaint);
 			if (lockEnabled) {
 				display.setBounds(lockRect);
 				display.draw(canvas);
@@ -443,7 +443,7 @@ public class LevelPainter implements Runnable {
 					middleX, maxLevelY, infoPaint);
 		} else {
 			canvas.rotate(orientation.getRotation(), middleX, middleY);
-			canvas.drawText(infoText, middleX, infoY, infoPaint);
+			//canvas.drawText(infoText, middleX, infoY, infoPaint);
 			if (lockEnabled) {
 				display.setBounds(lockRect);
 				display.draw(canvas);
