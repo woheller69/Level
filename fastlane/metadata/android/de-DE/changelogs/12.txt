@@ -1,0 +1,4 @@
+Auf AppCompat und DayNight Theme umgestellt
+Auf AndroidX umgestellt
+Veraltete APIs ersetzt
+Ungenutzter Code entfernt

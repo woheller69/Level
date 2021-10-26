@@ -1,0 +1,4 @@
+Migrate to AppCompat and DayNight Theme
+Migrate to AndroidX
+Replace deprecated APIs
+Remove unused code
