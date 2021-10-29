@@ -257,6 +257,7 @@ public class LevelPainter implements Runnable {
     	
         // init
     	this.locked = false;
+    	Level.getProvider().setLocked(this.locked);
     	this.lockEnabled = lockEnabled;
     	this.orientation = Orientation.TOP;
     	this.wait = true;
