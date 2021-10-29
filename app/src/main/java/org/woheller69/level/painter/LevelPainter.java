@@ -607,20 +607,20 @@ public class LevelPainter implements Runnable {
 		if (!orientation.equals(newOrientation)) {
 			setOrientation(newOrientation);
 		}
-		if (!wait) {
+		if (!wait){
 			switch (orientation) {
 				case TOP :
 				case BOTTOM :
-					angle1 = Math.abs(newBalance);
-		            angleX = Math.sin(Math.toRadians(newBalance)) / MAX_SINUS;
+					angle1 = angle1*0.7f + Math.abs(newBalance)*0.3f;
+					angleX = angleX*0.7f + (Math.sin(Math.toRadians(newBalance)) / MAX_SINUS)*0.3f;
 					break;
 				case LANDING :
-					angle2 = Math.abs(newRoll);
-		            angleX = Math.sin(Math.toRadians(newRoll)) / MAX_SINUS;
+					angle2 = angle2*0.7f + Math.abs(newRoll)*0.3f;
+					angleX = angleX*0.7f + (Math.sin(Math.toRadians(newRoll)) / MAX_SINUS)*0.3f;
 				case RIGHT :
 				case LEFT :
-					angle1 = Math.abs(newPitch);
-		            angleY = Math.sin(Math.toRadians(newPitch)) / MAX_SINUS;
+					angle1 = angle1*0.7f + Math.abs(newPitch)*0.3f;
+					angleY = angleY*0.7f + (Math.sin(Math.toRadians(newPitch)) / MAX_SINUS)*0.3f;
 					if (angle1 > 90) {
 						angle1 = 180 - angle1;
 					}
