@@ -9,7 +9,7 @@
     <string name="calibrate">Kalibrieren</string>
     <string name="calibrate_info">Drücke MENU zum Kalibrieren...</string>
     <string name="calibrate_title">Das Gerät kalibrieren</string>
-    <string name="calibrate_message">Lege die Seite des Telefons zu kalibrieren auf eine flache horizontale Oberfläche und drücke die Schaltfläche Kalibrieren.</string>
+    <string name="calibrate_message">Lege die Seite des Telefons zum Kalibrieren auf eine flache horizontale Oberfläche und drücke die Schaltfläche Kalibrieren.</string>
     <string name="calibrate_again_title">Bitte erneut kalibrieren</string>
     <string name="calibrate_again_message">Das Wechseln des Sensors erfordert eine Neukalibrierung des Geräts.</string>
     <string name="calibrate_saved">Kalibrierung erfolgreich!</string>
