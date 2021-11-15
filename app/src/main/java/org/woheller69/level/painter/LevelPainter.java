@@ -8,6 +8,8 @@ import org.woheller69.level.config.DisplayType;
 import org.woheller69.level.config.Viscosity;
 import org.woheller69.level.orientation.Orientation;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -74,6 +76,7 @@ public class LevelPainter implements Runnable {
 	private int infoHeight;
 	private int lcdWidth;
 	private int lcdHeight;
+	private int arrowHeight;
 	private int lockWidth;
 	private int lockHeight;
 	private int displayPadding;
@@ -87,6 +90,7 @@ public class LevelPainter implements Runnable {
 	/** Rect */
 	private Rect displayRect;
 	private Rect lockRect;
+	private Bitmap bitmap;
 	
 	/** Angles */
 	private float angle1;
@@ -184,7 +188,8 @@ public class LevelPainter implements Runnable {
         this.marker1D = ContextCompat.getDrawable(context, R.drawable.marker_1d);
         this.marker2D = ContextCompat.getDrawable(context, R.drawable.marker_2d);
         this.display = ContextCompat.getDrawable(context, R.drawable.display);
-        
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.baseline_height_black_24dp);
+
         // vitesse de la bulle
         this.viscosity = viscosity;
         
@@ -266,6 +271,7 @@ public class LevelPainter implements Runnable {
     	this.displayPadding = context.getResources().getDimensionPixelSize(R.dimen.display_padding);
     	this.displayRect = new Rect();
     	this.lockRect = new Rect();
+    	this.arrowHeight =context.getResources().getDimensionPixelSize(R.dimen.arrow_height);
     	
         // init
     	this.locked = false;
@@ -428,13 +434,11 @@ public class LevelPainter implements Runnable {
 						displayRect.centerY() + lcdHeight / 2.0f,
 						lcdForegroundPaint);
 				canvas.save();
-				canvas.rotate(270f,
-						middleX - displayRect.width()-displayGap /2.0f - 1.5f*arrowGap,
-						displayRect.centerY());
-				canvas.drawText(
-						"\u21f3",
-						middleX - displayRect.width()-displayGap / 2.0f - 1.5f*arrowGap,
-						displayRect.centerY(),
+				canvas.rotate(90f,
+						middleX - displayRect.width() - displayGap / 2.0f - arrowHeight / 4.0f ,
+						displayRect.centerY() - arrowHeight / 2.0f);
+				canvas.drawBitmap(bitmap,middleX - displayRect.width() - displayGap / 2.0f - arrowHeight / 4.0f,
+						displayRect.centerY() - arrowHeight / 2.0f,
 						blackPaint);
 				canvas.restore();
 
@@ -448,10 +452,8 @@ public class LevelPainter implements Runnable {
 						middleX + (displayRect.width() + displayGap) / 2.0f,
 						displayRect.centerY() + lcdHeight / 2.0f,
 						lcdForegroundPaint);
-				canvas.drawText(
-						"\u21f3",
-						middleX + displayRect.width() + displayGap / 2.0f + 2*arrowGap,
-						displayRect.centerY() + lcdHeight / 2.0f,
+				canvas.drawBitmap(bitmap,middleX + displayRect.width() + displayGap / 2.0f ,
+						displayRect.centerY() - arrowHeight / 2.0f,
 						blackPaint);
 			}
 			bubble2D.setBounds(
