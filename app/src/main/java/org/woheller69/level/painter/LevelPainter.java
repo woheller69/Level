@@ -81,6 +81,7 @@ public class LevelPainter implements Runnable {
 	private int infoY;
 	private int sensorY;
 	private int sensorGap;
+	private int arrowGap;
 	private int levelMaxDimension;
 	
 	/** Rect */
@@ -89,7 +90,9 @@ public class LevelPainter implements Runnable {
 	
 	/** Angles */
 	private float angle1;
+	private float angle1raw;
 	private float angle2;
+	private float angle2raw;
 	private double n, teta, l;
 	
 	private static final double LEVEL_ASPECT_RATIO 	= 0.150;
@@ -144,6 +147,7 @@ public class LevelPainter implements Runnable {
 	private Paint lockForegroundPaint;
 	private Paint lockBackgroundPaint;
 	private Paint infoPaint;
+	private Paint blackPaint;
 	private int backgroundColor;
 	
 	/** Config angles */
@@ -236,6 +240,13 @@ public class LevelPainter implements Runnable {
         this.lockBackgroundPaint.setTypeface(lcd);
         this.lockBackgroundPaint.setTextAlign(Paint.Align.CENTER);
 
+        this.blackPaint= new Paint();
+        this.blackPaint.setColor(ContextCompat.getColor(context, R.color.black));
+		this.blackPaint.setAntiAlias(true);
+		this.blackPaint.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.lcd_text));
+		this.blackPaint.setTypeface(lcd);
+		this.blackPaint.setTextAlign(Paint.Align.CENTER);
+
         // dimens
     	Rect rect = new Rect();
     	this.infoPaint.getTextBounds(infoText, 0, infoText.length(), rect);
@@ -251,6 +262,7 @@ public class LevelPainter implements Runnable {
     	this.markerThickness = context.getResources().getDimensionPixelSize(R.dimen.marker_thickness);
     	this.displayGap = context.getResources().getDimensionPixelSize(R.dimen.display_gap);
     	this.sensorGap = context.getResources().getDimensionPixelSize(R.dimen.sensor_gap);
+    	this.arrowGap=context.getResources().getDimensionPixelSize(R.dimen.arrow_gap);
     	this.displayPadding = context.getResources().getDimensionPixelSize(R.dimen.display_padding);
     	this.displayRect = new Rect();
     	this.lockRect = new Rect();
@@ -415,6 +427,17 @@ public class LevelPainter implements Runnable {
 						middleX - (displayRect.width() + displayGap) / 2.0f,
 						displayRect.centerY() + lcdHeight / 2.0f,
 						lcdForegroundPaint);
+				canvas.save();
+				canvas.rotate(270f,
+						middleX - displayRect.width()-displayGap /2.0f - 2*arrowGap,
+						displayRect.centerY());
+				canvas.drawText(
+						"\u21f3",
+						middleX - displayRect.width()-displayGap / 2.0f - 2*arrowGap,
+						displayRect.centerY(),
+						blackPaint);
+				canvas.restore();
+
 				canvas.drawText(
 						displayBackgroundText,
 						middleX + (displayRect.width() + displayGap) / 2.0f,
@@ -425,6 +448,11 @@ public class LevelPainter implements Runnable {
 						middleX + (displayRect.width() + displayGap) / 2.0f,
 						displayRect.centerY() + lcdHeight / 2.0f,
 						lcdForegroundPaint);
+				canvas.drawText(
+						"\u21f3",
+						middleX + displayRect.width() + displayGap / 2.0f + 2*arrowGap,
+						displayRect.centerY() + lcdHeight / 2.0f,
+						blackPaint);
 			}
 			bubble2D.setBounds(
 					(int) (x - halfBubbleWidth),
@@ -475,6 +503,20 @@ public class LevelPainter implements Runnable {
 						middleX,
 						displayRect.centerY() + lcdHeight / 2.0f,
 						lcdForegroundPaint);
+
+				if (angle1raw>0.1f) {
+					canvas.drawText(
+							"\u2193",
+							middleX + displayRect.width() / 2.0f,
+							displayRect.centerY() + lcdHeight / 2.0f,
+							lcdForegroundPaint);
+				}else if (angle1raw<-0.1f){
+					canvas.drawText(
+							"\u2191",
+							middleX + displayRect.width() /2.0f,
+							displayRect.centerY() + lcdHeight / 2.0f,
+							lcdForegroundPaint);
+				}
 			}
 			// level
 			level1D.draw(canvas);
@@ -563,14 +605,21 @@ public class LevelPainter implements Runnable {
 	            bubbleHeight = 2 * halfBubbleHeight;
 	        	maxBubble = (int) (maxLevelY - bubbleHeight * BUBBLE_CROPPING);
 	        	minBubble = maxBubble - bubbleHeight;
-	        	
-	        	// display
-	        	displayRect.set(
-	        			middleX - lcdWidth / 2 - displayPadding, 
-	        			sensorY  - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2, 
-	        			middleX + lcdWidth / 2 + displayPadding, 
-	        			sensorY - displayGap - infoHeight / 2);
-	        	
+
+				// display
+				if (orientation == Orientation.LANDING) {
+					displayRect.set(
+							middleX - lcdWidth / 2 - displayPadding,
+							sensorY  - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2,
+							middleX + lcdWidth / 2 + displayPadding ,
+							sensorY - displayGap - infoHeight / 2);
+				}else{
+					displayRect.set(
+							middleX - lcdWidth / 2 - displayPadding,
+							sensorY  - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2,
+							middleX + lcdWidth / 2 + displayPadding + 2 * arrowGap,
+							sensorY - displayGap - infoHeight / 2);
+				}
 	        	// lock
 	        	lockRect.set(
 	        			middleX - lockWidth / 2 - displayPadding, 
@@ -612,15 +661,18 @@ public class LevelPainter implements Runnable {
 			switch (orientation) {
 				case TOP :
 				case BOTTOM :
-					angle1 = angle1*0.7f + Math.abs(newBalance)*0.3f;
+					angle1raw=angle1raw*0.7f + newBalance*0.3f;
+					angle1 = Math.abs(angle1raw);
 					angleX = angleX*0.7f + (Math.sin(Math.toRadians(newBalance)) / MAX_SINUS)*0.3f;
 					break;
 				case LANDING :
-					angle2 = angle2*0.7f + Math.abs(newRoll)*0.3f;
+					angle2raw = angle2raw*0.7f + newRoll*0.3f;
+					angle2=Math.abs(angle2raw);
 					angleX = angleX*0.7f + (Math.sin(Math.toRadians(newRoll)) / MAX_SINUS)*0.3f;
 				case RIGHT :
 				case LEFT :
-					angle1 = angle1*0.7f + Math.abs(newPitch)*0.3f;
+					angle1raw=angle1raw*0.7f + newPitch*0.3f;
+					angle1 = Math.abs(angle1raw);
 					angleY = angleY*0.7f + (Math.sin(Math.toRadians(newPitch)) / MAX_SINUS)*0.3f;
 					if (angle1 > 90) {
 						angle1 = 180 - angle1;
