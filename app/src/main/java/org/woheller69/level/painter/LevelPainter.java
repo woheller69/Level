@@ -429,11 +429,11 @@ public class LevelPainter implements Runnable {
 						lcdForegroundPaint);
 				canvas.save();
 				canvas.rotate(270f,
-						middleX - displayRect.width()-displayGap /2.0f - 2*arrowGap,
+						middleX - displayRect.width()-displayGap /2.0f - 1.5f*arrowGap,
 						displayRect.centerY());
 				canvas.drawText(
 						"\u21f3",
-						middleX - displayRect.width()-displayGap / 2.0f - 2*arrowGap,
+						middleX - displayRect.width()-displayGap / 2.0f - 1.5f*arrowGap,
 						displayRect.centerY(),
 						blackPaint);
 				canvas.restore();
