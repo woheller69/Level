@@ -1,18 +1,19 @@
 # Bubble level
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble1.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble2.png" width="150"/> 
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble1.png" width="150"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble2.png" width="150"/>
 
 With Bubble you can measure angles and inclination.
 
 Hold one of the four sides of the phone against an object or place it on a flat surface to check the orientation.
 
-No permissions required 
+No permissions required.
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
      height="80">](https://f-droid.org/packages/org.woheller69.level/)
      
-This is an updated version (Target SDK 30) of https://f-droid.org/de/packages/net.androgames.level/ which has not been revised since 2014.
+This is an updated fork of https://f-droid.org/packages/net.androgames.level/ which has not been revised since 2014.
 
 ## License
 
