@@ -23,6 +23,6 @@
 	<dimen name="lock_text">32dip</dimen>
 	<!-- INFO -->
 	<dimen name="info_text">12dip</dimen>
-    <dimen name="arrow_gap">10dip</dimen>
+	<dimen name="arrow_gap">10dip</dimen>
 	<dimen name="arrow_height">24dip</dimen>
 </resources>
