@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceCategory android:title="@string/preferences">
-		
-		<CheckBoxPreference
-			android:key="preference_show_angle"
-			android:defaultValue="true"
-			android:title="@string/preference_show_angle"
-			android:summary="@string/preference_show_angle_summary"/>
-	
-	    <ListPreference 
-		    android:key="preference_display_type"
-		    android:dependency="preference_show_angle"
-		    android:defaultValue="ANGLE"
-		    android:entryValues="@array/display_types"
-		    android:entries="@array/display_types_name"
-		    android:title="@string/preference_display_type" />
-		
-		<CheckBoxPreference
-			android:key="preference_lock"
-			android:defaultValue="false"
-			android:title="@string/preference_lock"
-			android:summary="@string/preference_lock_summary"/>
-		
-	    <ListPreference
-		    android:key="preference_viscosity"
-		    android:defaultValue="MEDIUM"
-		    android:entryValues="@array/viscosities"
-		    android:entries="@array/viscosities_name"
-		    android:title="@string/preference_viscosity" />
-		
-		<CheckBoxPreference
-			android:key="preference_sound"
-			android:defaultValue="false"
-			android:title="@string/preference_sound"
-			android:summary="@string/preference_sound_summary"/>
-	    
-	</PreferenceCategory>
-	
+    <PreferenceCategory android:title="@string/preferences">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="preference_show_angle"
+            android:summary="@string/preference_show_angle_summary"
+            android:title="@string/preference_show_angle" />
+
+        <ListPreference
+            android:defaultValue="ANGLE"
+            android:dependency="preference_show_angle"
+            android:entries="@array/display_types_name"
+            android:entryValues="@array/display_types"
+            android:key="preference_display_type"
+            android:title="@string/preference_display_type" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="preference_lock"
+            android:summary="@string/preference_lock_summary"
+            android:title="@string/preference_lock" />
+
+        <ListPreference
+            android:defaultValue="MEDIUM"
+            android:entries="@array/viscosities_name"
+            android:entryValues="@array/viscosities"
+            android:key="preference_viscosity"
+            android:title="@string/preference_viscosity" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="preference_sound"
+            android:summary="@string/preference_sound_summary"
+            android:title="@string/preference_sound" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

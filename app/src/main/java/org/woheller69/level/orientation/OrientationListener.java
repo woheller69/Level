@@ -3,9 +3,9 @@ package org.woheller69.level.orientation;
 /*
  *  This file is part of Level (an Android Bubble Level).
  *  <https://github.com/avianey/Level>
- *  
+ *
  *  Copyright (C) 2014 Antoine Vianey
- *  
+ *
  *  Level is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -21,10 +21,9 @@ package org.woheller69.level.orientation;
  */
 public interface OrientationListener {
 
-	void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
-	
-	void onCalibrationSaved(boolean success);
-	
-	void onCalibrationReset(boolean success);
-	
+    void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
+
+    void onCalibrationSaved(boolean success);
+
+    void onCalibrationReset(boolean success);
 }
