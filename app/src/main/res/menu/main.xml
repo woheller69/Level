@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/calibrate"
+        android:id="@+id/menu_calibrate"
         android:icon="@drawable/ic_gps_fixed"
         android:title="@string/calibrate"
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/preferences"
+        android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/preferences"
         app:showAsAction="ifRoom|withText" />
 
     <item
-        android:id="@+id/Github"
+        android:id="@+id/menu_about"
         android:icon="@drawable/ic_info"
         android:title="GitHub"
         app:showAsAction="ifRoom|withText" />

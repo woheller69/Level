@@ -78,7 +78,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CONTEXT = this;
-        view = findViewById(R.id.level);
+        view = findViewById(R.id.main_levelView);
         // sound
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -105,7 +105,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
 
     /* Handles item selections */
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.calibrate) {
+        if (item.getItemId() == R.id.menu_calibrate) {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.calibrate_title)
                     .setIcon(null)
@@ -116,10 +116,10 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     .setMessage(R.string.calibrate_message)
                     .show();
             return true;
-        } else if (item.getItemId() == R.id.preferences) {
+        } else if (item.getItemId() == R.id.menu_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        } else if (item.getItemId() == R.id.Github) {
+        } else if (item.getItemId() == R.id.menu_about) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
             return true;
         }
