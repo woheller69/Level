@@ -4,19 +4,19 @@
 
     <item
         android:id="@+id/calibrate"
-        android:icon="@android:drawable/ic_menu_mylocation"
+        android:icon="@drawable/ic_gps_fixed"
         android:title="@string/calibrate"
         app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/preferences"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_settings"
         android:title="@string/preferences"
         app:showAsAction="ifRoom|withText" />
 
     <item
         android:id="@+id/Github"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@drawable/ic_info"
         android:title="GitHub"
         app:showAsAction="ifRoom|withText" />
 </menu>

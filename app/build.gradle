@@ -11,6 +11,7 @@ android {
         targetSdkVersion 30
         versionCode 14
         versionName "1.4"
+        vectorDrawables.useSupportLibrary true
     }
 
     buildTypes {
