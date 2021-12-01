@@ -1,7 +1,6 @@
 package org.woheller69.level.view;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -11,11 +10,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-import androidx.preference.PreferenceManager;
-
-import org.woheller69.level.LevelPreferencesFragment;
-import org.woheller69.level.config.DisplayType;
-import org.woheller69.level.config.Viscosity;
 import org.woheller69.level.orientation.Orientation;
 import org.woheller69.level.painter.LevelPainter;
 
@@ -63,13 +57,8 @@ public class LevelView extends SurfaceView implements SurfaceHolder.Callback, On
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         if (painter == null) {
-            painter = new LevelPainter(holder, getContext(), new Handler(Looper.getMainLooper()), getWidth(), getHeight(),
-                    prefs.getBoolean(LevelPreferencesFragment.KEY_SHOW_ANGLE, true),
-                    DisplayType.valueOf(prefs.getString(LevelPreferencesFragment.KEY_DISPLAY_TYPE, "ANGLE")),
-                    Viscosity.valueOf(prefs.getString(LevelPreferencesFragment.KEY_VISCOSITY, "MEDIUM")),
-                    prefs.getBoolean(LevelPreferencesFragment.KEY_LOCK, false));
+            painter = new LevelPainter(holder, getContext(), new Handler(Looper.getMainLooper()));
         }
     }
 

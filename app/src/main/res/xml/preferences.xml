@@ -5,34 +5,34 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="preference_show_angle"
+            android:key="@string/prefKey_showAngle"
             android:summary="@string/preference_show_angle_summary"
             android:title="@string/preference_show_angle" />
 
         <ListPreference
-            android:defaultValue="ANGLE"
-            android:dependency="preference_show_angle"
-            android:entries="@array/display_types_name"
-            android:entryValues="@array/display_types"
-            android:key="preference_display_type"
+            android:defaultValue="@string/prefKey_displayType_angle"
+            android:dependency="@string/prefKey_showAngle"
+            android:entries="@array/pref_displayTypes_options"
+            android:entryValues="@array/pref_displayTypes_values"
+            android:key="@string/prefKey_displayType"
             android:title="@string/preference_display_type" />
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="preference_lock"
+            android:key="@string/prefKey_lockOrientation"
             android:summary="@string/preference_lock_summary"
             android:title="@string/preference_lock" />
 
         <ListPreference
-            android:defaultValue="MEDIUM"
-            android:entries="@array/viscosities_name"
-            android:entryValues="@array/viscosities"
-            android:key="preference_viscosity"
+            android:defaultValue="@string/prefKey_viscosity_medium"
+            android:entries="@array/pref_viscosity_options"
+            android:entryValues="@array/pref_viscosity_values"
+            android:key="@string/prefKey_viscosity"
             android:title="@string/preference_viscosity" />
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="preference_sound"
+            android:key="@string/prefKey_enableSound"
             android:summary="@string/preference_sound_summary"
             android:title="@string/preference_sound" />
 

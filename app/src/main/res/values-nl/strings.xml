@@ -37,9 +37,6 @@
     <string name="viscosity_low_summary">Lage viscositeit\nLuchtbel beweegt snel</string>
     <string name="viscosity_medium_summary">Middelmatige viscositeit\nLuchtbel beweegt normaal</string>
     <string name="viscosity_high_summary">Hoge viscositeit\nLuchtbel beweegt traag</string>
-    <string name="config_switch_vertically">Omgekeerde verticaal</string>
-    <string name="config_switch_horizontally">Omgekeerde horizontaal</string>
-    <string name="config_rotate_axis">Draai assen</string>
     <string name="orientation">Orientatie</string>
     <string name="accelerometer">G-sensor</string>
     <string name="orientation_sensor">kompas sensor</string>

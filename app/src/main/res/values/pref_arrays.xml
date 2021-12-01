@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_displayTypes_options">
+        <item>@string/angle</item>
+        <item>@string/inclination</item>
+    </string-array>
+    <string-array name="pref_displayTypes_values">
+        <item>@string/prefKey_displayType_angle</item>
+        <item>@string/prefKey_displayType_inclination</item>
+    </string-array>
+
+    <string-array name="pref_viscosity_options">
+        <item>@string/viscosity_low</item>
+        <item>@string/viscosity_medium</item>
+        <item>@string/viscosity_high</item>
+    </string-array>
+    <string-array name="pref_viscosity_values">
+        <item>@string/prefKey_viscosity_low</item>
+        <item>@string/prefKey_viscosity_medium</item>
+        <item>@string/prefKey_viscosity_high</item>
+    </string-array>
+
+</resources>

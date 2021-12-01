@@ -15,9 +15,8 @@ import androidx.core.content.ContextCompat;
 
 import org.woheller69.level.Level;
 import org.woheller69.level.R;
-import org.woheller69.level.config.DisplayType;
-import org.woheller69.level.config.Viscosity;
 import org.woheller69.level.orientation.Orientation;
+import org.woheller69.level.util.PreferenceHelper;
 
 import java.text.DecimalFormat;
 
@@ -162,7 +161,6 @@ public class LevelPainter implements Runnable {
     /**
      * Ajustement de la vitesse
      */
-    private Viscosity viscosity;
     private double viscosityValue;
     /**
      * Format des angles
@@ -180,15 +178,11 @@ public class LevelPainter implements Runnable {
      * Config angles
      */
     private boolean showAngle;
-    private DisplayType angleType;
     private boolean lockEnabled;
     private boolean locked;
     private long frameRate;
 
-    public LevelPainter(SurfaceHolder surfaceHolder, Context context,
-                        Handler handler, int width, int height,
-                        boolean showAngle, DisplayType angleType,
-                        Viscosity viscosity, boolean lockEnabled) {
+    public LevelPainter(SurfaceHolder surfaceHolder, Context context, Handler handler) {
 
         // get handles to some important objects
         this.surfaceHolder = surfaceHolder;
@@ -207,14 +201,10 @@ public class LevelPainter implements Runnable {
         this.display = ContextCompat.getDrawable(context, R.drawable.display);
         this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.baseline_height_black_24dp);
 
-        // vitesse de la bulle
-        this.viscosity = viscosity;
-
         // config
-        this.showAngle = showAngle;
-        this.displayFormat = new DecimalFormat(angleType.getDisplayFormat());
-        this.displayBackgroundText = angleType.getDisplayBackgroundText();
-        this.angleType = angleType;
+        this.showAngle = PreferenceHelper.showAngle();
+        this.displayFormat = new DecimalFormat(PreferenceHelper.getDisplayTypeFormat());
+        this.displayBackgroundText = PreferenceHelper.getDisplayTypeBackgroundText();
 
         // colors
         this.backgroundColor = ContextCompat.getColor(context, R.color.silver);
@@ -293,7 +283,7 @@ public class LevelPainter implements Runnable {
         // init
         this.locked = false;
         Level.getProvider().setLocked(this.locked);
-        this.lockEnabled = lockEnabled;
+        this.lockEnabled = PreferenceHelper.lockOrientation();
         this.orientation = Orientation.TOP;
         this.wait = true;
         this.initialized = false;
@@ -614,7 +604,7 @@ public class LevelPainter implements Runnable {
                         break;
                 }
 
-                viscosityValue = levelWidth * viscosity.getCoeff();
+                viscosityValue = levelWidth * PreferenceHelper.getViscosityCoefficient();
 
                 minLevelX = middleX - levelWidth / 2;
                 maxLevelX = middleX + levelWidth / 2;
@@ -702,16 +692,17 @@ public class LevelPainter implements Runnable {
                     }
                     break;
             }
-            if (angleType == DisplayType.INCLINATION) {
+            if (PreferenceHelper.isDisplayTypeInclination()) {
                 angle1 = 100 * angle1 / 45;
                 angle2 = 100 * angle2 / 45;
             }
             // correction des angles affiches
-            if (angle1 > angleType.getMax()) {
-                angle1 = angleType.getMax();
+            final float angleTypeMax = PreferenceHelper.getDisplayTypeMax();
+            if (angle1 > angleTypeMax) {
+                angle1 = angleTypeMax;
             }
-            if (angle2 > angleType.getMax()) {
-                angle2 = angleType.getMax();
+            if (angle2 > angleTypeMax) {
+                angle2 = angleTypeMax;
             }
             // correction des angles aberrants
             // pour ne pas que la bulle sorte de l'ecran

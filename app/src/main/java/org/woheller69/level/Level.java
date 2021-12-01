@@ -2,7 +2,6 @@ package org.woheller69.level;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -17,11 +16,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
 import org.woheller69.level.orientation.Orientation;
 import org.woheller69.level.orientation.OrientationListener;
 import org.woheller69.level.orientation.OrientationProvider;
+import org.woheller69.level.util.PreferenceHelper;
 import org.woheller69.level.view.LevelView;
 
 /*
@@ -126,13 +125,13 @@ public class Level extends AppCompatActivity implements OrientationListener {
         return false;
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         Log.d("Level", "Level resumed");
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         provider = OrientationProvider.getInstance();
         // chargement des effets sonores
-        soundEnabled = prefs.getBoolean(LevelPreferencesFragment.KEY_SOUND, false);
+        soundEnabled = PreferenceHelper.enableSound();
         // orientation manager
         if (provider.isSupported()) {
             provider.startListening(this);

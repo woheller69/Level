@@ -37,9 +37,6 @@
     <string name="viscosity_low_summary">Geringe Viskosität\nLuftblase bewegt sich schneller</string>
     <string name="viscosity_medium_summary">Mittlere Viskosität\nLuftblase bewegt sich normal</string>
     <string name="viscosity_high_summary">Hohe Viskosität\nLuftblase bewegt sich langsam</string>
-    <string name="config_switch_vertically">Kehren vertikal</string>
-    <string name="config_switch_horizontally">Kehren horizontal</string>
-    <string name="config_rotate_axis">Drehen Achse</string>
     <string name="orientation">Lage</string>
     <string name="accelerometer">Beschleunigung</string>
     <string name="orientation_sensor">Lagesensor</string>

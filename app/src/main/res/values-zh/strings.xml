@@ -10,7 +10,7 @@
     <string name="calibrate_info">点击菜单按钮校准...</string>
     <string name="calibrate_title">校准手机</string>
     <string name="calibrate_message">将手机调整至水平位置，点击校准按钮。
-	
+
 或重置校准手机的所有边。</string>
     <string name="calibrate_again_title">请再次校准</string>
     <string name="calibrate_again_message">测量器要求再次校准手机。</string>
@@ -44,9 +44,6 @@
 气泡常速移动"</string>
     <string name="viscosity_high_summary">"高粘度
 气泡慢速移动"</string>
-    <string name="config_switch_vertically">转向竖直方向</string>
-    <string name="config_switch_horizontally">转向水平方向</string>
-    <string name="config_rotate_axis">转动轴线</string>
     <string name="orientation">方位</string>
     <string name="accelerometer">加速器</string>
     <string name="orientation_sensor">方位测量器</string>

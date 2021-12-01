@@ -13,7 +13,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.settings_container, new LevelPreferencesFragment())
+                    .replace(R.id.settings_container, new SettingsFragment())
                     .commit();
         }
     }
