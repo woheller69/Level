@@ -39,16 +39,16 @@ public class PreferenceHelper {
         return currentKeyValue.equals(getPrefKey(prefKey));
     }
 
-    public static boolean showAngle() {
+    public static boolean getShowAngle() {
         return getHelperBoolean(PrefKeys.PREF_SHOW_ANGLE, true);
     }
 
-    public static String displayType() {
+    public static String getDisplayType() {
         return getHelperString(PrefKeys.PREF_DISPLAY_TYPE, PrefKeys.PREF_DISPLAY_TYPE_ANGLE);
     }
 
     public static boolean isDisplayTypeInclination() {
-        return getEquals(displayType(), PrefKeys.PREF_DISPLAY_TYPE_INCLINATION);
+        return getEquals(getDisplayType(), PrefKeys.PREF_DISPLAY_TYPE_INCLINATION);
     }
 
     public static String getDisplayTypeFormat() {
@@ -78,20 +78,20 @@ public class PreferenceHelper {
         return max;
     }
 
-    public static boolean lockOrientation() {
+    public static boolean getOrientationLocked() {
         return getHelperBoolean(PrefKeys.PREF_LOCK_ORIENTATION, false);
     }
 
-    private static String viscosity() {
+    private static String getViscosity() {
         return getHelperString(PrefKeys.PREF_VISCOSITY, PrefKeys.PREF_VISCOSITY_MEDIUM);
     }
 
     public static boolean isViscosityLow() {
-        return getEquals(viscosity(), PrefKeys.PREF_VISCOSITY_LOW);
+        return getEquals(getViscosity(), PrefKeys.PREF_VISCOSITY_LOW);
     }
 
     public static boolean isViscosityHigh() {
-        return getEquals(viscosity(), PrefKeys.PREF_VISCOSITY_HIGH);
+        return getEquals(getViscosity(), PrefKeys.PREF_VISCOSITY_HIGH);
     }
 
     public static double getViscosityCoefficient() {
@@ -105,7 +105,7 @@ public class PreferenceHelper {
         return coeff;
     }
 
-    public static boolean enableSound() {
+    public static boolean getSoundEnabled() {
         return getHelperBoolean(PrefKeys.PREF_ENABLE_SOUND, false);
     }
 }

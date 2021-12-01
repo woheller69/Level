@@ -202,7 +202,7 @@ public class LevelPainter implements Runnable {
         this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.baseline_height_black_24dp);
 
         // config
-        this.showAngle = PreferenceHelper.showAngle();
+        this.showAngle = PreferenceHelper.getShowAngle();
         this.displayFormat = new DecimalFormat(PreferenceHelper.getDisplayTypeFormat());
         this.displayBackgroundText = PreferenceHelper.getDisplayTypeBackgroundText();
 
@@ -283,7 +283,7 @@ public class LevelPainter implements Runnable {
         // init
         this.locked = false;
         Level.getProvider().setLocked(this.locked);
-        this.lockEnabled = PreferenceHelper.lockOrientation();
+        this.lockEnabled = PreferenceHelper.getOrientationLocked();
         this.orientation = Orientation.TOP;
         this.wait = true;
         this.initialized = false;

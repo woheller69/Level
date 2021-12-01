@@ -131,7 +131,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
         Log.d("Level", "Level resumed");
         provider = OrientationProvider.getInstance();
         // chargement des effets sonores
-        soundEnabled = PreferenceHelper.enableSound();
+        soundEnabled = PreferenceHelper.getSoundEnabled();
         // orientation manager
         if (provider.isSupported()) {
             provider.startListening(this);
