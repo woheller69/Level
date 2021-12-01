@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/preferences">
+    <PreferenceCategory
+        android:title="@string/preferences"
+        app:iconSpaceReserved="false">
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="@string/prefKey_showAngle"
             android:summary="@string/preference_show_angle_summary"
-            android:title="@string/preference_show_angle" />
+            android:title="@string/preference_show_angle"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             android:defaultValue="@string/prefKey_displayType_angle"
@@ -15,26 +19,30 @@
             android:entries="@array/pref_displayTypes_options"
             android:entryValues="@array/pref_displayTypes_values"
             android:key="@string/prefKey_displayType"
-            android:title="@string/preference_display_type" />
+            android:title="@string/preference_display_type"
+            app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="@string/prefKey_lockOrientation"
             android:summary="@string/preference_lock_summary"
-            android:title="@string/preference_lock" />
+            android:title="@string/preference_lock"
+            app:iconSpaceReserved="false" />
 
         <ListPreference
             android:defaultValue="@string/prefKey_viscosity_medium"
             android:entries="@array/pref_viscosity_options"
             android:entryValues="@array/pref_viscosity_values"
             android:key="@string/prefKey_viscosity"
-            android:title="@string/preference_viscosity" />
+            android:title="@string/preference_viscosity"
+            app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="@string/prefKey_enableSound"
             android:summary="@string/preference_sound_summary"
-            android:title="@string/preference_sound" />
+            android:title="@string/preference_sound"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
