@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources translatable="false">
+
+    <string name="prefKey_showAngle" translatable="false">pref_showAngle</string>
+
+    <string name="prefKey_displayType" translatable="false">pref_displayType</string>
+    <string name="prefKey_displayType_angle" translatable="false">pref_displayType_angle</string>
+    <string name="prefKey_displayType_inclination" translatable="false">pref_displayType_inclination</string>
+
+    <string name="prefKey_lockOrientation" translatable="false">pref_lockOrientation</string>
+
+    <string name="prefKey_viscosity" translatable="false">pref_viscosity</string>
+    <string name="prefKey_viscosity_low" translatable="false">pref_viscosity_low</string>
+    <string name="prefKey_viscosity_medium" translatable="false">pref_viscosity_medium</string>
+    <string name="prefKey_viscosity_high" translatable="false">pref_viscosity_high</string>
+
+    <string name="prefKey_enableSound" translatable="false">pref_enableSound</string>
+
+</resources>

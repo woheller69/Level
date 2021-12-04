@@ -1,7 +1,8 @@
 package org.woheller69.level;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -12,7 +13,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.settings, new LevelPreferencesFragment())
+                    .replace(R.id.settings_container, new SettingsFragment())
                     .commit();
         }
     }

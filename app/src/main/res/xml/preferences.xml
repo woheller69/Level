@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<PreferenceCategory android:title="@string/preferences">
-		
-		<CheckBoxPreference
-			android:key="preference_show_angle"
-			android:defaultValue="true"
-			android:title="@string/preference_show_angle"
-			android:summary="@string/preference_show_angle_summary"/>
-	
-	    <ListPreference 
-		    android:key="preference_display_type"
-		    android:dependency="preference_show_angle"
-		    android:defaultValue="ANGLE"
-		    android:entryValues="@array/display_types"
-		    android:entries="@array/display_types_name"
-		    android:title="@string/preference_display_type" />
-		
-		<CheckBoxPreference
-			android:key="preference_lock"
-			android:defaultValue="false"
-			android:title="@string/preference_lock"
-			android:summary="@string/preference_lock_summary"/>
-		
-	    <ListPreference
-		    android:key="preference_viscosity"
-		    android:defaultValue="MEDIUM"
-		    android:entryValues="@array/viscosities"
-		    android:entries="@array/viscosities_name"
-		    android:title="@string/preference_viscosity" />
-		
-		<CheckBoxPreference
-			android:key="preference_sound"
-			android:defaultValue="false"
-			android:title="@string/preference_sound"
-			android:summary="@string/preference_sound_summary"/>
-	    
-	</PreferenceCategory>
-	
+    <PreferenceCategory
+        android:title="@string/preferences"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="@string/prefKey_showAngle"
+            android:summary="@string/preference_show_angle_summary"
+            android:title="@string/preference_show_angle"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="@string/prefKey_displayType_angle"
+            android:dependency="@string/prefKey_showAngle"
+            android:entries="@array/pref_displayTypes_options"
+            android:entryValues="@array/pref_displayTypes_values"
+            android:key="@string/prefKey_displayType"
+            android:title="@string/preference_display_type"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="@string/prefKey_lockOrientation"
+            android:summary="@string/preference_lock_summary"
+            android:title="@string/preference_lock"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:defaultValue="@string/prefKey_viscosity_medium"
+            android:entries="@array/pref_viscosity_options"
+            android:entryValues="@array/pref_viscosity_values"
+            android:key="@string/prefKey_viscosity"
+            android:title="@string/preference_viscosity"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="@string/prefKey_enableSound"
+            android:summary="@string/preference_sound_summary"
+            android:title="@string/preference_sound"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

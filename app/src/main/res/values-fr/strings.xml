@@ -37,9 +37,6 @@
     <string name="viscosity_low_summary">Faible viscosité\nLa bulle se déplace rapidement</string>
     <string name="viscosity_medium_summary">Viscosité moyenne\nLa bulle se déplace a vitesse normal</string>
     <string name="viscosity_high_summary">Viscosité élevée\nLa bulle se déplace lentement</string>
-    <string name="config_switch_vertically">Inversion verticale</string>
-    <string name="config_switch_horizontally">Inversion horizontale</string>
-    <string name="config_rotate_axis">Echanger les axes</string>
     <string name="orientation">Orientation</string>
     <string name="accelerometer">Accéléromètre</string>
     <string name="orientation_sensor">Senseur d\'orientation</string>
