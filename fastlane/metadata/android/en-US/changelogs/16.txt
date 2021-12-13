@@ -1,0 +1,1 @@
+Bugfix: wrong calculation of inclination

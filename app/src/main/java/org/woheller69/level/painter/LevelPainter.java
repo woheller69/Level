@@ -693,8 +693,8 @@ public class LevelPainter implements Runnable {
                     break;
             }
             if (PreferenceHelper.isDisplayTypeInclination()) {
-                angle1 = 100 * angle1 / 45;
-                angle2 = 100 * angle2 / 45;
+                angle1 = (float) (100 * Math.tan(angle1/360*2*Math.PI));
+                angle2 = (float) (100 * Math.tan(angle2/360*2*Math.PI));
             }
             // correction des angles affiches
             final float angleTypeMax = PreferenceHelper.getDisplayTypeMax();
