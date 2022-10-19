@@ -3,15 +3,10 @@
     <string name="name">Bubble</string>
     <string name="reset">Zurücksetzen</string>
     <string name="not_supported">Ausrichtung nicht unterstützt</string>
-    <string name="cancel">Abbrechen</string>
-    <string name="save">Speichern</string>
-    <string name="ok">Ok</string>
     <string name="calibrate">Kalibrieren</string>
     <string name="calibrate_info">Drücke MENU zum Kalibrieren...</string>
     <string name="calibrate_title">Das Gerät kalibrieren</string>
     <string name="calibrate_message">Lege die Seite des Telefons zum Kalibrieren auf eine flache horizontale Oberfläche und drücke die Schaltfläche Kalibrieren.</string>
-    <string name="calibrate_again_title">Bitte erneut kalibrieren</string>
-    <string name="calibrate_again_message">Das Wechseln des Sensors erfordert eine Neukalibrierung des Geräts.</string>
     <string name="calibrate_saved">Kalibrierung erfolgreich!</string>
     <string name="calibrate_failed">Kalibrierung fehlgeschlagen!</string>
     <string name="calibrate_restored">Originale Kalibrierung wiederhergestellt!</string>
@@ -24,8 +19,6 @@
     <string name="preference_lock">Sperren</string>
     <string name="preference_lock_summary">Erlaube das Sperren der Ausrichtung</string>
     <string name="preference_viscosity">Viskosität</string>
-    <string name="preference_economy">Strom sparen</string>
-    <string name="preference_economy_summary">Weniger ruhige Animationen,\naber der Akku wird geschont</string>
     <string name="angle">Winkel</string>
     <string name="lock_info">Berühren um die Ausrichtung zu sperren</string>
     <string name="inclination">Steigung</string>
@@ -37,10 +30,4 @@
     <string name="viscosity_low_summary">Geringe Viskosität\nLuftblase bewegt sich schneller</string>
     <string name="viscosity_medium_summary">Mittlere Viskosität\nLuftblase bewegt sich normal</string>
     <string name="viscosity_high_summary">Hohe Viskosität\nLuftblase bewegt sich langsam</string>
-    <string name="orientation">Lage</string>
-    <string name="accelerometer">Beschleunigung</string>
-    <string name="orientation_sensor">Lagesensor</string>
-    <string name="accelerometer_sensor">Beschleunigungssensor</string>
-    <string name="orientation_summary">Lagesensor\nGenauigkeit hängt vom Gerät ab</string>
-    <string name="accelerometer_summary">Beschleunigungssensor\nGenau, aber anfällig für Bewegungen</string>
 </resources>

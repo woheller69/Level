@@ -6,6 +6,5 @@
 
     <!-- Rates -->
     <integer name="frame_rate">60</integer>
-    <integer name="sensor_rate">10</integer>
 
 </resources>

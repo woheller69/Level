@@ -3,15 +3,10 @@
     <string name="name">Bubble</string>
     <string name="reset">Reiniciar</string>
     <string name="not_supported">Orientatação não suportada</string>
-    <string name="cancel">Cancelar</string>
-    <string name="save">Guardar</string>
-    <string name="ok">Ok</string>
     <string name="calibrate">Calibrar</string>
     <string name="calibrate_info">Clique em MENU para calibrar...</string>
     <string name="calibrate_title">Calibrar o telemóvel</string>
     <string name="calibrate_message">Coloque o lado do telefone que deseja calibrar numa superfície plana horizontal e clique em Calibrar.</string>
-    <string name="calibrate_again_title">Precisa de recalibrar</string>
-    <string name="calibrate_again_message">A alteração do sensor precisa de uma nova calibragem.</string>
     <string name="calibrate_saved">A calibragem foi guardada!</string>
     <string name="calibrate_failed">A calibragem falhou!</string>
     <string name="calibrate_restored">Aplicada a calibragem de origem!</string>
@@ -24,8 +19,6 @@
     <string name="preference_lock">Bloqueio</string>
     <string name="preference_lock_summary">Bloquear o tipo de nível a usar</string>
     <string name="preference_viscosity">Viscosidade</string>
-    <string name="preference_economy">Modo económico</string>
-    <string name="preference_economy_summary">Menos qualidade nas animações\npreservando mais a vida da bateria.</string>
     <string name="angle">Ângulo</string>
     <string name="lock_info">Clicar para bloquear neste sensor</string>
     <string name="inclination">Inclinação</string>
@@ -37,10 +30,4 @@
     <string name="viscosity_low_summary">Baixa viscosidade\nA bolha move-se mais rápidamente</string>
     <string name="viscosity_medium_summary">Média viscosidade\nA bolha move-se a uma velocidade normal</string>
     <string name="viscosity_high_summary">Alta viscosidade\nA bolha move-se mais lentamente</string>
-    <string name="orientation">Orientação</string>
-    <string name="accelerometer">Acelerómetro</string>
-    <string name="orientation_sensor">Sensor de orientação</string>
-    <string name="accelerometer_sensor">Sensor de aceleração</string>
-    <string name="orientation_summary">Sensor de orientação\nA sensibilidade depende do aparelho</string>
-    <string name="accelerometer_summary">Sensor de aceleração\nPreciso mas sensível aos movimentos</string>
 </resources>

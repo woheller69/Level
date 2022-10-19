@@ -110,7 +110,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     .setIcon(null)
                     .setCancelable(true)
                     .setPositiveButton(R.string.calibrate, (dialog, id) -> provider.saveCalibration())
-                    .setNegativeButton(R.string.cancel, null)
+                    .setNegativeButton(android.R.string.cancel, null)
                     .setNeutralButton(R.string.reset, (dialog, id) -> provider.resetCalibration())
                     .setMessage(R.string.calibrate_message)
                     .show();

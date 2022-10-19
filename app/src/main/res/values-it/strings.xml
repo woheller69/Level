@@ -3,15 +3,10 @@
     <string name="name">Livella</string>
     <string name="reset">Reset</string>
     <string name="not_supported">Orientamento non supportato</string>
-    <string name="cancel">Annullare</string>
-    <string name="save">Salva</string>
-    <string name="ok">D\'accordo</string>
     <string name="calibrate">Calibrare</string>
     <string name="calibrate_info">Premere MENU per calibrare...</string>
     <string name="calibrate_title">Calibrare il telefono</string>
     <string name="calibrate_message">Posto il lato del telefono che si desidera calibrare su una superficie piana orizzontale e premere il pulsante di calibrazione.</string>
-    <string name="calibrate_again_title">È necessario ricalibrare</string>
-    <string name="calibrate_again_message">Il cambio di sensore richiede ricalibrazione del telefono cellulare.</string>
     <string name="calibrate_saved">Calibrazione personalizzata salvata !</string>
     <string name="calibrate_failed">La calibrazione fallito !</string>
     <string name="calibrate_restored">Calibrazione originale restaurata !</string>
@@ -24,8 +19,6 @@
     <string name="preference_lock">Orientamento</string>
     <string name="preference_lock_summary">Preserva il orientamento di livello</string>
     <string name="preference_viscosity">Viscosità</string>
-    <string name="preference_economy">Eco Mode</string>
-    <string name="preference_economy_summary">Animazioni meno fluide\nma conserva la batteria</string>
     <string name="angle">Angolo</string>
     <string name="lock_info">premere per bloccare il orientamento</string>
     <string name="inclination">Inclinazione</string>
@@ -37,10 +30,4 @@
     <string name="viscosity_low_summary">Bassa viscosità\nLa bolla si muove rapidamente</string>
     <string name="viscosity_medium_summary">Media viscosità\nLa bolla si muove a velocità normale</string>
     <string name="viscosity_high_summary">Alta viscosità\nLa bolla si muove lentamente</string>
-    <string name="orientation">Orientamento</string>
-    <string name="accelerometer">Accelerometro</string>
-    <string name="orientation_sensor">Sensore di orientamento</string>
-    <string name="accelerometer_sensor">Accelerometro sensore</string>
-    <string name="orientation_summary">Sensore di orientamento\nSensibilità dipende dal telefono</string>
-    <string name="accelerometer_summary">Accelerometro sensore\nAccurato, ma sensibili ai movimenti</string>
 </resources>
