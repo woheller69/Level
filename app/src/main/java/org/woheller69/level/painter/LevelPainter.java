@@ -518,17 +518,34 @@ public class LevelPainter implements Runnable {
                         lcdForegroundPaint);
 
                 if (angle1raw > 0.1f) {
-                    canvas.drawText(
-                            "\u2193",
-                            middleX + displayRect.width() / 2.0f,
-                            displayRect.centerY() + lcdHeight / 2.0f,
-                            lcdForegroundPaint);
+                    if (orientation.getReverse()==1){
+                        canvas.drawText(
+                                "\u2193",
+                                middleX + displayRect.width() / 2.0f,
+                                displayRect.centerY() + lcdHeight / 2.0f,
+                                lcdForegroundPaint);
+                    } else {
+                        canvas.drawText(
+                                "\u2191",
+                                middleX + displayRect.width() / 2.0f,
+                                displayRect.centerY() + lcdHeight / 2.0f,
+                                lcdForegroundPaint);
+                    }
                 } else if (angle1raw < -0.1f) {
-                    canvas.drawText(
-                            "\u2191",
-                            middleX + displayRect.width() / 2.0f,
-                            displayRect.centerY() + lcdHeight / 2.0f,
-                            lcdForegroundPaint);
+                    if (orientation.getReverse()==1)
+                    {
+                        canvas.drawText(
+                                "\u2191",
+                                middleX + displayRect.width() / 2.0f,
+                                displayRect.centerY() + lcdHeight / 2.0f,
+                                lcdForegroundPaint);
+                    } else {
+                        canvas.drawText(
+                                "\u2193",
+                                middleX + displayRect.width() / 2.0f,
+                                displayRect.centerY() + lcdHeight / 2.0f,
+                                lcdForegroundPaint);
+                    }
                 }
             }
             // level
