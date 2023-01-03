@@ -46,6 +46,7 @@ public class OrientationProvider implements SensorEventListener {
     private static final String SAVED_PITCH = "pitch.";
     private static final String SAVED_ROLL = "roll.";
     private static final String SAVED_BALANCE = "balance.";
+    private static final String SAVED_COUNT = "valuecount.";
     private static OrientationProvider provider;
     /**
      * Calibration
@@ -53,6 +54,7 @@ public class OrientationProvider implements SensorEventListener {
     private final float[] calibratedPitch = new float[5];
     private final float[] calibratedRoll = new float[5];
     private final float[] calibratedBalance = new float[5];
+    private final int[] calibratedValueCount = new int[5];
     /**
      * Rotation Matrix
      */
@@ -135,16 +137,13 @@ public class OrientationProvider implements SensorEventListener {
      * Returns true if at least one Accelerometer sensor is available
      */
     public boolean isSupported() {
-        if (supported == null) {
-            if (Level.getContext() != null) {
-                sensorManager = (SensorManager) Level.getContext().getSystemService(Context.SENSOR_SERVICE);
-                boolean supported = true;
-                for (int sensorType : getRequiredSensors()) {
-                    List<Sensor> sensors = sensorManager.getSensorList(sensorType);
-                    supported = (sensors.size() > 0) && supported;
-                }
-                this.supported = supported;
-                return supported;
+        boolean supported = false;
+        if (Level.getContext() != null) {
+            sensorManager = (SensorManager) Level.getContext().getSystemService(Context.SENSOR_SERVICE);
+            supported = true;
+            for (int sensorType : getRequiredSensors()) {
+                List<Sensor> sensors = sensorManager.getSensorList(sensorType);
+                supported = (sensors.size() > 0) && supported;
             }
         }
         return supported;
@@ -162,6 +161,7 @@ public class OrientationProvider implements SensorEventListener {
         Arrays.fill(calibratedPitch, 0);
         Arrays.fill(calibratedRoll, 0);
         Arrays.fill(calibratedBalance, 0);
+        Arrays.fill(calibratedValueCount, 0);
         SharedPreferences prefs = context.getPreferences(Context.MODE_PRIVATE);
         for (Orientation orientation : Orientation.values()) {
             calibratedPitch[orientation.ordinal()] =
@@ -170,14 +170,17 @@ public class OrientationProvider implements SensorEventListener {
                     prefs.getFloat(SAVED_ROLL + orientation.toString(), 0);
             calibratedBalance[orientation.ordinal()] =
                     prefs.getFloat(SAVED_BALANCE + orientation.toString(), 0);
+            calibratedValueCount[orientation.ordinal()] =
+                    prefs.getInt(SAVED_COUNT + orientation.toString(), 0);
         }
+
         // register listener and start listening
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         running = true;
         for (int sensorType : getRequiredSensors()) {
             List<Sensor> sensors = sensorManager.getSensorList(sensorType);
             if (sensors.size() > 0) {
-                sensor = sensors.get(0);
+                Sensor sensor = sensors.get(0);
                 running = sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL) && running;
             }
         }
@@ -278,28 +281,53 @@ public class OrientationProvider implements SensorEventListener {
 
         if (calibrating) {
             calibrating = false;
+
+            // Allow for 2 calibration values to be entered.
+            float cpitch = calibratedPitch[orientation.ordinal()];
+            float croll = calibratedRoll[orientation.ordinal()];
+            float cbalance = calibratedBalance[orientation.ordinal()];
+            int ccount = calibratedValueCount[orientation.ordinal()];
+
+            // More than 2 values is not allowed - reset calibration first.
+            if (ccount >= 2) {
+                ccount = 0;
+                cpitch = 0;
+                croll = 0;
+                cbalance = 0;
+            }
+            ccount += 1;
+            if (cpitch != 0.0f) {
+                pitch = (pitch + cpitch) / (float)ccount;
+            }
+            if (croll != 0.0f) {
+                roll = (roll + croll) / (float)ccount;
+            }
+            if (cbalance != 0.0f) {
+                balance = (balance + cbalance) / (float)ccount;
+            }
+
             Editor editor = Level.getContext().getPreferences(Context.MODE_PRIVATE).edit();
             editor.putFloat(SAVED_PITCH + orientation.toString(), pitch);
             editor.putFloat(SAVED_ROLL + orientation.toString(), roll);
             editor.putFloat(SAVED_BALANCE + orientation.toString(), balance);
+            editor.putInt(SAVED_COUNT + orientation.toString(), ccount);
             final boolean success = editor.commit();
             if (success) {
                 calibratedPitch[orientation.ordinal()] = pitch;
                 calibratedRoll[orientation.ordinal()] = roll;
                 calibratedBalance[orientation.ordinal()] = balance;
+                calibratedValueCount[orientation.ordinal()] = ccount;
             }
-            listener.onCalibrationSaved(success);
-            pitch = 0;
-            roll = 0;
-            balance = 0;
-        } else {
-            pitch -= calibratedPitch[orientation.ordinal()];
-            roll -= calibratedRoll[orientation.ordinal()];
-            balance -= calibratedBalance[orientation.ordinal()];
+            listener.onCalibrationSaved(success,ccount);
         }
 
+        //  apply calibration to return values (keep internal values untouched!)
+        float opitch = pitch - calibratedPitch[orientation.ordinal()];
+        float oroll = roll - calibratedRoll[orientation.ordinal()];
+        float obalance = balance - calibratedBalance[orientation.ordinal()];
+
         // propagation of the orientation
-        listener.onOrientationChanged(orientation, pitch, roll, balance);
+        listener.onOrientationChanged(orientation, opitch, oroll, obalance);
     }
 
     /**
@@ -317,6 +345,7 @@ public class OrientationProvider implements SensorEventListener {
             Arrays.fill(calibratedPitch, 0);
             Arrays.fill(calibratedRoll, 0);
             Arrays.fill(calibratedBalance, 0);
+            Arrays.fill(calibratedValueCount, 0);
         }
         if (listener != null) {
             listener.onCalibrationReset(success);

@@ -23,7 +23,7 @@ public interface OrientationListener {
 
     void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
 
-    void onCalibrationSaved(boolean success);
+    void onCalibrationSaved(boolean success, int ccount);
 
     void onCalibrationReset(boolean success);
 }

@@ -9,6 +9,7 @@
     <string name="calibrate_message">将手机调整至水平位置，点击校准按钮。
 
 或重置校准手机的所有边。</string>
+    <string name="calibrate_first_step">现在转动设备180度并再次校准!</string>
     <string name="calibrate_saved">定制校准已保存！</string>
     <string name="calibrate_failed">校准失败！</string>
     <string name="calibrate_restored">初始校准已恢复！</string>

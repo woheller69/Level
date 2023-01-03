@@ -7,6 +7,7 @@
     <string name="calibrate_info">Clique em MENU para calibrar...</string>
     <string name="calibrate_title">Calibrar o telemóvel</string>
     <string name="calibrate_message">Coloque o lado do telefone que deseja calibrar numa superfície plana horizontal e clique em Calibrar.</string>
+    <string name="calibrate_first_step">Agora rodar o seu dispositivo 180 graus e calibrar novamente!</string>
     <string name="calibrate_saved">A calibragem foi guardada!</string>
     <string name="calibrate_failed">A calibragem falhou!</string>
     <string name="calibrate_restored">Aplicada a calibragem de origem!</string>

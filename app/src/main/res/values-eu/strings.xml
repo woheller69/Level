@@ -7,6 +7,7 @@
     <string name="calibrate_info">sakatu MENU kalibratzeko...</string>
     <string name="calibrate_title">Kalibratu zure telefonoa</string>
     <string name="calibrate_message">Jarri zure Android gailuaren edozein alde (atzekoa barne) gainazal horizontal lau batean eta sakatu Kalibratu botoia.\n\nEdo berrezarri kalibrazioa telefonoaren alde guztientzat.</string>
+    <string name="calibrate_first_step"> Orain aktibatu gailua 180 gradu eta kalibratu berriro!!</string>
     <string name="calibrate_saved">Kalibrazio pertsonalizatua gordeta!</string>
     <string name="calibrate_failed">Kalibrazioak huts egind du!</string>
     <string name="calibrate_restored">Jatorrizko kalibrazioa leheneratuta!</string>

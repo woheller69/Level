@@ -7,6 +7,7 @@
     <string name="calibrate_info">Druk op MENU voor calibratie</string>
     <string name="calibrate_title">Calibreer uw telefoon</string>
     <string name="calibrate_message">Plaats de zijkant van de telefoon die u wilt kalibreren op een vlak horizontaal oppervlak en druk op Calibreren</string>
+    <string name="calibrate_first_step">Nu uw apparaat 180 graden draaien en opnieuw kalibreren!</string>
     <string name="calibrate_saved">Nieuwe calibratie opgeslagen !</string>
     <string name="calibrate_failed">Calibratie mislukt !</string>
     <string name="calibrate_restored">Oorspronkelijke calibratie hersteld !</string>

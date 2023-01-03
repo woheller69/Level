@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="name">Bubble</string>
+    <string name="name">Wasserwaage</string>
     <string name="reset">Zurücksetzen</string>
     <string name="not_supported">Ausrichtung nicht unterstützt</string>
     <string name="calibrate">Kalibrieren</string>
     <string name="calibrate_info">Drücke MENU zum Kalibrieren...</string>
     <string name="calibrate_title">Das Gerät kalibrieren</string>
     <string name="calibrate_message">Lege die Seite des Telefons zum Kalibrieren auf eine flache horizontale Oberfläche und drücke die Schaltfläche Kalibrieren.</string>
-    <string name="calibrate_saved">Kalibrierung erfolgreich!</string>
+    <string name="calibrate_first_step">Bitte das Gerät nun um 180 Grad wenden und nochmals kalibrieren!</string>
+    <string name="calibrate_saved">Kalibrierung erfolgreich fertiggestellt!</string>
     <string name="calibrate_failed">Kalibrierung fehlgeschlagen!</string>
     <string name="calibrate_restored">Originale Kalibrierung wiederhergestellt!</string>
     <string name="preferences">Einstellungen</string>

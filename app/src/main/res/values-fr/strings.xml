@@ -7,6 +7,7 @@
     <string name="calibrate_info">appuyez sur MENU pour étalonner...</string>
     <string name="calibrate_title">Etalonnage du téléphone</string>
     <string name="calibrate_message">Posez le côté du téléphone que vous souhaitez calibrer sur une surface horizontale et plane de référence puis appuyez sur le bouton Etalonner.\n\nOu réinitialisez l\'étalonnage pour l\'ensemble des côtés du téléphone.</string>
+    <string name="calibrate_first_step">Maintenant, tournez votre appareil de 180 degrés et calibrez à nouveau!</string>
     <string name="calibrate_saved">Etalonnage sauvegardé !</string>
     <string name="calibrate_failed">L\'étalonnage a échoué !</string>
     <string name="calibrate_restored">Etalonnage d\'usine restauré !</string>

@@ -179,9 +179,17 @@ public class Level extends AppCompatActivity implements OrientationListener {
     }
 
     @Override
-    public void onCalibrationSaved(boolean success) {
-        Toast.makeText(this, success ?
-                        R.string.calibrate_saved : R.string.calibrate_failed,
-                Toast.LENGTH_LONG).show();
+    public void onCalibrationSaved(boolean success, int ccount) {
+        if (success) {
+            if (ccount < 2) {
+              Toast.makeText(this,R.string.calibrate_first_step,Toast.LENGTH_LONG).show();
+            }
+            else {
+              Toast.makeText(this,R.string.calibrate_saved,Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            Toast.makeText(this, R.string.calibrate_failed, Toast.LENGTH_LONG).show();
+        }
     }
 }
