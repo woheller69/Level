@@ -130,18 +130,8 @@ public class LevelPainter implements Runnable {
      * Orientation
      */
     private Orientation orientation;
-    /**
-     * Bubble physics
-     */
-    private long currentTime;
-    private long lastTime;
-    private double timeDiff;
-    private double posX;
-    private double posY;
     private double angleX;
     private double angleY;
-    private double speedX;
-    private double speedY;
     private double x, y;
     /**
      * Drawables
@@ -158,10 +148,6 @@ public class LevelPainter implements Runnable {
      */
     private String infoText;
     private String lockText;
-    /**
-     * Ajustement de la vitesse
-     */
-    private double viscosityValue;
     /**
      * Format des angles
      */
@@ -307,6 +293,7 @@ public class LevelPainter implements Runnable {
     @Override
     public void run() {
         Canvas c = null;
+        long lastTime = System.currentTimeMillis();
         updatePhysics();
         try {
             c = this.surfaceHolder.lockCanvas(null);
@@ -358,43 +345,23 @@ public class LevelPainter implements Runnable {
     }
 
     private void updatePhysics() {
-        currentTime = System.currentTimeMillis();
-        if (lastTime > 0) {
-            timeDiff = (currentTime - lastTime) / 1000.0;
-            posX = orientation.getReverse() * (2 * x - minLevelX - maxLevelX) / levelMinusBubbleWidth;
-            switch (orientation) {
-                case TOP:
-                case BOTTOM:
-                    speedX = orientation.getReverse() * (angleX - posX) * viscosityValue;
-                    break;
-                case LEFT:
-                case RIGHT:
-                    speedX = orientation.getReverse() * (angleY - posX) * viscosityValue;
-                    break;
-                case LANDING:
-                    posY = (2 * y - minLevelY - maxLevelY) / levelMinusBubbleHeight;
-                    speedX = (angleX - posX) * viscosityValue;
-                    speedY = (angleY - posY) * viscosityValue;
-                    y += speedY * timeDiff;
-                    break;
-            }
-            x += speedX * timeDiff;
-            // en cas de latence elevee
-            // si la bubble a trop deviee
-            // elle est replacee correctement
-            if (orientation == Orientation.LANDING) {
-                if (Math.sqrt((middleX - x) * (middleX - x)
-                        + (middleY - y) * (middleY - y)) > levelMaxDimension / 2.0f - halfBubbleWidth) {
-                    x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-                    y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
-                }
-            } else {
-                if (x < minLevelX + halfBubbleWidth || x > maxLevelX - halfBubbleWidth) {
-                    x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-                }
-            }
+        /**
+         * Bubble physics
+         */
+        switch (orientation) {
+            case TOP:
+            case BOTTOM:
+                x = (orientation.getReverse() * angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+                break;
+            case LEFT:
+            case RIGHT:
+                x = (orientation.getReverse() * angleY * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+                break;
+            case LANDING:
+                x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
+                y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
+                break;
         }
-        lastTime = currentTime;
     }
 
     private void doDraw(Canvas canvas) {
@@ -621,8 +588,6 @@ public class LevelPainter implements Runnable {
                         break;
                 }
 
-                viscosityValue = levelWidth * PreferenceHelper.getViscosityCoefficient();
-
                 minLevelX = middleX - levelWidth / 2;
                 maxLevelX = middleX + levelWidth / 2;
                 minLevelY = middleY - levelHeight / 2;
@@ -691,19 +656,19 @@ public class LevelPainter implements Runnable {
             switch (orientation) {
                 case TOP:
                 case BOTTOM:
-                    angle1raw = angle1raw * 0.7f + newBalance * 0.3f;
+                    angle1raw = newBalance;
                     angle1 = Math.abs(angle1raw);
-                    angleX = angleX * 0.7f + (Math.sin(Math.toRadians(newBalance)) / MAX_SINUS) * 0.3f;
+                    angleX = (Math.sin(Math.toRadians(newBalance)) / MAX_SINUS);
                     break;
                 case LANDING:
-                    angle2raw = angle2raw * 0.7f + newRoll * 0.3f;
+                    angle2raw = newRoll;
                     angle2 = Math.abs(angle2raw);
-                    angleX = angleX * 0.7f + (Math.sin(Math.toRadians(newRoll)) / MAX_SINUS) * 0.3f;
+                    angleX = (Math.sin(Math.toRadians(newRoll)) / MAX_SINUS);
                 case RIGHT:
                 case LEFT:
-                    angle1raw = angle1raw * 0.7f + newPitch * 0.3f;
+                    angle1raw = newPitch;
                     angle1 = Math.abs(angle1raw);
-                    angleY = angleY * 0.7f + (Math.sin(Math.toRadians(newPitch)) / MAX_SINUS) * 0.3f;
+                    angleY = (Math.sin(Math.toRadians(newPitch)) / MAX_SINUS);
                     if (angle1 > 90) {
                         angle1 = 180 - angle1;
                     }

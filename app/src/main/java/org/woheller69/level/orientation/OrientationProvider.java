@@ -12,6 +12,7 @@ import android.view.Surface;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.woheller69.level.Level;
+import org.woheller69.level.util.PreferenceHelper;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -64,12 +65,21 @@ public class OrientationProvider implements SensorEventListener {
     /**
      * Orientation
      */
-    public float pitch;
-    public float roll;
-    public int displayOrientation;
-    private Sensor sensor;
+    private float pitch;
+    private float roll;
+    private int displayOrientation;
     private SensorManager sensorManager;
     private OrientationListener listener;
+    /**
+     * Smoothing
+     */
+    private long lastTime = 0;
+    private long deltaTime = 0;
+    private double halfLife = 300;
+    private float smoothedPitch = 0.0f;
+    private float smoothedRoll = 0.0f;
+    private float smoothedBalance = 0.0f;
+    private long framedist = 1000 / Level.getContext().getResources().getInteger(org.woheller69.level.R.integer.frame_rate);
     /**
      * indicates whether or not Accelerometer Sensor is supported
      */
@@ -80,10 +90,6 @@ public class OrientationProvider implements SensorEventListener {
     private boolean running = false;
     private boolean calibrating = false;
     private float balance;
-    private float tmp;
-    private float oldPitch;
-    private float oldRoll;
-    private float oldBalance;
     private float minStep = 360;
     private float refValues = 0;
     private Orientation orientation;
@@ -150,7 +156,6 @@ public class OrientationProvider implements SensorEventListener {
         return supported;
     }
 
-
     /**
      * Registers a listener and start listening
      * callback for accelerometer events
@@ -171,13 +176,18 @@ public class OrientationProvider implements SensorEventListener {
             calibratedBalance[orientation.ordinal()] =
                     prefs.getFloat(SAVED_BALANCE + orientation.toString(), 0);
         }
+
+        // viscosity coeff -> halflife in [ms]
+        double coeff = PreferenceHelper.getViscosityCoefficient();
+        halfLife = 300.0 / coeff;
+
         // register listener and start listening
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         running = true;
         for (int sensorType : getRequiredSensors()) {
             List<Sensor> sensors = sensorManager.getSensorList(sensorType);
             if (sensors.size() > 0) {
-                sensor = sensors.get(0);
+                Sensor sensor = sensors.get(0);
                 running = sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL) && running;
             }
         }
@@ -191,9 +201,17 @@ public class OrientationProvider implements SensorEventListener {
 
     public void onSensorChanged(SensorEvent event) {
 
-        oldPitch = pitch;
-        oldRoll = roll;
-        oldBalance = balance;
+        long currentTime = event.timestamp / 1000000; // [ms]
+        if (lastTime == 0) lastTime = currentTime;
+        else {
+            deltaTime = currentTime - lastTime;
+            if (deltaTime < framedist) return;
+            lastTime = currentTime;
+        }
+
+        float oldPitch = pitch;
+        float oldRoll = roll;
+        float oldBalance = balance;
 
         SensorManager.getRotationMatrix(R, I, event.values, MAG);
 
@@ -233,11 +251,11 @@ public class OrientationProvider implements SensorEventListener {
         SensorManager.getOrientation(outR, LOC);
 
         // normalize z on ux, uy
-        tmp = (float) Math.sqrt(outR[8] * outR[8] + outR[9] * outR[9]);
+        float tmp = (float) Math.sqrt(outR[8] * outR[8] + outR[9] * outR[9]);
         tmp = (tmp == 0 ? 0 : outR[8] / tmp);
 
         // LOC[0] compass
-        pitch = (float) Math.toDegrees(LOC[1]);
+        pitch = (float) Math.toDegrees(LOC[1]); // (also known as: 'nick')
         roll = -(float) Math.toDegrees(LOC[2]);
         balance = (float) Math.toDegrees(Math.asin(tmp));
 
@@ -276,30 +294,45 @@ public class OrientationProvider implements SensorEventListener {
             }
         }
 
-        if (calibrating) {
-            calibrating = false;
-            Editor editor = Level.getContext().getPreferences(Context.MODE_PRIVATE).edit();
-            editor.putFloat(SAVED_PITCH + orientation.toString(), pitch);
-            editor.putFloat(SAVED_ROLL + orientation.toString(), roll);
-            editor.putFloat(SAVED_BALANCE + orientation.toString(), balance);
-            final boolean success = editor.commit();
-            if (success) {
-                calibratedPitch[orientation.ordinal()] = pitch;
-                calibratedRoll[orientation.ordinal()] = roll;
-                calibratedBalance[orientation.ordinal()] = balance;
-            }
-            listener.onCalibrationSaved(success);
-            pitch = 0;
-            roll = 0;
-            balance = 0;
-        } else {
-            pitch -= calibratedPitch[orientation.ordinal()];
-            roll -= calibratedRoll[orientation.ordinal()];
-            balance -= calibratedBalance[orientation.ordinal()];
+        // smoothing - low pass filter
+        if (deltaTime > 0) {
+            // update
+            float beta = (float) Math.pow(0.5,(double)deltaTime/(double)halfLife);
+            float alpha = 1.0f-beta;
+            smoothedPitch = beta*smoothedPitch + alpha*pitch;
+            smoothedRoll = beta*smoothedRoll + alpha*roll;
+            smoothedBalance = beta*smoothedBalance + alpha*balance;
+        }
+        else {
+            // init
+            smoothedPitch = pitch;
+            smoothedRoll = roll;
+            smoothedBalance = balance;
         }
 
+        if (calibrating) {
+            calibrating = false;
+
+            Editor editor = Level.getContext().getPreferences(Context.MODE_PRIVATE).edit();
+            editor.putFloat(SAVED_PITCH + orientation.toString(), smoothedPitch);
+            editor.putFloat(SAVED_ROLL + orientation.toString(), smoothedRoll);
+            editor.putFloat(SAVED_BALANCE + orientation.toString(), smoothedBalance);
+            final boolean success = editor.commit();
+            if (success) {
+                calibratedPitch[orientation.ordinal()] = smoothedPitch;
+                calibratedRoll[orientation.ordinal()] = smoothedRoll;
+                calibratedBalance[orientation.ordinal()] = smoothedBalance;
+            }
+            listener.onCalibrationSaved(success);
+        }
+
+        //  apply calibration to return values (keep internal values untouched!)
+        float opitch = smoothedPitch - calibratedPitch[orientation.ordinal()];
+        float oroll = smoothedRoll - calibratedRoll[orientation.ordinal()];
+        float obalance = smoothedBalance - calibratedBalance[orientation.ordinal()];
+
         // propagation of the orientation
-        listener.onOrientationChanged(orientation, pitch, roll, balance);
+        listener.onOrientationChanged(orientation, opitch, oroll, obalance);
     }
 
     /**
