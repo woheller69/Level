@@ -64,9 +64,9 @@ public class OrientationProvider implements SensorEventListener {
     /**
      * Orientation
      */
-    public float pitch;
-    public float roll;
-    public int displayOrientation;
+    private float pitch;
+    private float roll;
+    private final int displayOrientation;
     private Sensor sensor;
     private SensorManager sensorManager;
     private OrientationListener listener;

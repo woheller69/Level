@@ -102,7 +102,6 @@ public class LevelPainter implements Runnable {
     private int infoHeight;
     private int lcdWidth;
     private int lcdHeight;
-    private int arrowHeight;
     private int lockWidth;
     private int lockHeight;
     private int displayPadding;
@@ -110,14 +109,15 @@ public class LevelPainter implements Runnable {
     private int infoY;
     private int sensorY;
     private int sensorGap;
-    private int arrowGap;
+    private int arrowWidth;
+    private int arrowPadding;
     private int levelMaxDimension;
     /**
      * Rect
      */
     private Rect displayRect;
     private Rect lockRect;
-    private Bitmap bitmap;
+
     /**
      * Angles
      */
@@ -199,7 +199,6 @@ public class LevelPainter implements Runnable {
         this.marker1D = ContextCompat.getDrawable(context, R.drawable.marker_1d);
         this.marker2D = ContextCompat.getDrawable(context, R.drawable.marker_2d);
         this.display = ContextCompat.getDrawable(context, R.drawable.display);
-        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.baseline_height_black_24dp);
 
         // config
         this.showAngle = PreferenceHelper.getShowAngle();
@@ -266,6 +265,9 @@ public class LevelPainter implements Runnable {
         this.lcdBackgroundPaint.getTextBounds(displayBackgroundText, 0, displayBackgroundText.length(), rect);
         this.lcdHeight = rect.height();
         this.lcdWidth = rect.width();
+        this.lcdBackgroundPaint.getTextBounds("\u25b6",0, 1, rect);
+        this.arrowPadding = context.getResources().getDimensionPixelSize(R.dimen.arrow_padding);
+        this.arrowWidth = rect.width() + arrowPadding;
         this.lockBackgroundPaint.getTextBounds(LOCKED, 0, LOCKED.length(), rect);
         this.lockHeight = rect.height();
         this.lockWidth = rect.width();
@@ -274,11 +276,9 @@ public class LevelPainter implements Runnable {
         this.markerThickness = context.getResources().getDimensionPixelSize(R.dimen.marker_thickness);
         this.displayGap = context.getResources().getDimensionPixelSize(R.dimen.display_gap);
         this.sensorGap = context.getResources().getDimensionPixelSize(R.dimen.sensor_gap);
-        this.arrowGap = context.getResources().getDimensionPixelSize(R.dimen.arrow_gap);
         this.displayPadding = context.getResources().getDimensionPixelSize(R.dimen.display_padding);
         this.displayRect = new Rect();
         this.lockRect = new Rect();
-        this.arrowHeight = context.getResources().getDimensionPixelSize(R.dimen.arrow_height);
 
         // init
         this.locked = false;
@@ -423,49 +423,63 @@ public class LevelPainter implements Runnable {
             }
             if (showAngle) {
                 display.setBounds(
-                        displayRect.left - (displayRect.width() + displayGap) / 2,
+                    middleX - (displayRect.width() + displayGap),
                         displayRect.top,
-                        displayRect.right - (displayRect.width() + displayGap) / 2,
+                        middleX - displayGap,
                         displayRect.bottom);
                 display.draw(canvas);
                 display.setBounds(
-                        displayRect.left + (displayRect.width() + displayGap) / 2,
+                        middleX + displayGap,
                         displayRect.top,
-                        displayRect.right + (displayRect.width() + displayGap) / 2,
+                        middleX + displayRect.width() + displayGap,
                         displayRect.bottom);
                 display.draw(canvas);
                 canvas.drawText(
                         displayBackgroundText,
-                        middleX - (displayRect.width() + displayGap) / 2.0f,
+                        middleX - (displayRect.width() + displayGap - arrowWidth) / 2.0f - displayPadding,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdBackgroundPaint);
                 canvas.drawText(
                         displayFormat.format(angle2),
-                        middleX - (displayRect.width() + displayGap) / 2.0f,
+                        middleX - (displayRect.width() + displayGap - arrowWidth) / 2.0f - displayPadding,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdForegroundPaint);
-                canvas.save();
-                canvas.rotate(90f,
-                        middleX - displayRect.width() - displayGap / 2.0f - arrowHeight / 4.0f,
-                        displayRect.centerY() - arrowHeight / 2.0f);
-                canvas.drawBitmap(bitmap, middleX - displayRect.width() - displayGap / 2.0f - arrowHeight / 4.0f,
-                        displayRect.centerY() - arrowHeight / 2.0f,
-                        blackPaint);
-                canvas.restore();
-
+                if (angle2raw > 0.1f){
+                    canvas.drawText(  //left-right →
+                            "\u25b6",
+                            middleX - (displayRect.width() + displayGap) + arrowWidth / 2.0f + displayPadding / 2.0f,
+                            displayRect.centerY() + lcdHeight / 2.0f,
+                            lcdForegroundPaint);
+                } else if (angle2raw <-0.1f){
+                    canvas.drawText(  //left-right ←
+                            "\u25c0",
+                            middleX - (displayRect.width() + displayGap) + arrowWidth / 2.0f + displayPadding / 2.0f,
+                            displayRect.centerY() + lcdHeight / 2.0f,
+                            lcdForegroundPaint);
+                }
                 canvas.drawText(
                         displayBackgroundText,
-                        middleX + (displayRect.width() + displayGap) / 2.0f,
+                        middleX + displayGap + (displayRect.width() - arrowWidth) / 2.0f,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdBackgroundPaint);
                 canvas.drawText(
                         displayFormat.format(angle1),
-                        middleX + (displayRect.width() + displayGap) / 2.0f,
+                        middleX + displayGap + (displayRect.width() - arrowWidth) / 2.0f,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdForegroundPaint);
-                canvas.drawBitmap(bitmap, middleX + displayRect.width() + displayGap / 2.0f,
-                        displayRect.centerY() - arrowHeight / 2.0f,
-                        blackPaint);
+                if (angle1raw > 0.1f){
+                    canvas.drawText(  //up-down ↓
+                            "\u25bc",
+                            middleX + displayGap + (displayRect.width() - arrowWidth) / 2.0f + displayRect.width() / 2.0f - displayPadding / 2.0f,
+                            displayRect.centerY() + lcdHeight / 2.0f,
+                            lcdForegroundPaint);
+                } else if (angle1raw < -0.1f){
+                    canvas.drawText(  //up-down ↑
+                            "\u25b2",
+                            middleX + displayGap + (displayRect.width() - arrowWidth) / 2.0f + displayRect.width() / 2.0f - displayPadding / 2.0f,
+                            displayRect.centerY() + lcdHeight / 2.0f,
+                            lcdForegroundPaint);
+                }
             }
             bubble2D.setBounds(
                     (int) (x - halfBubbleWidth),
@@ -520,14 +534,14 @@ public class LevelPainter implements Runnable {
                 if (angle1raw > 0.1f) {
                     if (orientation.getReverse()==1){
                         canvas.drawText(
-                                "\u2193",
-                                middleX + displayRect.width() / 2.0f,
+                                "\u25bc",
+                                middleX + displayRect.width() / 2.0f - displayPadding / 2.0f,
                                 displayRect.centerY() + lcdHeight / 2.0f,
                                 lcdForegroundPaint);
                     } else {
                         canvas.drawText(
-                                "\u2191",
-                                middleX + displayRect.width() / 2.0f,
+                                "\u25b2",
+                                middleX + displayRect.width() / 2.0f - displayPadding / 2.0f,
                                 displayRect.centerY() + lcdHeight / 2.0f,
                                 lcdForegroundPaint);
                     }
@@ -535,14 +549,14 @@ public class LevelPainter implements Runnable {
                     if (orientation.getReverse()==1)
                     {
                         canvas.drawText(
-                                "\u2191",
-                                middleX + displayRect.width() / 2.0f,
+                                "\u25b2",
+                                middleX + displayRect.width() / 2.0f - displayPadding / 2.0f,
                                 displayRect.centerY() + lcdHeight / 2.0f,
                                 lcdForegroundPaint);
                     } else {
                         canvas.drawText(
-                                "\u2193",
-                                middleX + displayRect.width() / 2.0f,
+                                "\u25bc",
+                                middleX + displayRect.width() / 2.0f - displayPadding / 2.0f,
                                 displayRect.centerY() + lcdHeight / 2.0f,
                                 lcdForegroundPaint);
                     }
@@ -639,15 +653,15 @@ public class LevelPainter implements Runnable {
                 // display
                 if (orientation == Orientation.LANDING) {
                     displayRect.set(
-                            middleX - lcdWidth / 2 - displayPadding,
+                            middleX - lcdWidth / 2 -arrowWidth / 2 - displayPadding,
                             sensorY - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2,
-                            middleX + lcdWidth / 2 + displayPadding,
+                            middleX + lcdWidth / 2 + displayPadding + arrowWidth / 2,
                             sensorY - displayGap - infoHeight / 2);
                 } else {
                     displayRect.set(
                             middleX - lcdWidth / 2 - displayPadding,
                             sensorY - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2,
-                            middleX + lcdWidth / 2 + displayPadding + 2 * arrowGap,
+                            middleX + lcdWidth / 2 + displayPadding + arrowWidth,
                             sensorY - displayGap - infoHeight / 2);
                 }
                 // lock
