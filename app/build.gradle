@@ -9,8 +9,8 @@ android {
         applicationId "org.woheller69.level"
         minSdkVersion 16
         targetSdkVersion 31
-        versionCode 18
-        versionName "1.8"
+        versionCode 19
+        versionName "1.9"
         vectorDrawables.useSupportLibrary true
     }
 
