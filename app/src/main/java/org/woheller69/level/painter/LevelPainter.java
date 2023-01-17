@@ -379,14 +379,16 @@ public class LevelPainter implements Runnable {
                     break;
             }
             x += speedX * timeDiff;
-            // en cas de latence elevee
-            // si la bubble a trop deviee
-            // elle est replacee correctement
+
+            /*
+             * Keep the bubble inside of the circle.
+             */
             if (orientation == Orientation.LANDING) {
-                if (Math.sqrt((middleX - x) * (middleX - x)
-                        + (middleY - y) * (middleY - y)) > levelMaxDimension / 2.0f - halfBubbleWidth) {
-                    x = (angleX * levelMinusBubbleWidth + minLevelX + maxLevelX) / 2;
-                    y = (angleY * levelMinusBubbleHeight + minLevelY + maxLevelY) / 2;
+                double r = Math.sqrt((middleX - x) * (middleX - x) + (middleY - y) * (middleY - y));
+                double rm =  levelMaxDimension / 2.0f - halfBubbleWidth - levelBorderWidth;
+                if (r > rm) {
+                    x = (x - middleX) * rm / r + middleX;
+                    y = (y - middleY) * rm / r + middleY;
                 }
             } else {
                 if (x < minLevelX + halfBubbleWidth || x > maxLevelX - halfBubbleWidth) {
@@ -747,16 +749,7 @@ public class LevelPainter implements Runnable {
             } else if (angleY < -1) {
                 angleY = -1;
             }
-            // correction des angles a plat
-            // la bulle ne doit pas sortir du niveau
-            if (orientation.equals(Orientation.LANDING) && angleX != 0 && angleY != 0) {
-                n = Math.sqrt(angleX * angleX + angleY * angleY);
-                teta = Math.acos(Math.abs(angleX) / n);
-                l = 1 / Math.max(Math.abs(Math.cos(teta)), Math.abs(Math.sin(teta)));
-                angleX = angleX / l;
-                angleY = angleY / l;
-            }
-            // lancement de l'animation si mode eco
+
         }
     }
 
