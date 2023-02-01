@@ -2,6 +2,7 @@ package org.woheller69.level;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -15,6 +16,10 @@ public class SettingsActivity extends AppCompatActivity {
                     .beginTransaction()
                     .replace(R.id.settings_container, new SettingsFragment())
                     .commit();
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 }

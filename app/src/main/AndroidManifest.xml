@@ -28,7 +28,8 @@
         <activity
             android:name=".SettingsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.DayNight" />
+            android:parentActivityName=".Level"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
 
     </application>
 
