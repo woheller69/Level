@@ -1,13 +1,9 @@
 Mit Wasserwaage können Sie Winkel und Neigungen messen.
 
-Halten Sie eine der vier Seiten des Telefons gegen ein Objekt oder legen Sie es auf eine ebene Fläche, um die Ausrichtung zu prüfen.
+Richten Sie einfach eine der vier Seiten Ihres Telefons an einem Objekt aus oder legen Sie es auf eine ebene Oberfläche, um seine Ausrichtung zu bestimmen.
+Erleben Sie eine benutzerfreundliche und werbefreie Lösung, die keine Berechtigungen erfordert.
 
 * Kalibrieren
 * Winkel oder Neigung anzeigen
 * Soundeffekte
 * Ausrichtungssperre
-
-Keine Berechtigungen erforderlich
-
-
-
