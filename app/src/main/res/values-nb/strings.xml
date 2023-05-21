@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Vater</string>
+    <string name="reset">Tilbakestill</string>
+    <string name="not_supported">Orientering ikke støttet</string>
+    <string name="calibrate">Kalibrer</string>
+    <string name="calibrate_info">trykk MENY for å kalibrere...</string>
+    <string name="calibrate_title">Kalibrer telefonen</string>
+    <string name="calibrate_message">Legg hvilken som helst side (inkludert baksiden) av Android-enheten din på en flat horisontal overflate og trykk knappen Kalibrer.\n\nEller tilbakestill kalibreringen for alle sidene av telefonen.</string>
+    <string name="calibrate_saved">Kalibrering lagret!</string>
+    <string name="calibrate_failed">Kalibrering  feilet!</string>
+    <string name="calibrate_restored">Opprinnelig kalibrering gjenopprettet!</string>
+    <string name="preferences">Innstillinger</string>
+    <string name="preference_show_angle">Vis numerisk vinkel</string>
+    <string name="preference_show_angle_summary">Vis vinkelverdi(er) på skjermen</string>
+    <string name="preference_display_type">Visningstype</string>
+    <string name="preference_sound">Lydeffekter</string>
+    <string name="preference_sound_summary">Avspill lyd når i vater</string>
+    <string name="preference_lock">Låsing</string>
+    <string name="preference_lock_summary">Tillat låsing av vaterorientering</string>
+    <string name="preference_viscosity">Viskositet</string>
+    <string name="angle">Vinkel</string>
+    <string name="lock_info">trykk for å låse vaterorientering</string>
+    <string name="inclination">Helling</string>
+    <string name="angle_summary">Vinkel i grader</string>
+    <string name="inclination_summary">Helling i prosent\n100&#37; &#126; 45°</string>
+    <string name="viscosity_low">Lav</string>
+    <string name="viscosity_medium">Middels</string>
+    <string name="viscosity_high">Høy</string>
+    <string name="viscosity_low_summary">Lav viskositet\nLuftboble beveger seg raskere</string>
+    <string name="viscosity_medium_summary">Middels viskositet\nLuftboble beveger seg normalt</string>
+    <string name="viscosity_high_summary">Høy viskositet\nLuftboble beveger seg sakte</string>
+</resources>
