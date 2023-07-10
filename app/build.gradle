@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "org.woheller69.level"
         minSdkVersion 16
-        targetSdkVersion 31
-        versionCode 20
-        versionName "2.0"
+        targetSdkVersion 33
+        versionCode 21
+        versionName "2.1"
         vectorDrawables.useSupportLibrary true
     }
 
