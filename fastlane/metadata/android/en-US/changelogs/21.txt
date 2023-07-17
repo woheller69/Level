@@ -1,0 +1,2 @@
+Norwegian translation
+Monochrome icon support
