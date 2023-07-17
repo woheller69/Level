@@ -73,7 +73,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
         setContentView(R.layout.main);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setIcon(R.mipmap.ic_launcher_round_appbar);
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CONTEXT = this;
