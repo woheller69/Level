@@ -6,17 +6,24 @@
         android:id="@+id/menu_calibrate"
         android:icon="@drawable/ic_gps_fixed"
         android:title="@string/calibrate"
-        app:showAsAction="always|withText" />
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_ruler"
+        android:icon="@drawable/ic_ruler"
+        android:checkable="true"
+        android:title="Show ruler"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/preferences"
-        app:showAsAction="always|withText" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_info"
         android:title="GitHub"
-        app:showAsAction="always|withText" />
+        app:showAsAction="never"/>
 </menu>

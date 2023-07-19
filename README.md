@@ -1,13 +1,15 @@
 <pre>Send a coffee to woheller69@t-online.de
 <a href= "https://www.paypal.com/signin"><img  align="left" src="https://www.paypalobjects.com/webstatic/de_DE/i/de-pp-logo-150px.png"></a></pre>
 
-# Bubble level
+# Bubble: Spirit level and ruler
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble1.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble2.png" width="150"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble1.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble2.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble3.png" width="150"/>
 
 With Bubble you can measure angles and inclination.
 
 Simply align one of your phone's four sides with an object or place it on a level surface to determine its orientation.
+
+A ruler in cm and inches is also available.
 
 Experience a user-friendly and ad-free solution with no permissions required.
 
@@ -18,6 +20,8 @@ Experience a user-friendly and ad-free solution with no permissions required.
 This is an updated fork of https://f-droid.org/packages/net.androgames.level/ which has not been revised since 2014.
 
 ## License
+
+RulerView taken from https://github.com/SecUSo/privacy-friendly-ruler, published under GPL3.0 license
 
 ```
 An Android Bubble Level application.

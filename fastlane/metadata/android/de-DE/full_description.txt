@@ -1,9 +1,8 @@
-Mit Wasserwaage können Sie Winkel und Neigungen messen.
+Mit Bubble können Sie Winkel und Neigungen messen.
 
 Richten Sie einfach eine der vier Seiten Ihres Telefons an einem Objekt aus oder legen Sie es auf eine ebene Oberfläche, um seine Ausrichtung zu bestimmen.
+
+Ein Lineal in cm und inch ist ebenfalls verfügbar.
+
 Erleben Sie eine benutzerfreundliche und werbefreie Lösung, die keine Berechtigungen erfordert.
 
-* Kalibrieren
-* Winkel oder Neigung anzeigen
-* Soundeffekte
-* Ausrichtungssperre

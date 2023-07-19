@@ -1,5 +1,6 @@
 package org.woheller69.level;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
@@ -8,20 +9,26 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.core.content.ContextCompat;
 
 import org.woheller69.level.orientation.Orientation;
 import org.woheller69.level.orientation.OrientationListener;
 import org.woheller69.level.orientation.OrientationProvider;
 import org.woheller69.level.util.PreferenceHelper;
 import org.woheller69.level.view.LevelView;
+import org.woheller69.level.view.RulerView;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
@@ -48,7 +55,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
 
     private OrientationProvider provider;
 
-    private LevelView view;
+    private LevelView levelView;
+    private RulerView rulerView;
 
     /**
      * Gestion du son
@@ -76,7 +84,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CONTEXT = this;
-        view = findViewById(R.id.main_levelView);
+        levelView = findViewById(R.id.main_levelView);
         // sound
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -95,9 +103,14 @@ public class Level extends AppCompatActivity implements OrientationListener {
         bipRate = getResources().getInteger(R.integer.bip_rate);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.menu_ruler).setChecked(rulerView!=null);
+        if (menu instanceof MenuBuilder) {
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
         return true;
     }
 
@@ -120,8 +133,32 @@ public class Level extends AppCompatActivity implements OrientationListener {
         } else if (item.getItemId() == R.id.menu_about) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
             return true;
+        } else if (item.getItemId() == R.id.menu_ruler) {
+            if (!item.isChecked()) showRuler(true);
+            else showRuler(false);
         }
+        invalidateOptionsMenu();
         return false;
+    }
+
+    private void showRuler(boolean ruler) {
+        if (ruler){
+            RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            float dpmm =  (float) (displayMetrics.ydpi/25.4);
+
+            rulerView = new RulerView(this, dpmm, dpmm*25.4/32);
+            rulerView.setBackgroundColor(ContextCompat.getColor(this,R.color.silver));
+            rulerLayout.addView(rulerView);
+            levelView.setVisibility(View.INVISIBLE);
+        } else {
+            levelView.setVisibility(View.VISIBLE);
+            RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
+            if (rulerView!=null) rulerLayout.removeView(rulerView);
+            rulerView = null;
+        }
+
     }
 
     @Override
@@ -167,7 +204,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             lastBip = System.currentTimeMillis();
             soundPool.play(bipSoundID, volume, volume, 1, 0, 1);
         }
-        view.onOrientationChanged(orientation, pitch, roll, balance);
+        levelView.onOrientationChanged(orientation, pitch, roll, balance);
     }
 
     @Override

@@ -1,9 +1,7 @@
-With Bubble you can measure angles and inclination
+With Bubble you can measure angles and inclination.
 
 Simply align one of your phone's four sides with an object or place it on a level surface to determine its orientation.
-Experience a user-friendly and ad-free solution with no permissions required.
 
-* Calibrate
-* Show angle or inclination
-* Sound effects
-* Orientation lock
+A ruler in cm and inches is also available.
+
+Experience a user-friendly and ad-free solution with no permissions required.

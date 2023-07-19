@@ -9,8 +9,8 @@ android {
         applicationId "org.woheller69.level"
         minSdkVersion 16
         targetSdkVersion 33
-        versionCode 22
-        versionName "2.2"
+        versionCode 23
+        versionName "2.3"
         vectorDrawables.useSupportLibrary true
     }
 
@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.preference:preference:1.2.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1" //needed due to duplicate class error
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" //needed due to duplicate class error
