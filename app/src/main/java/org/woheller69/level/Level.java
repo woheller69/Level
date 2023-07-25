@@ -54,9 +54,7 @@ import org.woheller69.level.view.RulerView;
  */
 public class Level extends AppCompatActivity implements OrientationListener {
 
-    private static Level CONTEXT;
-
-    private OrientationProvider provider;
+    private static OrientationProvider provider;
 
     private LevelView levelView;
     private RulerView rulerView;
@@ -71,12 +69,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
     private int bipRate;
     private long lastBip;
 
-    public static Level getContext() {
-        return CONTEXT;
-    }
-
     public static OrientationProvider getProvider() {
-        return getContext().provider;
+        return provider;
     }
 
     @Override
@@ -87,7 +81,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        CONTEXT = this;
         levelView = findViewById(R.id.main_levelView);
         // sound
 
@@ -224,7 +217,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
     @Override
     protected void onResume() {
         super.onResume();
-        provider = OrientationProvider.getInstance();
+        provider = OrientationProvider.getInstance(this);
         // chargement des effets sonores
         soundEnabled = PreferenceHelper.getSoundEnabled();
         // orientation manager

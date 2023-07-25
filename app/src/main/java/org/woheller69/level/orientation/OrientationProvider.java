@@ -11,8 +11,6 @@ import android.view.Surface;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.woheller69.level.Level;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -88,19 +86,20 @@ public class OrientationProvider implements SensorEventListener {
     private float refValues = 0;
     private Orientation orientation;
     private boolean locked;
+    private final AppCompatActivity activity;
 
-    public OrientationProvider() {
-
+    public OrientationProvider(Context context) {
+        activity = (AppCompatActivity) context;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            this.displayOrientation = Level.getContext().getDisplay().getRotation();
+            this.displayOrientation = activity.getDisplay().getRotation();
         } else {
-            this.displayOrientation = Level.getContext().getWindowManager().getDefaultDisplay().getRotation();
+            this.displayOrientation = activity.getWindowManager().getDefaultDisplay().getRotation();
         }
     }
 
-    public static OrientationProvider getInstance() {
+    public static OrientationProvider getInstance(Context context) {
         if (provider == null) {
-            provider = new OrientationProvider();
+            provider = new OrientationProvider(context);
         }
         return provider;
     }
@@ -136,8 +135,8 @@ public class OrientationProvider implements SensorEventListener {
      */
     public boolean isSupported() {
         if (supported == null) {
-            if (Level.getContext() != null) {
-                sensorManager = (SensorManager) Level.getContext().getSystemService(Context.SENSOR_SERVICE);
+            if (activity != null) {
+                sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
                 boolean supported = true;
                 for (int sensorType : getRequiredSensors()) {
                     List<Sensor> sensors = sensorManager.getSensorList(sensorType);
@@ -156,13 +155,12 @@ public class OrientationProvider implements SensorEventListener {
      * callback for accelerometer events
      */
     public void startListening(OrientationListener orientationListener) {
-        final AppCompatActivity context = Level.getContext();
         // load calibration
         calibrating = false;
         Arrays.fill(calibratedPitch, 0);
         Arrays.fill(calibratedRoll, 0);
         Arrays.fill(calibratedBalance, 0);
-        SharedPreferences prefs = context.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences prefs = activity.getPreferences(Context.MODE_PRIVATE);
         for (Orientation orientation : Orientation.values()) {
             calibratedPitch[orientation.ordinal()] =
                     prefs.getFloat(SAVED_PITCH + orientation.toString(), 0);
@@ -172,7 +170,7 @@ public class OrientationProvider implements SensorEventListener {
                     prefs.getFloat(SAVED_BALANCE + orientation.toString(), 0);
         }
         // register listener and start listening
-        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         running = true;
         for (int sensorType : getRequiredSensors()) {
             List<Sensor> sensors = sensorManager.getSensorList(sensorType);
@@ -278,7 +276,7 @@ public class OrientationProvider implements SensorEventListener {
 
         if (calibrating) {
             calibrating = false;
-            Editor editor = Level.getContext().getPreferences(Context.MODE_PRIVATE).edit();
+            Editor editor = activity.getPreferences(Context.MODE_PRIVATE).edit();
             editor.putFloat(SAVED_PITCH + orientation.toString(), pitch);
             editor.putFloat(SAVED_ROLL + orientation.toString(), roll);
             editor.putFloat(SAVED_BALANCE + orientation.toString(), balance);
@@ -309,7 +307,7 @@ public class OrientationProvider implements SensorEventListener {
     public final void resetCalibration() {
         boolean success = false;
         try {
-            success = Level.getContext().getPreferences(
+            success = activity.getPreferences(
                     Context.MODE_PRIVATE).edit().clear().commit();
         } catch (Exception e) {
         }
