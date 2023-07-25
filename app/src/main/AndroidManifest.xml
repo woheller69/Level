@@ -10,7 +10,7 @@
     <application
         android:name=".LevelApp"
         android:allowBackup="true"
-        android:theme="@style/Theme.AppCompat.DayNight"
+        android:theme="@style/LevelTheme"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/name">
 

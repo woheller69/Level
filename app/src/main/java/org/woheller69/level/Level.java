@@ -108,6 +108,9 @@ public class Level extends AppCompatActivity implements OrientationListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.menu_ruler).setChecked(rulerView!=null);
+        menu.findItem(R.id.menu_calibrate).setVisible(rulerView==null);
+        menu.findItem(R.id.menu_settings).setVisible(rulerView==null);
+        menu.findItem(R.id.menu_about).setVisible(rulerView==null);
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
         }
@@ -134,10 +137,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
             return true;
         } else if (item.getItemId() == R.id.menu_ruler) {
-            if (!item.isChecked()) showRuler(true);
-            else showRuler(false);
+            showRuler(!item.isChecked());
         }
-        invalidateOptionsMenu();
         return false;
     }
 
@@ -152,11 +153,28 @@ public class Level extends AppCompatActivity implements OrientationListener {
             rulerView.setBackgroundColor(ContextCompat.getColor(this,R.color.silver));
             rulerLayout.addView(rulerView);
             levelView.setVisibility(View.INVISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LOW_PROFILE|
+                                View.SYSTEM_UI_FLAG_FULLSCREEN|
+                                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+            } else {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LOW_PROFILE|
+                                View.SYSTEM_UI_FLAG_FULLSCREEN|
+                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+            }
+            invalidateOptionsMenu();
         } else {
             levelView.setVisibility(View.VISIBLE);
             RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
             if (rulerView!=null) rulerLayout.removeView(rulerView);
             rulerView = null;
+            getWindow().getDecorView().setSystemUiVisibility(0);
+            invalidateOptionsMenu();
         }
 
     }
@@ -179,6 +197,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
     @Override
     protected void onPause() {
         super.onPause();
+        showRuler(false);
         if (provider.isListening()) {
             provider.stopListening();
         }
