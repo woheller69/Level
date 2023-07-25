@@ -108,4 +108,11 @@ public class RulerView extends View {
             }
         }
     }
+
+    public void setCalib(double ydpmm, double ydpi) {
+        dpmm=ydpmm;
+        dpfi=ydpi;
+        invalidate();
+        requestLayout();
+    }
 }

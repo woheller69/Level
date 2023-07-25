@@ -3,6 +3,7 @@ package org.woheller69.level;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -10,18 +11,20 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import org.woheller69.level.orientation.Orientation;
 import org.woheller69.level.orientation.OrientationListener;
@@ -57,6 +60,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
 
     private LevelView levelView;
     private RulerView rulerView;
+    private SeekBar rulerCalView;
 
     /**
      * Gestion du son
@@ -108,7 +112,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.menu_ruler).setChecked(rulerView!=null);
-        menu.findItem(R.id.menu_calibrate).setVisible(rulerView==null);
         menu.findItem(R.id.menu_settings).setVisible(rulerView==null);
         menu.findItem(R.id.menu_about).setVisible(rulerView==null);
         if (menu instanceof MenuBuilder) {
@@ -120,15 +123,50 @@ public class Level extends AppCompatActivity implements OrientationListener {
     /* Handles item selections */
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_calibrate) {
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.calibrate_title)
-                    .setIcon(null)
-                    .setCancelable(true)
-                    .setPositiveButton(R.string.calibrate, (dialog, id) -> provider.saveCalibration())
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .setNeutralButton(R.string.reset, (dialog, id) -> provider.resetCalibration())
-                    .setMessage(R.string.calibrate_message)
-                    .show();
+            if (rulerView==null){
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.calibrate_title)
+                        .setIcon(null)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.calibrate, (dialog, id) -> provider.saveCalibration())
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .setNeutralButton(R.string.reset, (dialog, id) -> provider.resetCalibration())
+                        .setMessage(R.string.calibrate_message)
+                        .show();
+            } else {
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                int progress = sp.getInt("pref_rulercal",100);
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                float dpmm =  (float) (displayMetrics.ydpi/25.4);
+                RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
+                if (rulerCalView ==null){
+                    rulerCalView = new SeekBar(this);
+                    rulerCalView.setMax(200);
+                    rulerCalView.setProgress(progress);
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    rulerCalView.setLayoutParams(layoutParams);
+                    rulerCalView.setRotation(270);
+                    rulerLayout.addView(rulerCalView);
+                    rulerCalView.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                            rulerView.setCalib(dpmm*(1+(progress-100f)/5000f), dpmm*25.4/32*(1+(progress-100f)/5000f));
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putInt("pref_rulercal",progress);
+                            editor.apply();
+                        }
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {}
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {}
+                    });
+                } else {
+                    rulerLayout.removeView(rulerCalView);
+                    rulerCalView =null;
+                }
+            }
+
             return true;
         } else if (item.getItemId() == R.id.menu_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
@@ -144,10 +182,12 @@ public class Level extends AppCompatActivity implements OrientationListener {
 
     private void showRuler(boolean ruler) {
         if (ruler){
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            float dpmm =  (float) (displayMetrics.ydpi/25.4);
+            int progress = sp.getInt("pref_rulercal",100);
+            float dpmm =  (float) (displayMetrics.ydpi/25.4)*(1+(progress-100f)/5000f);
 
             rulerView = new RulerView(this, dpmm, dpmm*25.4/32);
             rulerView.setBackgroundColor(ContextCompat.getColor(this,R.color.silver));
@@ -173,6 +213,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
             RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
             if (rulerView!=null) rulerLayout.removeView(rulerView);
             rulerView = null;
+            if (rulerCalView !=null) rulerLayout.removeView(rulerCalView);
+            rulerCalView = null;
             getWindow().getDecorView().setSystemUiVisibility(0);
             invalidateOptionsMenu();
         }
@@ -182,7 +224,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("Level", "Level resumed");
         provider = OrientationProvider.getInstance();
         // chargement des effets sonores
         soundEnabled = PreferenceHelper.getSoundEnabled();
