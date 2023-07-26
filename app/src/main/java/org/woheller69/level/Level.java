@@ -133,7 +133,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                 float dpmm =  (float) (displayMetrics.ydpi/25.4);
                 RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
-                if (rulerCalView ==null){
+                if (rulerCalView == null){
+                    Toast.makeText(this,getString(R.string.calibrate)+" \u25b2\u25bc", Toast.LENGTH_LONG).show();
                     rulerCalView = new SeekBar(this);
                     rulerCalView.setMax(200);
                     rulerCalView.setProgress(progress);
