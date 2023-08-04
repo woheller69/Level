@@ -61,7 +61,7 @@ public class RulerView extends View {
                 //draw 8mm line every cm
                 canvas.drawLine(0, (float)dpmm*i, (float)dpmm*8, (float)dpmm*i, paint);
                 //draw a number every cm
-                canvas.drawText(""+i/10, (float)dpmm*8+(textSize/5), (float)(dpmm*i+textSize), paint);
+                canvas.drawText(""+i/10, (float)dpmm*8+(textSize/5f), (float)(dpmm*i+textSize), paint);
             } else if (i%5 == 0) {
                 //draw 5mm line every 5mm
                 canvas.drawLine(0, (float)dpmm*i, (float)dpmm*5, (float)dpmm*i, paint);

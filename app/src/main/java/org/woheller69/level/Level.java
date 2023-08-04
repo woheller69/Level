@@ -105,6 +105,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.menu_ruler).setChecked(rulerView!=null);
+        menu.findItem(R.id.menu_ruler).setIcon(rulerView==null ? R.drawable.ic_ruler : R.drawable.ic_bubble);
         menu.findItem(R.id.menu_settings).setVisible(rulerView==null);
         menu.findItem(R.id.menu_about).setVisible(rulerView==null);
         if (menu instanceof MenuBuilder) {
@@ -129,9 +130,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             } else {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
                 int progress = sp.getInt("pref_rulercal",100);
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                float dpmm =  (float) (displayMetrics.ydpi/25.4);
+                float dpmm =  (float) (getResources().getDisplayMetrics().ydpi/25.4);
                 RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
                 if (rulerCalView == null){
                     Toast.makeText(this,getString(R.string.calibrate)+" \u25b2\u25bc", Toast.LENGTH_LONG).show();
@@ -178,10 +177,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
         if (ruler){
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int progress = sp.getInt("pref_rulercal",100);
-            float dpmm =  (float) (displayMetrics.ydpi/25.4)*(1+(progress-100f)/5000f);
+            float dpmm =  (float) (getResources().getDisplayMetrics().ydpi/25.4)*(1+(progress-100f)/5000f);
 
             rulerView = new RulerView(this, dpmm, dpmm*25.4/32);
             rulerView.setBackgroundColor(ContextCompat.getColor(this,R.color.silver));
