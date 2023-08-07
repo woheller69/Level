@@ -4,12 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -110,11 +113,19 @@ public class Level extends AppCompatActivity implements OrientationListener {
         menu.findItem(R.id.menu_ruler).setChecked(rulerView!=null);
         menu.findItem(R.id.menu_ruler).setIcon(rulerView==null ? R.drawable.ic_ruler : R.drawable.ic_bubble);
         menu.findItem(R.id.menu_settings).setVisible(rulerView==null);
-        menu.findItem(R.id.menu_about).setVisible(rulerView==null);
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
         }
         return true;
+    }
+
+    @Override
+    public void onPanelClosed(int featureId, Menu menu) {
+        if (rulerView != null) {
+            setFullscreenMode();
+        }
+
+        super.onPanelClosed(featureId, menu);
     }
 
     /* Handles item selections */
@@ -140,15 +151,22 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     rulerCalView = new VerticalSeekBar(this);
                     rulerCalView.setMax(200);
                     rulerCalView.setProgress(progress);
+                    rulerCalView.setThumb(ContextCompat.getDrawable(context, R.drawable.ic_fine));
+                    rulerCalView.getThumb().setColorFilter(getThemeColor(context,R.attr.colorAccent), PorterDuff.Mode.MULTIPLY);
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    layoutParams.setMargins(rulerLayout.getWidth()*5/8,0,0,0);
+                    layoutParams.setMargins(rulerLayout.getWidth()*3/8,0,0,0);
                     rulerCalView.setLayoutParams(layoutParams);
-
                     rulerCoarseCalView = new VerticalSeekBar(this);
                     rulerCoarseCalView.setMax(8000);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        rulerCoarseCalView.setMin(2000);
+                    }
                     rulerCoarseCalView.setProgress(coarseprogress);
+                    rulerCoarseCalView.setThumb(ContextCompat.getDrawable(context, R.drawable.ic_coarse));
+                    rulerCoarseCalView.getThumb().setColorFilter(getThemeColor(context,R.attr.colorAccent), PorterDuff.Mode.MULTIPLY);
                     RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    layoutParams2.setMargins(rulerLayout.getWidth()*3/8,0,0,0);
+                    layoutParams2.setMargins(0,0,rulerLayout.getWidth()*3/8,0);
+                    layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                     rulerCoarseCalView.setLayoutParams(layoutParams2);
 
                     rulerLayout.addView(rulerCalView);
@@ -181,7 +199,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
                         public void onStopTrackingTouch(SeekBar seekBar) {}
                     });
                 } else {
-                    Toast.makeText(context,"FINE:"+progress+" COARSE:"+coarseprogress,Toast.LENGTH_SHORT).show();
                     rulerLayout.removeView(rulerCalView);
                     rulerLayout.removeView(rulerCoarseCalView);
                     rulerCalView = null;
@@ -195,6 +212,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             return true;
         } else if (item.getItemId() == R.id.menu_about) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
+            recreate(); //fix strange action bar position when coming from ruler
             return true;
         } else if (item.getItemId() == R.id.menu_ruler) {
             showRuler(!item.isChecked());
@@ -214,20 +232,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             rulerView.setBackgroundColor(ContextCompat.getColor(this,R.color.silver));
             rulerLayout.addView(rulerView);
             levelView.setVisibility(View.INVISIBLE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                getWindow().getDecorView().setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LOW_PROFILE|
-                                View.SYSTEM_UI_FLAG_FULLSCREEN|
-                                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-            } else {
-                getWindow().getDecorView().setSystemUiVisibility(
-                        View.SYSTEM_UI_FLAG_LOW_PROFILE|
-                                View.SYSTEM_UI_FLAG_FULLSCREEN|
-                                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-            }
+            setFullscreenMode();
             invalidateOptionsMenu();
         } else {
             levelView.setVisibility(View.VISIBLE);
@@ -256,7 +261,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
         } else {
             Toast.makeText(this, getText(R.string.not_supported), Toast.LENGTH_LONG).show();
         }
-        showRuler(rulerView != null);
     }
 
     @Override
@@ -308,5 +312,30 @@ public class Level extends AppCompatActivity implements OrientationListener {
     public float getDpmmCal(int progress, int coarseProgress){
         float dpmm =  (float) (getResources().getDisplayMetrics().ydpi/25.4);
         return dpmm*(1+(progress+coarseProgress-100f-4000f)/5000f);
+    }
+
+    public static int getThemeColor(Context context, int colorResId) {
+        TypedValue typedValue = new TypedValue();
+        TypedArray typedArray = context.obtainStyledAttributes(typedValue.data, new int[] {colorResId});
+        int color = typedArray.getColor(0, 0);
+        typedArray.recycle();
+        return color;
+    }
+
+    private void setFullscreenMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LOW_PROFILE|
+                            View.SYSTEM_UI_FLAG_FULLSCREEN|
+                            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LOW_PROFILE|
+                            View.SYSTEM_UI_FLAG_FULLSCREEN|
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
+                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        }
     }
 }
