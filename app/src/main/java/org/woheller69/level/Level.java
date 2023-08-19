@@ -144,7 +144,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             } else {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
                 int progress = sp.getInt("pref_rulercal",100);
-                int coarseprogress = sp.getInt("pref_rulercoarsecal",4000);
+                int coarseprogress = sp.getInt("pref_rulercoarsecal",2000);
                 RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
                 if (rulerCalView == null){
                     Toast.makeText(this,getString(R.string.calibrate)+" \u25b2\u25bc", Toast.LENGTH_LONG).show();
@@ -157,10 +157,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     layoutParams.setMargins(rulerLayout.getWidth()*3/8,0,0,0);
                     rulerCalView.setLayoutParams(layoutParams);
                     rulerCoarseCalView = new VerticalSeekBar(this);
-                    rulerCoarseCalView.setMax(8000);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        rulerCoarseCalView.setMin(2000);
-                    }
+                    rulerCoarseCalView.setMax(6000);
                     rulerCoarseCalView.setProgress(coarseprogress);
                     rulerCoarseCalView.setThumb(ContextCompat.getDrawable(context, R.drawable.ic_coarse));
                     rulerCoarseCalView.getThumb().setColorFilter(getThemeColor(context,R.attr.colorAccent), PorterDuff.Mode.MULTIPLY);
@@ -225,7 +222,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             RelativeLayout rulerLayout = (RelativeLayout) findViewById(R.id.main_layout);
             int progress = sp.getInt("pref_rulercal",100);
-            int coarseProgress = sp.getInt("pref_rulercoarsecal",4000);
+            int coarseProgress = sp.getInt("pref_rulercoarsecal",2000);
             float dpmm =  getDpmmCal(progress,coarseProgress);
 
             rulerView = new RulerView(this, dpmm, dpmm*25.4/32);
@@ -311,7 +308,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
 
     public float getDpmmCal(int progress, int coarseProgress){
         float dpmm =  (float) (getResources().getDisplayMetrics().ydpi/25.4);
-        return dpmm*(1+(progress+coarseProgress-100f-4000f)/5000f);
+        return dpmm*(1+(progress+coarseProgress-100f-2000f)/5000f);
     }
 
     public static int getThemeColor(Context context, int colorResId) {
@@ -328,12 +325,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     View.SYSTEM_UI_FLAG_LOW_PROFILE|
                             View.SYSTEM_UI_FLAG_FULLSCREEN|
                             View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        } else {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LOW_PROFILE|
-                            View.SYSTEM_UI_FLAG_FULLSCREEN|
                             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
                             View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         }
