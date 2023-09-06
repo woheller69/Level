@@ -96,11 +96,11 @@ public class PreferenceHelper {
 
     public static double getViscosityCoefficient() {
         // coefficient of default viscosity (medium)
-        double coeff = 1d;
+        double coeff = 0.4d;
         if (isViscosityLow()) {
-            coeff = 1.5d;
+            coeff = 0.6d;
         } else if (isViscosityHigh()) {
-            coeff = 0.5d;
+            coeff = 0.2d;
         }
         return coeff;
     }

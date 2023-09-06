@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_calibrate"
-        android:icon="@drawable/ic_gps_fixed"
+        android:icon="@drawable/ic_calibrate"
         android:title="@string/calibrate"
         app:showAsAction="always" />
 
