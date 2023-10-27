@@ -1,0 +1,7 @@
+Bubble ile açıları ve eğimi ölçebilirsiniz.
+
+Yönünü belirlemek için telefonunuzun dört kenarından birini bir nesneyle hizalamanız veya düz bir yüzeye yerleştirmeniz yeterlidir.
+
+Ayrıca cm ve inç cinsinden bir cetvel de mevcuttur.
+
+İzin gerektirmeyen, kullanıcı dostu ve reklamsız bir çözümü deneyimleyin.

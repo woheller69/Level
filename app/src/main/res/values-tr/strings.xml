@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Bubble</string>
+    <string name="reset">Sıfırla</string>
+    <string name="not_supported">Yönlendirme desteklenmiyor</string>
+    <string name="calibrate">Kalibre et</string>
+    <string name="calibrate_info">kalibre etmek için MENÜ\'ye basın...</string>
+    <string name="calibrate_title">Telefonunuzu kalibre edin</string>
+    <string name="calibrate_message">Android cihazınızın herhangi bir tarafını (arkası dahil) düz yatay bir yüzeye koyun ve Kalibre Et düğmesine basın.\n\nYa da tüm telefon tarafları için kalibrasyonu sıfırlayın.</string>
+    <string name="calibrate_saved">Özel kalibrasyon kaydedildi!</string>
+    <string name="calibrate_failed">Kalibrasyon başarısız oldu!</string>
+    <string name="calibrate_restored">Orijinal kalibre geri yüklendi!</string>
+    <string name="preferences">Ayarlar</string>
+    <string name="preference_show_angle">Sayısal açıyı göster</string>
+    <string name="preference_show_angle_summary">Açı değer(ler)ini ekranda görüntüle</string>
+    <string name="preference_display_type">Ekran tipi</string>
+    <string name="preference_sound">Ses efektleri</string>
+    <string name="preference_sound_summary">Seviye geldiğinde ses çal</string>
+    <string name="preference_lock">Kilitleniyor</string>
+    <string name="preference_lock_summary">Seviye yönünü kilitlemesine izin ver</string>
+    <string name="preference_viscosity">Viskozite</string>
+    <string name="angle">Açı</string>
+    <string name="lock_info">seviye yönünü kilitlemek için dokunun</string>
+    <string name="inclination">Eğim</string>
+    <string name="angle_summary">Derece cinsinden açı</string>
+    <string name="inclination_summary">Yüzde cinsinden eğim\n100&#37; &#126; 45°</string>
+    <string name="viscosity_low">Düşük</string>
+    <string name="viscosity_medium">Orta</string>
+    <string name="viscosity_high">Yüksek</string>
+    <string name="viscosity_low_summary">Düşük viskozite\nKabarcık daha hızlı hareket eder</string>
+    <string name="viscosity_medium_summary">Orta viskozite\nKabarcık normal hareket eder</string>
+    <string name="viscosity_high_summary">Yüksek viskozite\nKabarcık yavaş hareket eder</string>
+</resources>
