@@ -1,8 +1,6 @@
 package org.woheller69.level.painter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -125,7 +123,10 @@ public class LevelPainter implements Runnable {
     private float angle1raw;
     private float angle2;
     private float angle2raw;
-    private double n, teta, l;
+    private static float angle1DispValue = 0;
+    private static float angle2DispValue = 0;
+    private static long angleDispUpdateTime = 0L;
+    private static final long angleDispInterval = 300L;
     /**
      * Orientation
      */
@@ -404,6 +405,13 @@ public class LevelPainter implements Runnable {
     private void doDraw(Canvas canvas) {
         canvas.save();
 
+        // decouple display speed from sensor speed
+        if ((System.currentTimeMillis() - angleDispUpdateTime) > angleDispInterval) {
+            angle1DispValue = angle1;
+            angle2DispValue = angle2;
+            angleDispUpdateTime = System.currentTimeMillis();
+        }
+
         canvas.drawColor(backgroundColor);
 
         if (orientation == Orientation.LANDING) {
@@ -444,7 +452,7 @@ public class LevelPainter implements Runnable {
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdBackgroundPaint);
                 canvas.drawText(
-                        displayFormat.format(angle2),
+                        displayFormat.format(angle2DispValue),
                         middleX - (displayRect.width() + displayGap - arrowWidth) / 2.0f - displayPadding,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdForegroundPaint);
@@ -467,7 +475,7 @@ public class LevelPainter implements Runnable {
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdBackgroundPaint);
                 canvas.drawText(
-                        displayFormat.format(angle1),
+                        displayFormat.format(angle1DispValue),
                         middleX + displayGap + (displayRect.width() - arrowWidth) / 2.0f,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdForegroundPaint);
@@ -530,7 +538,7 @@ public class LevelPainter implements Runnable {
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdBackgroundPaint);
                 canvas.drawText(
-                        displayFormat.format(angle1),
+                        displayFormat.format(angle1DispValue),
                         middleX,
                         displayRect.centerY() + lcdHeight / 2.0f,
                         lcdForegroundPaint);
