@@ -9,7 +9,7 @@
     <string name="calibrate_message">Položte libovolnou stranu (včetně zadní) zařízení Android na rovný vodorovný povrch a stiskněte tlačítko Kalibrovat.\n\nNebo resetujte kalibraci všech stran telefonu.</string>
     <string name="calibrate_saved">Vlastní kalibrace uložena!</string>
     <string name="calibrate_failed">Kalibrace selhala!</string>
-    <string name="calibrate_restored">Výchopzí kalibrace obnovena!</string>
+    <string name="calibrate_restored">Výchozí kalibrace obnovena!</string>
     <string name="preferences">Nastavení</string>
     <string name="preference_show_angle">Zobrazit úhel</string>
     <string name="preference_show_angle_summary">Zobrazovat hodnotu(y) úhlu na obrazovce</string>
