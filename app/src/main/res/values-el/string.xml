@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Φυσαλίδα</string>
+    <string name="reset">Επαναφορά</string>
+    <string name="not_supported">Ο προσανατολισμός δεν υποστηρίζεται</string>
+    <string name="calibrate">Βαθμονόμηση</string>
+    <string name="calibrate_info">Πατήστε ΜΕΝΟΥ για βαθμονόμηση...</string>
+    <string name="calibrate_title">Βαθμονομήστε το τηλέφωνο</string>
+    <string name="calibrate_message">Τοποθετήστε οποιαδήποτε πλευρά (συμπεριλαμβανομένης της πίσω) της συσκευής σας σε μια επίπεδη οριζόντια επιφάνεια και πατήστε το κουμπί Βαθμονόμηση.\n\nΉ επαναφέρετε τη βαθμονόμηση για όλες τις πλευρές του τηλεφώνου.</string>
+    <string name="calibrate_saved">Η προσαρμοσμένη βαθμονόμηση αποθηκεύτηκε!</string>
+    <string name="calibrate_failed">Η βαθμονόμηση απέτυχε!</string>
+    <string name="calibrate_restored">Επανήλθε η αρχική βαθμονόμηση</string>
+    <string name="preferences">Ρυθμίσεις</string>
+    <string name="preference_show_angle">Εμφάνιση αριθμητικής γωνίας</string>
+    <string name="preference_show_angle_summary">Εμφάνιση τιμών γωνίας στην οθόνη</string>
+    <string name="preference_display_type">Μορφή εμφάνισης</string>
+    <string name="preference_sound">Ηχητικά εφέ</string>
+    <string name="preference_sound_summary">Αναπαραγωγή ήχου κατά την οριζοντίωση</string>
+    <string name="preference_lock">Κλείδωμα</string>
+    <string name="preference_lock_summary">Να επιτρέπεται το κλείδωμα του αλφαδιού</string>
+    <string name="preference_viscosity">Ιξώδες</string>
+    <string name="angle">Γωνία</string>
+    <string name="lock_info">Πατήστε για να κλειδώσετε τον προσανατολισμό του αλφαδιού</string>
+    <string name="inclination">Κλίση</string>
+    <string name="angle_summary">Γωνία σε μοίρες</string>
+    <string name="inclination_summary">Κλίση σε ποσοστό\n100&#37; &#126; 45°</string>
+    <string name="viscosity_low">Χαμηλό</string>
+    <string name="viscosity_medium">Μεσαίο</string>
+    <string name="viscosity_high">Υψηλό</string>
+    <string name="viscosity_low_summary">Χαμηλό ιξώδες\nΗ φυσαλίδα κινείται γρήγορα</string>
+    <string name="viscosity_medium_summary">Μεσαίο ιξώδες\nΗ φυσαλίδα κινείται κανονικά</string>
+    <string name="viscosity_high_summary">Υψηλό ιξώδες\nΗ φυσαλίδα κινείται αργά</string>
+  </resources>
