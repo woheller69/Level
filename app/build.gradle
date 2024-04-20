@@ -3,14 +3,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "org.woheller69.level"
-        minSdkVersion 16
-        targetSdkVersion 33
-        versionCode 27
-        versionName "2.7"
+        minSdk 16
+        targetSdk 34
+        versionCode 28
+        versionName "2.8"
         vectorDrawables.useSupportLibrary true
     }
 
@@ -37,8 +37,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.preference:preference:1.2.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1" //needed due to duplicate class error
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" //needed due to duplicate class error
 }
