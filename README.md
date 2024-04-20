@@ -18,7 +18,7 @@
 
 # Bubble: Spirit level and ruler
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble1.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble2.png" width="150"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble3.png" width="150"/>
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble1.png" height="250"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble2.png" height="250"/> <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/Bubble3.png" height="250"/>
 
 With Bubble you can measure angles and inclination.
 
