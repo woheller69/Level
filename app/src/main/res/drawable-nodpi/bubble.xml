@@ -3,6 +3,9 @@
     <item>
         <shape android:shape="oval">
             <solid android:color="@color/bubble_center" />
+            <stroke
+                android:width="@dimen/bubble_border"
+                android:color="@color/display_border" />
         </shape>
     </item>
 </layer-list>
