@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Пузырёк</string>
+    <string name="reset">Сброс</string>
+    <string name="not_supported">Ориентация не поддерживается</string>
+    <string name="calibrate">Калибровка</string>
+    <string name="calibrate_info">нажмите МЕНЮ для калибровки...</string>
+    <string name="calibrate_title">Откалибруйте свой телефон</string>
+    <string name="calibrate_message">Положите любую сторону (включая заднюю) вашего устройства на плоскую горизонтальную поверхность и нажмите кнопку Калибровать.\n\nНе сбрасывайте калибровку для всех сторон телефона.</string>
+    <string name="calibrate_saved">Своя калибровка сохранена!</string>
+    <string name="calibrate_failed">Ошибка калибровки!</string>
+    <string name="calibrate_restored">Первоначальная калибровка восстановлена!</string>
+    <string name="preferences">Настройки</string>
+    <string name="preference_show_angle">Показывать числовой угол</string>
+    <string name="preference_show_angle_summary">Отображать значения углов на экране</string>
+    <string name="preference_display_type">Тип отображения</string>
+    <string name="preference_sound">Звуковые эффекты</string>
+    <string name="preference_sound_summary">Воспроизводить звук при достижении уровня</string>
+    <string name="preference_lock">Фиксация</string>
+    <string name="preference_lock_summary">Разрешить фиксацию ориентации уровня</string>
+    <string name="preference_viscosity">Вязкость</string>
+    <string name="angle">Угол</string>
+    <string name="lock_info">Нажмите чтобы зафиксировать ориентацию уровня</string>
+    <string name="inclination">Наклон</string>
+    <string name="angle_summary">Угол в градусах</string>
+    <string name="inclination_summary">Наклон в процентах\n100&#37; &#126; 45°</string>
+    <string name="viscosity_low">Низкая</string>
+    <string name="viscosity_medium">Средняя</string>
+    <string name="viscosity_high">Высокая</string>
+    <string name="viscosity_low_summary">Низкая вязкость\nПузырёк движется быстрее</string>
+    <string name="viscosity_medium_summary">Средняя вязкость\nПузырёк движется нормально</string>
+    <string name="viscosity_high_summary">Высокая вязкость\nПузырёк движется медленно</string>
+</resources>
