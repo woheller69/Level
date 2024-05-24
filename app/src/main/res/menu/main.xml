@@ -12,7 +12,7 @@
         android:id="@+id/menu_ruler"
         android:icon="@drawable/ic_ruler"
         android:checkable="true"
-        android:title="Show ruler"
+        android:title="@string/toggle_mode"
         app:showAsAction="always"/>
 
     <item

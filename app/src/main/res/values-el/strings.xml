@@ -30,4 +30,5 @@
     <string name="viscosity_low_summary">Χαμηλό ιξώδες\nΗ φυσαλίδα κινείται γρήγορα</string>
     <string name="viscosity_medium_summary">Μεσαίο ιξώδες\nΗ φυσαλίδα κινείται κανονικά</string>
     <string name="viscosity_high_summary">Υψηλό ιξώδες\nΗ φυσαλίδα κινείται αργά</string>
+    <string name="toggle_mode">Toggle mode</string>
   </resources>
