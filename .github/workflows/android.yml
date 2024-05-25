@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: set up JDK $JDK_VERSION
+    - name: set up JDK ${{ env.JDK_VERSION }}
       uses: actions/setup-java@v3
       with:
-        java-version: '$JDK_VERSION'
+        java-version: '${{ env.JDK_VERSION }}'
         distribution: 'temurin'
         cache: gradle
 
