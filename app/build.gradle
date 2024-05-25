@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdk 33
 
     defaultConfig {
         applicationId "org.woheller69.level"
@@ -26,19 +26,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    lintOptions {
-        disable 'GoogleAppIndexingWarning'
+    packagingOptions {
+        jniLibs {
+            excludes += ['META-INF/*']
+        }
+        resources {
+            excludes += ['META-INF/*']
+        }
     }
 
-    packagingOptions {
-        exclude 'META-INF/*'
+
+    namespace 'org.woheller69.level'
+    lint {
+        disable 'GoogleAppIndexingWarning'
     }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.preference:preference:1.2.0'
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1" //needed due to duplicate class error
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" //needed due to duplicate class error
+    implementation 'androidx.preference:preference:1.2.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.2" //needed due to duplicate class error
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2" //needed due to duplicate class error
 }

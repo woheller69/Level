@@ -1,8 +1,6 @@
 package org.woheller69.level.painter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -72,11 +70,6 @@ public class LevelPainter implements Runnable {
      */
     private boolean initialized;
     private boolean wait;
-    /**
-     * Dimensions
-     */
-    private int height;
-    private int width;
     private int canvasWidth;
     private int canvasHeight;
     private int minLevelX;
@@ -87,8 +80,6 @@ public class LevelPainter implements Runnable {
     private int levelMinusBubbleHeight;
     private int middleX;
     private int middleY;
-    private int bubbleWidth;
-    private int bubbleHeight;
     private int halfBubbleWidth;
     private int halfBubbleHeight;
     private int halfMarkerGap;
@@ -96,9 +87,9 @@ public class LevelPainter implements Runnable {
     private int maxLevelY;
     private int minBubble;
     private int maxBubble;
-    private int markerThickness;
-    private int levelBorderWidth;
-    private int levelBorderHeight;
+    private final int markerThickness;
+    private final int levelBorderWidth;
+    private final int levelBorderHeight;
     private int infoHeight;
     private int lcdWidth;
     private int lcdHeight;
@@ -603,6 +594,11 @@ public class LevelPainter implements Runnable {
             synchronized (this.surfaceHolder) {
                 orientation = newOrientation;
 
+                /**
+                 * Dimensions
+                 */
+                int height;
+                int width;
                 switch (newOrientation) {
                     case LEFT:        // left
                     case RIGHT:    // right
@@ -649,8 +645,8 @@ public class LevelPainter implements Runnable {
                 // bubble
                 halfBubbleWidth = (int) (levelWidth * BUBBLE_WIDTH / 2);
                 halfBubbleHeight = (int) (halfBubbleWidth * BUBBLE_ASPECT_RATIO);
-                bubbleWidth = 2 * halfBubbleWidth;
-                bubbleHeight = 2 * halfBubbleHeight;
+                int bubbleWidth = 2 * halfBubbleWidth;
+                int bubbleHeight = 2 * halfBubbleHeight;
                 maxBubble = (int) (maxLevelY - bubbleHeight * BUBBLE_CROPPING);
                 minBubble = maxBubble - bubbleHeight;
 
