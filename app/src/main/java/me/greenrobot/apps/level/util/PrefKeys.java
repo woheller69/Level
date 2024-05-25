@@ -1,6 +1,7 @@
 package me.greenrobot.apps.level.util;
 
-import org.woheller69.level.R;
+
+import me.greenrobot.apps.level.R;
 
 public class PrefKeys {
     public static final int PREF_SHOW_ANGLE = R.string.prefKey_showAngle;

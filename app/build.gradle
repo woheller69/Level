@@ -36,7 +36,7 @@ android {
     }
 
 
-    namespace 'org.woheller69.level'
+    namespace 'me.greenrobot.apps.level'
     lint {
         disable 'GoogleAppIndexingWarning'
     }

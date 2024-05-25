@@ -9,7 +9,8 @@ import android.graphics.Path;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
-import org.woheller69.level.R;
+
+import me.greenrobot.apps.level.R;
 
 public class RulerView extends View {
 
