@@ -1,4 +1,4 @@
-package me.greenrobot.apps.level.orientation;
+package me.greenrobot.apps.level.orientation
 
 /*
  *  This file is part of Level (an Android Bubble Level).
@@ -19,11 +19,10 @@ package me.greenrobot.apps.level.orientation;
  *  You should have received a copy of the GNU General Public License
  *  along with Level. If not, see <http://www.gnu.org/licenses/>
  */
-public interface OrientationListener {
+interface OrientationListener {
+    fun onOrientationChanged(orientation: Orientation?, pitch: Float, roll: Float, balance: Float)
 
-    void onOrientationChanged(Orientation orientation, float pitch, float roll, float balance);
+    fun onCalibrationSaved(success: Boolean)
 
-    void onCalibrationSaved(boolean success);
-
-    void onCalibrationReset(boolean success);
+    fun onCalibrationReset(success: Boolean)
 }
