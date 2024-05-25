@@ -71,7 +71,7 @@ class LevelView(context: Context?, attrs: AttributeSet?) : SurfaceView(context, 
 
     fun onOrientationChanged(orientation: Orientation?, pitch: Float, roll: Float, balance: Float) {
         if (painter != null) {
-            painter!!.onOrientationChanged(orientation, pitch, roll, balance)
+            painter!!.onOrientationChanged(orientation!!, pitch, roll, balance)
         }
     }
 

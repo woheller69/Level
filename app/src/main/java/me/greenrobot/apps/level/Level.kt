@@ -299,9 +299,9 @@ class Level : AppCompatActivity(), OrientationListener {
         super.onResume()
         provider = OrientationProvider.getInstance(this)
         // chargement des effets sonores
-        soundEnabled = PreferenceHelper.getSoundEnabled()
+        soundEnabled = PreferenceHelper.soundEnabled
         // orientation manager
-        if (provider!!.isSupported()) {
+        if (provider!!.isSupported!!) {
             provider!!.startListening(this)
         } else {
             Toast.makeText(this, getText(R.string.not_supported), Toast.LENGTH_LONG).show()
@@ -324,13 +324,13 @@ class Level : AppCompatActivity(), OrientationListener {
     }
 
     override fun onOrientationChanged(
-        orientation: Orientation,
+        orientation: Orientation?,
         pitch: Float,
         roll: Float,
         balance: Float
     ) {
         if ((soundEnabled
-                    && orientation.isLevel(
+                    && orientation!!.isLevel(
                 pitch,
                 roll,
                 balance,

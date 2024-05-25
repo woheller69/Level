@@ -15,7 +15,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val displayType = findPreference<ListPreference>(getString(PrefKeys.PREF_DISPLAY_TYPE))
         if (displayType != null) {
             displayType.summaryProvider = SummaryProvider<ListPreference> { preference: Preference? ->
-                if (PreferenceHelper.isDisplayTypeInclination()) {
+                if (PreferenceHelper.isDisplayTypeInclination) {
                     return@SummaryProvider getString(R.string.inclination_summary)
                 }
                 getString(R.string.angle_summary)
@@ -25,10 +25,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val viscosity = findPreference<ListPreference>(getString(PrefKeys.PREF_VISCOSITY))
         if (viscosity != null) {
             viscosity.summaryProvider = SummaryProvider<ListPreference> { preference: Preference? ->
-                if (PreferenceHelper.isViscosityLow()) {
+                if (PreferenceHelper.isViscosityLow) {
                     return@SummaryProvider getString(R.string.viscosity_low_summary)
                 }
-                if (PreferenceHelper.isViscosityHigh()) {
+                if (PreferenceHelper.isViscosityHigh) {
                     return@SummaryProvider getString(R.string.viscosity_high_summary)
                 }
                 getString(R.string.viscosity_medium_summary)
