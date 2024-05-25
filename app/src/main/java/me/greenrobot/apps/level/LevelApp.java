@@ -1,8 +1,8 @@
-package org.woheller69.level;
+package me.greenrobot.apps.level;
 
 import android.app.Application;
 
-import org.woheller69.level.util.PreferenceHelper;
+import me.greenrobot.apps.level.util.PreferenceHelper;
 
 public class LevelApp extends Application {
 
