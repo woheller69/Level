@@ -1,0 +1,3 @@
+Android 14 support (SDK 34)
+Simplified color scheme
+Greek translation

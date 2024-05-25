@@ -30,4 +30,5 @@
     <string name="viscosity_low_summary">Bassa viscosità\nLa bolla si muove rapidamente</string>
     <string name="viscosity_medium_summary">Media viscosità\nLa bolla si muove a velocità normale</string>
     <string name="viscosity_high_summary">Alta viscosità\nLa bolla si muove lentamente</string>
+    <string name="toggle_mode">Cambiare la modalità</string>
 </resources>

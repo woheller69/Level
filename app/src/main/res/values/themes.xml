@@ -2,6 +2,7 @@
 <resources>
 
     <style name="LevelTheme" parent="Theme.AppCompat.DayNight">
+        <item name="colorAccent">@color/green</item>
         <item name="android:actionBarSize">36dp</item>
         <item name="actionBarSize">36dp</item>
     </style>

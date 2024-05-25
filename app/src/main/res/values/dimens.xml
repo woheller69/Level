@@ -12,11 +12,7 @@
     <!-- Marker -->
     <dimen name="marker_thickness">3dip</dimen>
     <!-- Bubble -->
-    <dimen name="bubble_padding">2dip</dimen>
-    <dimen name="bubble_padding_top">0dip</dimen>
-    <dimen name="bubble_padding_bottom">10dip</dimen>
-    <dimen name="bubble_padding_right">2dip</dimen>
-    <dimen name="bubble_padding_left">2dip</dimen>
+    <dimen name="bubble_border">2dip</dimen>
     <!-- LCD -->
     <dimen name="lcd_text">32dip</dimen>
     <!-- LOCK -->

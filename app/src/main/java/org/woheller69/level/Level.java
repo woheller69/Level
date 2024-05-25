@@ -25,6 +25,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
@@ -63,6 +64,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
     private RulerView rulerView;
     private VerticalSeekBar rulerCalView;
     private VerticalSeekBar rulerCoarseCalView;
+    private AppCompatImageButton rulerResetButtonView;
 
     /**
      * Gestion du son
@@ -166,6 +168,13 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                     rulerCoarseCalView.setLayoutParams(layoutParams2);
 
+                    rulerResetButtonView = new AppCompatImageButton(this);
+                    RelativeLayout.LayoutParams layoutParams3 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams3.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+                    layoutParams3.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                    rulerResetButtonView.setLayoutParams(layoutParams3);
+                    rulerResetButtonView.setImageResource(R.drawable.ic_reset);
+                    rulerLayout.addView(rulerResetButtonView);
                     rulerLayout.addView(rulerCalView);
                     rulerLayout.addView(rulerCoarseCalView);
 
@@ -195,11 +204,17 @@ public class Level extends AppCompatActivity implements OrientationListener {
                         @Override
                         public void onStopTrackingTouch(SeekBar seekBar) {}
                     });
+                    rulerResetButtonView.setOnClickListener(view -> {
+                        rulerCalView.setProgress(100);
+                        rulerCoarseCalView.setProgress(2000);
+                    });
                 } else {
                     rulerLayout.removeView(rulerCalView);
                     rulerLayout.removeView(rulerCoarseCalView);
+                    rulerLayout.removeView(rulerResetButtonView);
                     rulerCalView = null;
                     rulerCoarseCalView = null;
+                    rulerResetButtonView = null;
                 }
             }
 
@@ -240,6 +255,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
             rulerCalView = null;
             if (rulerCoarseCalView !=null) rulerLayout.removeView(rulerCoarseCalView);
             rulerCoarseCalView = null;
+            if (rulerResetButtonView !=null) rulerLayout.removeView(rulerResetButtonView);
+            rulerResetButtonView = null;
             getWindow().getDecorView().setSystemUiVisibility(0);
             invalidateOptionsMenu();
         }
