@@ -1,4 +1,4 @@
-package org.woheller69.level.util;
+package me.greenrobot.apps.level.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

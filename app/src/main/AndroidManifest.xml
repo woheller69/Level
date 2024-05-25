@@ -7,14 +7,14 @@
         android:required="true" />
 
     <application
-        android:name=".LevelApp"
+        android:name="me.greenrobot.apps.level.LevelApp"
         android:allowBackup="true"
         android:theme="@style/LevelTheme"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/name">
 
         <activity
-            android:name="org.woheller69.level.Level"
+            android:name="me.greenrobot.apps.level.Level"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:exported="true">
@@ -25,9 +25,9 @@
         </activity>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name="me.greenrobot.apps.level.SettingsActivity"
             android:screenOrientation="portrait"
-            android:parentActivityName=".Level" />
+            android:parentActivityName="me.greenrobot.apps.level.Level" />
 
     </application>
 

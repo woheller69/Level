@@ -1,4 +1,4 @@
-package org.woheller69.level.util;
+package me.greenrobot.apps.level.util;
 
 import org.woheller69.level.R;
 

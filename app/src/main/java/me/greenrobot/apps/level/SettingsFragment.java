@@ -1,12 +1,14 @@
-package org.woheller69.level;
+package me.greenrobot.apps.level;
 
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import org.woheller69.level.util.PrefKeys;
-import org.woheller69.level.util.PreferenceHelper;
+import org.woheller69.level.R;
+
+import me.greenrobot.apps.level.util.PrefKeys;
+import me.greenrobot.apps.level.util.PreferenceHelper;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     @Override

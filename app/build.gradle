@@ -6,7 +6,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "org.woheller69.level"
+        applicationId "me.greenrobot.apps.level"
         minSdk 19
         targetSdk 34
         versionCode 30

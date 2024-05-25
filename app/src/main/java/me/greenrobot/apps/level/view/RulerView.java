@@ -1,4 +1,4 @@
-package org.woheller69.level.view;
+package me.greenrobot.apps.level.view;
 
 // taken from https://github.com/SecUSo/privacy-friendly-ruler, published under GPL3.0 license
 

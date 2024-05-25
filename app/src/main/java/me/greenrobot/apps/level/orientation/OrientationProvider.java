@@ -1,4 +1,4 @@
-package org.woheller69.level.orientation;
+package me.greenrobot.apps.level.orientation;
 
 import android.content.Context;
 import android.content.SharedPreferences;

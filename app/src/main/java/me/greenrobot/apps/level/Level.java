@@ -1,4 +1,4 @@
-package org.woheller69.level;
+package me.greenrobot.apps.level;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -29,13 +29,15 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import org.woheller69.level.orientation.Orientation;
-import org.woheller69.level.orientation.OrientationListener;
-import org.woheller69.level.orientation.OrientationProvider;
-import org.woheller69.level.util.PreferenceHelper;
-import org.woheller69.level.view.LevelView;
-import org.woheller69.level.view.RulerView;
-import org.woheller69.level.view.VerticalSeekBar;
+import org.woheller69.level.R;
+
+import me.greenrobot.apps.level.orientation.Orientation;
+import me.greenrobot.apps.level.orientation.OrientationListener;
+import me.greenrobot.apps.level.orientation.OrientationProvider;
+import me.greenrobot.apps.level.util.PreferenceHelper;
+import me.greenrobot.apps.level.view.LevelView;
+import me.greenrobot.apps.level.view.RulerView;
+import me.greenrobot.apps.level.view.VerticalSeekBar;
 
 /*
  *  This file is part of Level (an Android Bubble Level).
