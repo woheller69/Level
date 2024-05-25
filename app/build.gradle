@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
 }
 
 android {
@@ -43,8 +44,11 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "androidx.preference:preference:1.2.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.8.0" //needed due to duplicate class error
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0" //needed due to duplicate class error
+    implementation libs.appCompat
+    implementation libs.androidx.preference
+    implementation libs.androidx.lifecycle.viewmodel //needed due to duplicate class error
+    implementation libs.lifecycle.viewmodel.ktx //needed due to duplicate class error
+
+
+    debugImplementation libs.leakcanary.android
 }
