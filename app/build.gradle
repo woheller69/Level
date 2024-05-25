@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "org.woheller69.level"
-        minSdk 16
+        minSdk 19
         targetSdk 34
         versionCode 30
         versionName "3.0"
