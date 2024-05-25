@@ -12,7 +12,7 @@ import android.view.SurfaceHolder;
 import androidx.core.content.ContextCompat;
 
 import me.greenrobot.apps.level.Level;
-import org.woheller69.level.R;
+import me.greenrobot.apps.level.R;
 import me.greenrobot.apps.level.orientation.Orientation;
 import me.greenrobot.apps.level.util.PreferenceHelper;
 

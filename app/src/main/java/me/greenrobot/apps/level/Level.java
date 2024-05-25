@@ -29,8 +29,6 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import org.woheller69.level.R;
-
 import me.greenrobot.apps.level.orientation.Orientation;
 import me.greenrobot.apps.level.orientation.OrientationListener;
 import me.greenrobot.apps.level.orientation.OrientationProvider;
@@ -225,7 +223,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         } else if (item.getItemId() == R.id.menu_about) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/level")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/penkzhou/level")));
             recreate(); //fix strange action bar position when coming from ruler
             return true;
         } else if (item.getItemId() == R.id.menu_ruler) {
