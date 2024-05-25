@@ -311,14 +311,14 @@ class Level : AppCompatActivity(), OrientationListener {
     override fun onPause() {
         super.onPause()
         showRuler(false)
-        if (provider!!.isListening) {
-            provider!!.stopListening()
+        if (provider?.isListening == true) {
+            provider?.stopListening()
         }
     }
 
     public override fun onDestroy() {
         if (soundPool != null) {
-            soundPool!!.release()
+            soundPool?.release()
         }
         super.onDestroy()
     }
@@ -367,13 +367,12 @@ class Level : AppCompatActivity(), OrientationListener {
     }
 
     private fun setFullscreenMode() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE or
-                    View.SYSTEM_UI_FLAG_FULLSCREEN or
-                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
-                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        }
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE or
+                View.SYSTEM_UI_FLAG_FULLSCREEN or
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
     }
+
 
     companion object {
         @JvmStatic
