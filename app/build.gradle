@@ -23,12 +23,7 @@ android {
     }
 
     kotlin {
-
         jvmToolchain(17)
-    }
-
-    compileOptions {
-        encoding "UTF-8"
     }
     packagingOptions {
         jniLibs {
@@ -53,5 +48,5 @@ dependencies {
     implementation libs.lifecycle.viewmodel.ktx //needed due to duplicate class error
 
 
-    debugImplementation libs.leakcanary.android
+//    debugImplementation libs.leakcanary.android
 }
