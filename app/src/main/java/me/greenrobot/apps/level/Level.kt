@@ -9,7 +9,6 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Menu
@@ -82,7 +81,7 @@ class Level : AppCompatActivity(), OrientationListener {
         levelView = findViewById(R.id.main_levelView)
 
         // sound
-        soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        soundPool =
             SoundPool.Builder()
                 .setMaxStreams(1)
                 .setAudioAttributes(
@@ -91,9 +90,6 @@ class Level : AppCompatActivity(), OrientationListener {
                         .build()
                 )
                 .build()
-        } else {
-            SoundPool(1, AudioManager.STREAM_RING, 0)
-        }
 
         bipSoundID = soundPool!!.load(this, R.raw.bip, 1)
         bipRate = resources.getInteger(R.integer.bip_rate)

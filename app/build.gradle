@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "me.greenrobot.apps.level"
-        minSdk 19
+        minSdk 21
         targetSdk 34
         versionCode 30
         versionName "3.0"
@@ -50,3 +51,20 @@ dependencies {
 
 //    debugImplementation libs.leakcanary.android
 }
+
+spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
+    // configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    kotlin {
+        // by default the target is every '.kt' and '.kts` file in the java sourcesets
+
+        target("src/**/*.kt")
+        ktlint("1.2.1")   // has its own section below
+        licenseHeaderFile(rootProject.file("spotless/Copyright.kt"))
+    }
+    kotlinGradle {
+        target("*.kts")
+        ktlint("1.2.1")
+        licenseHeaderFile(rootProject.file("spotless/Copyright.kts"), "(^(?![\\/ ]\\**).*\$)")
+    }
+}
+
