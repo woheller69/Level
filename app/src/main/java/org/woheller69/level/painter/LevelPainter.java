@@ -180,6 +180,7 @@ public class LevelPainter implements Runnable {
      */
     private boolean showAngle;
     private boolean lockEnabled;
+    private boolean swapViewsEnabled;
     private boolean locked;
     private long frameRate;
 
@@ -285,6 +286,7 @@ public class LevelPainter implements Runnable {
         this.locked = false;
         Level.getProvider().setLocked(this.locked);
         this.lockEnabled = PreferenceHelper.getOrientationLocked();
+        this.swapViewsEnabled = PreferenceHelper.getSwapViewsEnabled();
         this.orientation = Orientation.TOP;
         this.wait = true;
         this.initialized = false;
@@ -662,26 +664,46 @@ public class LevelPainter implements Runnable {
                 maxBubble = (int) (maxLevelY - bubbleHeight * BUBBLE_CROPPING);
                 minBubble = maxBubble - bubbleHeight;
 
+                // prepare Top and Bottom positions for 'display' and 'lock' here
+                // as they might get swapped
+                int displayRectTop = sensorY - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2;
+                int displayRectBottom = sensorY - displayGap - infoHeight / 2;
+
+                int lockRectTop = middleY - height / 2 + displayGap;
+                int lockRectBottom = middleY - height / 2 + displayGap + 2 * displayPadding + lockHeight;
+
+                if (swapViewsEnabled) {
+                    // swap 'display' with 'lock' position
+                    int topSwap = lockRectTop;
+                    int bottomSwap = lockRectBottom;
+                    lockRectTop = displayRectTop;
+                    lockRectBottom = displayRectBottom;
+                    displayRectTop = topSwap;
+                    displayRectBottom = bottomSwap;
+                }
+
                 // display
+                int displayRectRight = middleX + lcdWidth / 2 + displayPadding + arrowWidth / 2;
                 if (orientation == Orientation.LANDING) {
                     displayRect.set(
                             middleX - lcdWidth / 2 - arrowWidth / 2 - displayPadding,
-                            sensorY - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2,
-                            middleX + lcdWidth / 2 + displayPadding + arrowWidth / 2,
-                            sensorY - displayGap - infoHeight / 2);
+                            displayRectTop,
+                            displayRectRight,
+                            displayRectBottom);
                 } else {
                     displayRect.set(
                             middleX - arrowWidth / 2 - lcdWidth / 2 - displayPadding,
-                            sensorY - displayGap - 2 * displayPadding - lcdHeight - infoHeight / 2,
-                            middleX + lcdWidth / 2 + displayPadding + arrowWidth / 2,
-                            sensorY - displayGap - infoHeight / 2);
+                            displayRectTop,
+                            displayRectRight,
+                            displayRectBottom);
                 }
+
                 // lock
                 lockRect.set(
                         middleX - lockWidth / 2 - displayPadding,
-                        middleY - height / 2 + displayGap,
+                        lockRectTop,
                         middleX + lockWidth / 2 + displayPadding,
-                        middleY - height / 2 + displayGap + 2 * displayPadding + lockHeight);
+                        lockRectBottom);
 
                 // marker
                 halfMarkerGap = (int) (levelWidth * MARKER_GAP / 2);

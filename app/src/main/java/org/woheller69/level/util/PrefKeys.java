@@ -17,4 +17,6 @@ public class PrefKeys {
     public static final int PREF_VISCOSITY_HIGH = R.string.prefKey_viscosity_high;
 
     public static final int PREF_ENABLE_SOUND = R.string.prefKey_enableSound;
+
+    public static final int PREF_SWAP_VIEWS = R.string.prefKey_swapViews;
 }

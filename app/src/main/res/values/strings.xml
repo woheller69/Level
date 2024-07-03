@@ -19,6 +19,8 @@
     <string name="preference_lock">Locking</string>
     <string name="preference_lock_summary">Allow level orientation locking</string>
     <string name="preference_viscosity">Viscosity</string>
+    <string name="preference_swapViews">Swap Views</string>
+    <string name="preference_swapViews_summary">Swap position for \'display\' view with \'locking\' view</string>
     <string name="angle">Angle</string>
     <string name="lock_info">tap to lock level orientation</string>
     <string name="inclination">Inclination</string>

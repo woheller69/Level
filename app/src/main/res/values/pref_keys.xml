@@ -16,4 +16,6 @@
 
     <string name="prefKey_enableSound" translatable="false">pref_enableSound</string>
 
+    <string name="prefKey_swapViews" translatable="false">pref_swapViews</string>
+
 </resources>

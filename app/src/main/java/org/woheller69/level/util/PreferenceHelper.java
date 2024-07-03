@@ -108,4 +108,8 @@ public class PreferenceHelper {
     public static boolean getSoundEnabled() {
         return getHelperBoolean(PrefKeys.PREF_ENABLE_SOUND, false);
     }
+
+    public static boolean getSwapViewsEnabled() {
+        return getHelperBoolean(PrefKeys.PREF_SWAP_VIEWS, false);
+    }
 }
