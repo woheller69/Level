@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.media.AudioAttributes;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -88,6 +90,28 @@ public class Level extends AppCompatActivity implements OrientationListener {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            boolean isDarkMode = (nightModeFlags == Configuration.UI_MODE_NIGHT_YES);
+            WindowInsetsController insetsController = getWindow().getInsetsController();
+            if (insetsController != null) {
+                if (isDarkMode) {
+                    // Dark mode: remove light status bar appearance (use light icons)
+                    insetsController.setSystemBarsAppearance(
+                            0,
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    );
+                } else {
+                    // Light mode: enable light status bar appearance (dark icons)
+                    insetsController.setSystemBarsAppearance(
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    );
+                }
+            }
+        }
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         levelView = findViewById(R.id.main_levelView);
         // sound
@@ -119,15 +143,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
         }
         return true;
-    }
-
-    @Override
-    public void onPanelClosed(int featureId, Menu menu) {
-        if (rulerView != null) {
-            setFullscreenMode();
-        }
-
-        super.onPanelClosed(featureId, menu);
     }
 
     /* Handles item selections */
@@ -244,7 +259,6 @@ public class Level extends AppCompatActivity implements OrientationListener {
             rulerView.setBackgroundColor(ContextCompat.getColor(this,R.color.silver));
             rulerLayout.addView(rulerView);
             levelView.setVisibility(View.INVISIBLE);
-            setFullscreenMode();
             invalidateOptionsMenu();
         } else {
             levelView.setVisibility(View.VISIBLE);
@@ -336,14 +350,4 @@ public class Level extends AppCompatActivity implements OrientationListener {
         return color;
     }
 
-    private void setFullscreenMode() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LOW_PROFILE|
-                            View.SYSTEM_UI_FLAG_FULLSCREEN|
-                            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|
-                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        }
-    }
 }

@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="Theme">
+        <attr name="colorAccent" format="reference|color" />
+    </declare-styleable>
+</resources>
