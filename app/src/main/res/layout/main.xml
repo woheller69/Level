@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-<RelativeLayout
-        android:id="@+id/main_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <org.woheller69.level.view.LevelView
-        android:id="@+id/main_levelView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <org.woheller69.level.view.LevelView
+            android:id="@+id/main_levelView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
