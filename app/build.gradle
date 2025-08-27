@@ -5,12 +5,13 @@ plugins {
 android {
     compileSdk 35
     namespace 'org.woheller69.level'
+    android.buildFeatures.buildConfig true
     defaultConfig {
         applicationId "org.woheller69.level"
         minSdk 16
         targetSdk 35
-        versionCode 31
-        versionName "3.1"
+        versionCode 32
+        versionName "3.2"
         vectorDrawables.useSupportLibrary true
     }
 
@@ -41,4 +42,5 @@ dependencies {
     implementation "androidx.preference:preference:1.2.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1" //needed due to duplicate class error
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" //needed due to duplicate class error
+    implementation 'com.github.woheller69:FreeDroidWarn:V1.3'
 }

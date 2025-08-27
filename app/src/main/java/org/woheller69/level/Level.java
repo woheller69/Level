@@ -31,6 +31,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
+import org.woheller69.freeDroidWarn.FreeDroidWarn;
 import org.woheller69.level.orientation.Orientation;
 import org.woheller69.level.orientation.OrientationListener;
 import org.woheller69.level.orientation.OrientationProvider;
@@ -130,6 +131,7 @@ public class Level extends AppCompatActivity implements OrientationListener {
 
         bipSoundID = soundPool.load(this, R.raw.bip, 1);
         bipRate = getResources().getInteger(R.integer.bip_rate);
+        FreeDroidWarn.showWarningOnUpgrade(this, BuildConfig.VERSION_CODE);
     }
 
     @SuppressLint("RestrictedApi")
