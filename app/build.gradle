@@ -8,7 +8,7 @@ android {
     android.buildFeatures.buildConfig true
     defaultConfig {
         applicationId "org.woheller69.level"
-        minSdk 16
+        minSdk 15
         targetSdk 35
         versionCode 34
         versionName "3.4"
