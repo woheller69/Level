@@ -181,8 +181,8 @@ public class Level extends AppCompatActivity implements OrientationListener {
                     rulerCoarseCalView.setMax(6000);
                     rulerCoarseCalView.setProgress(coarseprogress);
                     Drawable rulerCoarseCalViewThumb = ContextCompat.getDrawable(context, R.drawable.ic_coarse);
-                    rulerCoarseCalView.setThumb(rulerCoarseCalViewThumb);
                     rulerCoarseCalViewThumb.setColorFilter(getThemeColor(context, R.attr.colorAccent), PorterDuff.Mode.MULTIPLY);
+                    rulerCoarseCalView.setThumb(rulerCoarseCalViewThumb);
                     RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
                     layoutParams2.setMargins(0,0,rulerLayout.getWidth()*3/8,0);
                     layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
