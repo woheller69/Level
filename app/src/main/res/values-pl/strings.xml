@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Bubble</string>
+    <string name="reset">Reset</string>
+    <string name="not_supported">Orientacja nie jest obsługiwana</string>
+    <string name="calibrate">Kalibruj</string>
+    <string name="calibrate_info">Naciśnij MENU, aby skalibrować…</string>
+    <string name="calibrate_title">Skalibruj swój telefon</string>
+    <string name="calibrate_message">Połóż dowolny bok (w tym tył) urządzenia na płaskiej, poziomej powierzchni i naciśnij przycisk Kalibruj.\n\nMożesz też zresetować kalibrację dla wszystkich stron telefonu.</string>
+    <string name="calibrate_saved">Zapisano własną kalibrację!</string>
+    <string name="calibrate_failed">Kalibracja nie powiodła się!</string>
+    <string name="calibrate_restored">Przywrócono oryginalną kalibrację!</string>
+    <string name="preferences">Ustawienia</string>
+    <string name="preference_show_angle">Pokaż kąt liczbowo</string>
+    <string name="preference_show_angle_summary">Wyświetla wartość kąta na ekranie</string>
+    <string name="preference_display_type">Typ wyświetlacza</string>
+    <string name="preference_sound">Efekty dźwiękowe</string>
+    <string name="preference_sound_summary">Odtwarzaj dźwięk po osiągnięciu poziomu</string>
+    <string name="preference_lock">Blokowanie</string>
+    <string name="preference_lock_summary">Zezwalaj na blokowanie orientacji poziomnicy</string>
+    <string name="preference_viscosity">Lepkość</string>
+    <string name="angle">Kąt</string>
+    <string name="lock_info">Dotknij, aby zablokować orientację poziomnicy</string>
+    <string name="inclination">Nachylenie</string>
+    <string name="angle_summary">Kąt w stopniach</string>
+    <string name="inclination_summary">Nachylenie w procentach\n100&#37; &#126; 45°</string>
+    <string name="viscosity_low">Niska</string>
+    <string name="viscosity_medium">Średnia</string>
+    <string name="viscosity_high">Wysoka</string>
+    <string name="viscosity_low_summary">Niska lepkość\nPęcherzyk porusza się szybciej</string>
+    <string name="viscosity_medium_summary">Średnia lepkość\nPęcherzyk porusza się normalnie</string>
+    <string name="viscosity_high_summary">Wysoka lepkość\nPęcherzyk porusza się wolniej</string>
+    <string name="toggle_mode">Przełącz tryb</string>
+</resources>
